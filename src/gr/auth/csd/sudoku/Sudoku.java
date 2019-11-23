@@ -9,6 +9,11 @@ public abstract class Sudoku {
         grid = new int[gridSize][gridSize];
     }
 
+    public Sudoku(int[][] grid) {
+        this.grid = grid;
+        gridSize = grid.length;
+    }
+
     private boolean isOutOfBounds(int row, int col) {
         return (row >= 0) && (row < gridSize) && (col >= 0) && (col < gridSize);
     }
