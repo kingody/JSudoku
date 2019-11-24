@@ -1,25 +1,28 @@
 package gr.auth.csd.sudoku;
 
+/**
+ * This class represents a basic Sudoku puzzle.
+ */
 public abstract class Sudoku {
-    protected int gridSize;
+    protected final int gridSize;
     protected int[][] grid;
 
+    /**
+     * Creates an empty Sudoku from a given size.
+     * @param size The Sudoku grid size
+     */
     public Sudoku(int size) {
         gridSize = size;
         grid = new int[gridSize][gridSize];
     }
 
+    /**
+     * Creates a new Sudoku from a grid. Used for loading from files.
+     * @param grid The Sudoku grid
+     */
     public Sudoku(int[][] grid) {
-        this.grid = grid;
         gridSize = grid.length;
-    }
-
-    private boolean isOutOfBounds(int row, int col) {
-        return (row >= 0) && (row < gridSize) && (col >= 0) && (col < gridSize);
-    }
-
-    private boolean isValidNumber(int value) {
-        return (value > 0) && (value <= gridSize);
+        this.grid = grid;
     }
 
     public int getCell(int row, int col) {
@@ -30,17 +33,26 @@ public abstract class Sudoku {
     }
 
     public void setCell(int row, int col, int value) {
-        if (isOutOfBounds(row, col) && !isValidMove(row, col, value))
+        if (!isValidMove(row, col, value))
             return;
 
         grid[row][col] = value;
     }
 
+    private boolean isOutOfBounds(int row, int col) {
+        return (row < 0) || (row >= gridSize) || (col < 0) || (col >= gridSize);
+    }
+
+    private boolean isValidNumber(int value) {
+        return (value > 0) && (value <= gridSize);
+    }
+
     private boolean isValidMove(int row, int col, int value) {
-        if (!isValidNumber(value))
+        if (isOutOfBounds(row, col) || !isValidNumber(value))
             return false;
 
         for (int i = 0; i < gridSize; i++) {
+            //Row and column uniqueness check
             if (grid[i][col] == value || grid[row][i] == value)
                 return false;
         }
@@ -50,6 +62,7 @@ public abstract class Sudoku {
 
         for (int i = 3 * squareRow; i < 3 * squareRow + 3; i++) {
             for (int j = 3 * squareCol; j < 3 * squareCol + 3; j++) {
+                //Square uniqueness check
                 if (grid[i][j] == value)
                     return false;
             }
