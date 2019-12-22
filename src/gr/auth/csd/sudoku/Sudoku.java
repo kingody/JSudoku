@@ -3,7 +3,7 @@ package gr.auth.csd.sudoku;
 /**
  * This class represents a basic Sudoku puzzle.
  */
-public abstract class Sudoku {
+public class Sudoku {
     protected final int gridSize;
     protected int[][] grid;
 
@@ -47,7 +47,7 @@ public abstract class Sudoku {
         return (value > 0) && (value <= gridSize);
     }
 
-    private boolean isValidMove(int row, int col, int value) {
+    protected boolean isValidMove(int row, int col, int value) {
         if (isOutOfBounds(row, col) || !isValidNumber(value))
             return false;
 
