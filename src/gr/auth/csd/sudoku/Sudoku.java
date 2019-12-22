@@ -55,11 +55,13 @@ public class Sudoku {
                 return false;
         }
 
-        int squareRow = row / 3;
-        int squareCol = col / 3;
+        int squareSize = (int) Math.sqrt(gridSize);
 
-        for (int i = 3 * squareRow; i < 3 * squareRow + 3; i++) {
-            for (int j = 3 * squareCol; j < 3 * squareCol + 3; j++) {
+        int squareRow = row / squareSize;
+        int squareCol = col / squareSize;
+
+        for (int i = squareSize * squareRow; i < squareSize * squareRow + squareSize; i++) {
+            for (int j = squareSize * squareCol; j < squareSize * squareCol + squareSize; j++) {
                 //Square uniqueness check
                 if (grid[i][j] == value)
                     return false;
