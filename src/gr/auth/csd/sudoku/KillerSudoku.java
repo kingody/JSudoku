@@ -9,8 +9,9 @@ public class KillerSudoku extends Sudoku {
      * Creates a new Killer Sudoku from a given size and list of areas.
      * @param size The Sudoku grid size
      */
-    public KillerSudoku(int size) {
+    public KillerSudoku(int size, ArrayList<Area> areas) {
         super(size);
+        this.areas = areas;
     }
 
     public ArrayList<Area> getAreas() {
