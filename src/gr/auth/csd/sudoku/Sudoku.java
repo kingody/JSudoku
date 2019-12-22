@@ -33,10 +33,8 @@ public class Sudoku {
     }
 
     public void setCell(int row, int col, int value) {
-        if (!isValidMove(row, col, value))
-            return;
-
-        grid[row][col] = value;
+        if (isValidMove(row, col, value))
+            grid[row][col] = value;
     }
 
     private boolean isOutOfBounds(int row, int col) {
