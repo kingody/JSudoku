@@ -2,6 +2,9 @@ package gr.auth.csd.sudoku;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a Sudoku variation called Killer Sudoku.
+ */
 public class KillerSudoku extends Sudoku {
     private ArrayList<Area> areas;
 
