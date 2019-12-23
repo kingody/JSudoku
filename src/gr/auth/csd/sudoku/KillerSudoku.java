@@ -21,7 +21,7 @@ public class KillerSudoku extends Sudoku {
         return areas;
     }
 
-    protected boolean isValidMove(int row, int col, int value) {
+    public boolean isValidMove(int row, int col, int value) {
         if (!super.isValidMove(row, col, value))
             return false;
 
@@ -35,7 +35,12 @@ public class KillerSudoku extends Sudoku {
                     if (cell.equals(currentCell))
                         continue;
 
-                    sum += getCell(cell.getRow(), cell.getColumn());
+                    int cellValue = getCell(cell.getRow(), cell.getColumn());
+
+                    if (cellValue == value)
+                        return false;
+
+                    sum += cellValue;
                 }
 
                 return sum <= area.getSum();

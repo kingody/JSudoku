@@ -20,7 +20,6 @@ public class SudokuBuilder {
             System.out.println("File " + filename + " not found.");
             System.exit(404);
         }
-
         return scanner;
     }
 
@@ -44,18 +43,19 @@ public class SudokuBuilder {
 
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            String[] info = line.split(":");
-            String[] positions = info[1].split(",");
+            String[] areaInfo = line.split(" : ");
+            String[] positions = areaInfo[1].split(" ");
 
             ArrayList<Index> cells = new ArrayList<>();
-            for (int i = 0; i < positions.length; i += 2) {
-                int row = Integer.parseInt(positions[i]);
-                int col = Integer.parseInt(positions[i + 1]);
+            for (String position : positions) {
+                String[] pos = position.split(",");
+                int row = Integer.parseInt(pos[0]);
+                int col = Integer.parseInt(pos[1]);
 
                 cells.add(new Index(row, col));
             }
 
-            areas.add(new Area(Integer.parseInt(info[0]), cells));
+            areas.add(new Area(Integer.parseInt(areaInfo[0]), cells));
         }
 
         return new KillerSudoku(size, areas);

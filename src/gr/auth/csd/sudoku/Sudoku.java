@@ -49,7 +49,7 @@ public class Sudoku {
         return (value > 0) && (value <= gridSize);
     }
 
-    protected boolean isValidMove(int row, int col, int value) {
+    public boolean isValidMove(int row, int col, int value) {
         if (isOutOfBounds(row, col) || !isValidNumber(value))
             return false;
 
