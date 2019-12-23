@@ -37,6 +37,10 @@ public class Sudoku {
             grid[row][col] = value;
     }
 
+    public int[][] getGrid() {
+        return grid;
+    }
+
     private boolean isOutOfBounds(int row, int col) {
         return (row < 0) || (row >= gridSize) || (col < 0) || (col >= gridSize);
     }
