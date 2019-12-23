@@ -1,7 +1,5 @@
 package gr.auth.csd.sudoku;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,22 +7,10 @@ import java.util.Scanner;
  * This class is designed to create new Sudokus from files.
  */
 public class SudokuBuilder {
-
-    private Scanner openFile(String filename) {
-        File file = new File("Sudokus/" + filename);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("File " + filename + " not found.");
-            System.exit(404);
-        }
-        return scanner;
-    }
+    private static final String dir = "Sudokus/";
 
     public Sudoku sudokuFromFile(int size, String filename) {
-        Scanner scanner = openFile("Classic/" + filename);
+        Scanner scanner = FileHandler.openFile(dir + "Classic/" + filename);
 
         int[][] cells = new int[size][size];
 
@@ -38,7 +24,7 @@ public class SudokuBuilder {
     }
 
     public KillerSudoku killerSudokuFromFile(int size, String filename) {
-        Scanner scanner = openFile("Killer/" + filename);
+        Scanner scanner = FileHandler.openFile(dir + "Killer/" + filename);
         ArrayList<Area> areas = new ArrayList<>();
 
         while (scanner.hasNext()) {
