@@ -59,8 +59,13 @@ public class User {
         try {
             //Overwrite old file if it exists
             File file = new File(path);
-            file.delete();
-            file.createNewFile();
+            if (!file.delete())
+                System.out.println("Saving new user...");
+            if (!file.createNewFile()) {
+                System.out.println("Something went wrong.");
+                System.exit(-2);
+            }
+
             FileWriter writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
