@@ -6,12 +6,19 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 
+/**
+ * This class represents a player and records their stats
+ */
 public class User {
     private static final String dir = "Users/";
     private String username;
     private HashSet<String> solvedSudokus;
     private int wins, losses;
 
+    /**
+     * Creates a new user and saves them to disk.
+     * @param username The user's nickname.
+     */
     private User(String username) {
         this.username = username;
 
@@ -21,6 +28,10 @@ public class User {
         saveToFile();
     }
 
+    /**
+     * Loads an existing user from a file.
+     * @param file The user file.
+     */
     private User(File file) {
         Scanner scanner = FileHandler.openFile(file);
 
@@ -34,6 +45,11 @@ public class User {
         }
     }
 
+    /**
+     * Creates a new user if the username is not taken.
+     * @param username The user's nickname.
+     * @return null if the user exists, else a new User object.
+     */
     public static User newUser(String username) {
         File file = new File(dir + username + ".txt");
         if (file.exists()) {
@@ -43,7 +59,12 @@ public class User {
         return new User(username);
     }
 
-    public static User loadFromFile(String username) {
+    /**
+     * Loads a user from disk.
+     * @param username The user's nickname.
+     * @return null if the user does not exist, else a User object.
+     */
+    public static User loadUser(String username) {
         File file = new File(dir + username + ".txt");
 
         if (file.exists())
