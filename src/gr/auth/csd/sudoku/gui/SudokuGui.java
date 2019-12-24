@@ -1,5 +1,9 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.KillerSudoku;
+import gr.auth.csd.sudoku.Sudoku;
+import gr.auth.csd.sudoku.SudokuBuilder;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -14,6 +18,10 @@ public class SudokuGui extends JFrame {
 
     public SudokuGui(){
         super("Sudoku");
+        SudokuBuilder a = new SudokuBuilder();
+        Sudoku classic = a.sudokuFromFile(9,"classic1.txt") ;
+
+        KillerSudoku[] killers = new KillerSudoku[10];
         JPanel panel = new JPanel();
         JLabel text =  new JLabel("Welcome to Sudoku! Please choose one of the following or close the app");
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
@@ -24,20 +32,20 @@ public class SudokuGui extends JFrame {
         settings = new JButton("Settings");
 
 
-        int[][] grid = new int[9][9];
+       /* int[][] grid = new int[9][9];
         for(int i=0;i<grid.length;i++)
             for(int j= 0;j<grid.length;j++)
-                grid[i][j] = 0;
+                grid[i][j] = 0;*/
 
         normal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SudokuWindow("Classic",grid);
+                new SudokuWindow("Classic",classic);
 
             }
         });
 
-        killer.addActionListener(new ActionListener() {
+       /* killer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new SudokuWindow("Killer Sudoku",grid);
@@ -50,7 +58,7 @@ public class SudokuGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 new SudokuWindow("Duidoku",grid);
             }
-        });
+        });*/
 
         panel.add(text);
         panel.add(normal);
