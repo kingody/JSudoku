@@ -1,19 +1,23 @@
 package gr.auth.csd.sudoku.gui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 
 public class InputHelpWindow extends JFrame {
-    private JTextField input;
+    private JTextArea input;
     private JLabel label;
     private JPanel panel;
 
     public InputHelpWindow() {
-        input = new JTextField("Hi");
+        input = new JTextArea();
+        input.setDocument(new Textlimit(1));
         label = new JLabel("Enter value of selected cell:");
         panel = new JPanel();
+
+        panel.setLayout(new FlowLayout(FlowLayout.LEADING,10,20));
 
         KeyListener listen = new KeyListener() {
             @Override
@@ -35,8 +39,8 @@ public class InputHelpWindow extends JFrame {
             }
         };
         input.addKeyListener(listen);
-        panel.add(label);
-        panel.add(input);
+        panel.add(label,BorderLayout.CENTER);
+        panel.add(input,BorderLayout.EAST);
         add(panel);
 
         setVisible(true);

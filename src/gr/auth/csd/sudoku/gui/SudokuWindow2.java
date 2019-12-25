@@ -20,9 +20,9 @@ public class SudokuWindow2 extends JFrame {
         board = new JTable(size,size){
             public boolean isCellEditable(int row,int col){return false;}
         };
-        board.setRowHeight(50);
+        board.setRowHeight(70);
 
-        setColumnWidth(board,50,size);
+        setColumnWidth(board,70,size);
         for(int i=0;i<size;i++){
             for(int j=0;j<size;j++) {
                 board.setValueAt(sud.getCell(i,j),i,j);
