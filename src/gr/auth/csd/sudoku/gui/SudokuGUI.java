@@ -17,9 +17,7 @@ public class SudokuGUI extends JFrame {
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
 
         add(panel);
-        classic.addActionListener(e -> {
-            new SudokuWindow("Classic", sudoku);
-        });
+        classic.addActionListener(e -> new SudokuWindow("Classic", sudoku));
     }
 
     public static void main(String[] args) {
