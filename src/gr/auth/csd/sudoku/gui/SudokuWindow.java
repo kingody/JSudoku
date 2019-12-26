@@ -1,6 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,9 +67,10 @@ public class SudokuWindow extends JFrame {
         board2.setPreferredSize(new Dimension(630, 630));
         panel.add(board2);
         this.add(panel);
-        setVisible(true);
         setSize(700, 700);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
     }
 
 

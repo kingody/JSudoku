@@ -1,4 +1,6 @@
-package gr.auth.csd.sudoku.guitest;
+package gr.auth.csd.sudoku.gui;
+
+import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 
 import javax.swing.*;
 
@@ -12,7 +14,12 @@ public class SudokuGUI extends JFrame {
     private JPanel menu;
 
     public SudokuGUI() {
+        ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
+
         add(panel);
+        classic.addActionListener(e -> {
+            new SudokuWindow("Classic", sudoku);
+        });
     }
 
     public static void main(String[] args) {

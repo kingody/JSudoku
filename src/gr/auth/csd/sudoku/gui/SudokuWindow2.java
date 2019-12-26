@@ -1,6 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
