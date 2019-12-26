@@ -28,22 +28,44 @@ public class SudokuWindow extends JFrame {
             for (int j = 0; j < size; j++) {
                 cells[i][j] = new JTextField();
                 cells[i][j].setDocument(new Textlimit(1));
-                if (sud.getCell(i, j) != 0) {
+                if (sud.getCell(i, j) != 0) {//cells from file are initiliazed to corresponding value and not to be edited
                     cells[i][j].setText(Integer.toString(sud.getCell(i, j)));
                     cells[i][j].setEditable(false);
                     cells[i][j].setBackground(fixedColor);
-                } else {
+                } else {//empty cells
                     cells[i][j].setText("");
+                    cells[i][j].addMouseListener(new MouseAdapter() {//finding the selected cell from mouse click
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            JTextField selected = (JTextField)e.getSource();
+                            boolean flag = true;
+                            int row = -69;
+                            int col = -69;
+                            for(int i=0;i<size && flag;i++){
+                                for(int j=0;j<size && flag;j++){
+                                    if(selected.equals(cells[i][j])){
+                                        flag = false;
+                                        row = i;
+                                        col = j;
+                                    }
+                                }
+                            }
+                            System.out.println("You selected :"+row+" "+col);
+
+
+
+                        }
+                    });
                 }
                 cells[i][j].setHorizontalAlignment(JTextField.CENTER);
                 cells[i][j].setFont(font);
                 board2.add(cells[i][j]);
             }
-            System.out.println(cells[i][0].getText());
         }
 
 
-        board2.setPreferredSize(new Dimension(650, 650));
+        board2.setPreferredSize(new Dimension(630, 630));
         panel.add(board2);
         this.add(panel);
         setVisible(true);
