@@ -26,7 +26,7 @@ public class SudokuWindow extends JFrame {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 cells[i][j] = new JTextField();
-                cells[i][j].setDocument(new Textlimit(1));
+                cells[i][j].setDocument(new TextLimit(1));
                 if (sud.getCell(i, j) != 0) {//cells from file are initiliazed to corresponding value and not to be edited
                     cells[i][j].setText(Integer.toString(sud.getCell(i, j)));
                     cells[i][j].setEditable(false);

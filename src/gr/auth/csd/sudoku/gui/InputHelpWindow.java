@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 
 public class InputHelpWindow extends JFrame {
     private JTextArea input;
@@ -13,7 +12,7 @@ public class InputHelpWindow extends JFrame {
 
     public InputHelpWindow() {
         input = new JTextArea();
-        input.setDocument(new Textlimit(1));
+        input.setDocument(new TextLimit(1));
         label = new JLabel("Enter value of selected cell:");
         panel = new JPanel();
 

@@ -4,13 +4,13 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-public class Textlimit extends PlainDocument {
+public class TextLimit extends PlainDocument {
     private  int limit;
-    public Textlimit(int limit){
+    public TextLimit(int limit){
         super();
         this.limit = limit;
     }
-    public Textlimit(int limit, boolean upper) {
+    public TextLimit(int limit, boolean upper) {
         super();
         this.limit = limit;
     }

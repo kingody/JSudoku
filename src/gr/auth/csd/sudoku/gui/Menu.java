@@ -4,7 +4,7 @@ import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 
 import javax.swing.*;
 
-public class SudokuGUI extends JFrame {
+public class Menu extends JFrame {
     private JPanel panel;
     private JLabel title;
     private JButton classic;
@@ -13,7 +13,7 @@ public class SudokuGUI extends JFrame {
     private JButton duidoku;
     private JPanel menu;
 
-    public SudokuGUI() {
+    public Menu() {
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
 
         add(panel);
@@ -21,7 +21,7 @@ public class SudokuGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new SudokuGUI();
+        JFrame frame = new Menu();
         frame.setTitle("Sudoku");
         frame.setSize(300, 300);
         frame.setLocationRelativeTo(null);
