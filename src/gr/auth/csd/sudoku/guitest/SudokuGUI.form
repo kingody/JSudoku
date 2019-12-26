@@ -19,7 +19,7 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Welcome to Sudoku!"/>
+          <text value="Let's Play Sudoku!"/>
           <verticalAlignment value="0"/>
         </properties>
       </component>

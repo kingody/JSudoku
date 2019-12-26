@@ -4,6 +4,7 @@ package gr.auth.csd.sudoku;
  * This class represents a basic Sudoku puzzle.
  */
 public class Sudoku {
+    protected final String fileDir = "Sudokus/";
     protected final int gridSize;
     protected int[][] grid;
 
@@ -17,7 +18,7 @@ public class Sudoku {
     }
 
     /**
-     * Creates a new Sudoku from a grid. Used for loading from files.
+     * Creates a new Sudoku from a grid.
      * @param grid The Sudoku grid
      */
     public Sudoku(int[][] grid) {
@@ -57,19 +58,6 @@ public class Sudoku {
             //Row and column uniqueness check
             if (grid[i][col] == value || grid[row][i] == value)
                 return false;
-        }
-
-        int squareSize = (int) Math.sqrt(gridSize);
-
-        int squareRow = row / squareSize;
-        int squareCol = col / squareSize;
-
-        for (int i = squareSize * squareRow; i < squareSize * squareRow + squareSize; i++) {
-            for (int j = squareSize * squareCol; j < squareSize * squareCol + squareSize; j++) {
-                //Square uniqueness check
-                if (grid[i][j] == value)
-                    return false;
-            }
         }
         return true;
     }

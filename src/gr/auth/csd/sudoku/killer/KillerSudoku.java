@@ -1,11 +1,15 @@
-package gr.auth.csd.sudoku;
+package gr.auth.csd.sudoku.killer;
+
+import gr.auth.csd.sudoku.FileHandler;
+import gr.auth.csd.sudoku.classic.ClassicSudoku;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class represents a Sudoku variation called Killer Sudoku.
  */
-public class KillerSudoku extends Sudoku {
+public class KillerSudoku extends ClassicSudoku {
     private ArrayList<Area> areas;
 
     /**
@@ -15,6 +19,30 @@ public class KillerSudoku extends Sudoku {
     public KillerSudoku(int size, ArrayList<Area> areas) {
         super(size);
         this.areas = areas;
+    }
+
+    public KillerSudoku(int size, String filename) {
+        super(size);
+        areas = new ArrayList<>();
+
+        Scanner scanner = FileHandler.openFile(fileDir + "Killer/" + filename);
+
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            String[] areaInfo = line.split(" : ");
+            String[] positions = areaInfo[1].split(" ");
+
+            ArrayList<Index> cells = new ArrayList<>();
+            for (String position : positions) {
+                String[] pos = position.split(",");
+                int row = Integer.parseInt(pos[0]);
+                int col = Integer.parseInt(pos[1]);
+
+                cells.add(new Index(row, col));
+            }
+
+            areas.add(new Area(Integer.parseInt(areaInfo[0]), cells));
+        }
     }
 
     public ArrayList<Area> getAreas() {

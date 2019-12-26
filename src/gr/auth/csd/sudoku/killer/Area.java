@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku;
+package gr.auth.csd.sudoku.killer;
 
 import java.util.ArrayList;
 

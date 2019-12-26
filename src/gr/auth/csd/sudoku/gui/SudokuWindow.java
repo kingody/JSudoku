@@ -1,20 +1,19 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.Sudoku;
+import gr.auth.csd.sudoku.classic.ClassicSudoku;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
 
 public class SudokuWindow extends JFrame {
     final Color fixedColor = Color.gray;
     final Font font = new Font("Helvetica", Font.BOLD, 14);
-    private Sudoku sud;
+    private ClassicSudoku sud;
     JTextField[][] cells;
 
 
-    public SudokuWindow(String mode, Sudoku sud) {
+    public SudokuWindow(String mode, ClassicSudoku sud) {
         super(mode);
         this.sud = sud;
         int size = sud.getGrid().length;

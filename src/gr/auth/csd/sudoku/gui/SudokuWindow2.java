@@ -1,6 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.Sudoku;
+import gr.auth.csd.sudoku.classic.ClassicSudoku;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class SudokuWindow2 extends JFrame {
 
-    public SudokuWindow2(String mode, Sudoku sud){
+    public SudokuWindow2(String mode, ClassicSudoku sud){
 
         JFrame frame = new JFrame(mode);
         int size = sud.getGrid().length;

@@ -1,11 +1,9 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.KillerSudoku;
-import gr.auth.csd.sudoku.Sudoku;
-import gr.auth.csd.sudoku.SudokuBuilder;
+import gr.auth.csd.sudoku.killer.KillerSudoku;
+import gr.auth.csd.sudoku.classic.ClassicSudoku;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +16,7 @@ public class SudokuGui extends JFrame {
 
     public SudokuGui(){
         super("Sudoku");
-        SudokuBuilder a = new SudokuBuilder();
-        Sudoku classic = a.sudokuFromFile(9,"classic1.txt") ;
+        ClassicSudoku classic = new ClassicSudoku(9,"classic1.txt");
 
         KillerSudoku[] killers = new KillerSudoku[10];
         JPanel panel = new JPanel();
