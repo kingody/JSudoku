@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.killer;
+package gr.auth.csd.sudoku.variants.killer;
 
 import java.util.Objects;
 

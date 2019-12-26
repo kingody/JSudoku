@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.classic;
+package gr.auth.csd.sudoku.variants.classic;
 
 import gr.auth.csd.sudoku.FileHandler;
 import gr.auth.csd.sudoku.Sudoku;
