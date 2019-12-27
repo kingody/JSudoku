@@ -66,6 +66,7 @@ public class SudokuWindow extends JFrame {
                             }
                             if (isDig && !cells[rowsel][colsel].getText().isEmpty()) {
                                 cells[rowsel][colsel].setBackground(Color.WHITE);
+                                sud.clearCell(rowsel, colsel);
                                 int actual = Integer.parseInt(input);//converting String input to integer for further processing
                                 if (!sud.isValidMove(rowsel, colsel, actual)) {
                                     System.out.println("Potato");
