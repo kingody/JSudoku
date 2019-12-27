@@ -64,7 +64,7 @@ public class SudokuWindow extends JFrame {
                             for (char c : input.toCharArray()) {//checking to see if user entered a digit
                                 isDig = Character.isDigit(c);
                             }
-                            if (isDig) {
+                            if (isDig && !cells[rowsel][colsel].getText().isEmpty()) {
                                 cells[rowsel][colsel].setBackground(Color.WHITE);
                                 int actual = Integer.parseInt(input);//converting String input to integer for further processing
                                 if (!sud.isValidMove(rowsel, colsel, actual)) {
@@ -78,6 +78,9 @@ public class SudokuWindow extends JFrame {
                                     sud.setCell(rowsel,colsel,actual);
                                     cells[rowsel][colsel].setBackground(Color.WHITE);
                                 }
+                            }
+                            else if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+                                cells[rowsel][colsel].setBackground(Color.WHITE);
                             }
                             else{
                                 System.out.println("Invalid Input");
