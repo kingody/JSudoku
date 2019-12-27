@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 public class SudokuWindow extends JFrame {
     final Color fixedColor = Color.gray;
+    final Color wrongColor = new Color(255, 28, 4);
     final Font font = new Font("Helvetica", Font.BOLD, 14);
     private ClassicSudoku sud;
     private int rowsel;
@@ -67,10 +68,14 @@ public class SudokuWindow extends JFrame {
                                 int actual = Integer.parseInt(input);//converting String input to integer for further processing
                                 if (!sud.isValidMove(rowsel, colsel, actual)) {
                                     System.out.println("Potato");
-                                    cells[rowsel][colsel].setText("");
+                                    cells[rowsel][colsel].setBackground(wrongColor);
+                                    //cells[rowsel][colsel].setText("");
+
                                 }
                                 else{
                                     System.out.println("Nice");
+                                    sud.setCell(rowsel,colsel,actual);
+                                    cells[rowsel][colsel].setBackground(Color.WHITE);
                                 }
                             }
                             else{
