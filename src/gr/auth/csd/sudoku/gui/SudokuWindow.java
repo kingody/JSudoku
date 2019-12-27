@@ -11,12 +11,14 @@ public class SudokuWindow extends JFrame {
     final Color wrongColor = new Color(255, 28, 4);
     final Font font = new Font("Helvetica", Font.BOLD, 14);
     private ClassicSudoku sud;
+    private char[] chars;
     private int rowsel;
     private int colsel;
 
 
-    public SudokuWindow(String mode, ClassicSudoku sud) {
+    public SudokuWindow(String mode, ClassicSudoku sud, char[] chars) {
         super(mode);
+        this.chars = chars;
         this.sud = sud;
         int size = sud.getGrid().length;
         JPanel panel = new JPanel();
@@ -88,6 +90,15 @@ public class SudokuWindow extends JFrame {
                                 System.out.println("Invalid Input");
                                 cells[rowsel][colsel].setText("");
                             }
+                        }
+
+                        @Override
+                        public void keyPressed(KeyEvent e) {
+                            for (char c : chars)
+                                if (c == e.getKeyChar()) {
+                                    cells[rowsel][colsel].setText("");
+                                    return;
+                                }
                         }
                     });
                     cells[i][j].setText("");

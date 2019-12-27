@@ -13,11 +13,14 @@ public class Menu extends JFrame {
     private JButton duidoku;
     private JPanel menu;
 
-    public Menu() {
-        ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
+    private final char[] numbers = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
+                         letters = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
+    public Menu() {
         add(panel);
-        classic.addActionListener(e -> new SudokuWindow("Classic", sudoku));
+
+        ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
+        classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, numbers));
     }
 
     public static void main(String[] args) {
