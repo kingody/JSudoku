@@ -81,6 +81,7 @@ public class SudokuWindow extends JFrame {
                             }
                             else if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
                                 cells[rowsel][colsel].setBackground(Color.WHITE);
+                                sud.clearCell(rowsel,colsel);
                             }
                             else{
                                 System.out.println("Invalid Input");
