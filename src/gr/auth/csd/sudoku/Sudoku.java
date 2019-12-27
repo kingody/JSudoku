@@ -38,6 +38,11 @@ public class Sudoku {
             grid[row][col] = value;
     }
 
+    public void clearCell(int row, int col) {
+        if (!isOutOfBounds(row, col))
+            grid[row][col] = 0;
+    }
+
     public int[][] getGrid() {
         return grid;
     }
