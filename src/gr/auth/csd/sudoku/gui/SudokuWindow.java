@@ -10,7 +10,8 @@ public class SudokuWindow extends JFrame {
     final Color fixedColor = Color.gray;
     final Font font = new Font("Helvetica", Font.BOLD, 14);
     private ClassicSudoku sud;
-    JTextField[][] cells;
+    private int rowsel;
+    private int colsel;
 
 
     public SudokuWindow(String mode, ClassicSudoku sud) {
@@ -32,7 +33,6 @@ public class SudokuWindow extends JFrame {
                     cells[i][j].setEditable(false);
                     cells[i][j].setBackground(fixedColor);
                 } else {//empty cells
-                    cells[i][j].setText("");
                     cells[i][j].addMouseListener(new MouseAdapter() {//finding the selected cell from mouse click
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -50,12 +50,39 @@ public class SudokuWindow extends JFrame {
                                     }
                                 }
                             }
-                            System.out.println("You selected :"+row+" "+col);
-
-
-
+                            rowsel = row;
+                            colsel = col;
+                            System.out.println("You selected :"+rowsel+" "+colsel);
                         }
                     });
+                    cells[i][j].addKeyListener(new KeyAdapter() {//waiting for user input in mouse selected cell
+                        @Override
+                        public void keyReleased(KeyEvent e) {
+                            String input = cells[rowsel][colsel].getText();
+                            boolean isDig = true;
+                            for (char c : input.toCharArray()) {//checking to see if user entered a digit
+                                isDig = Character.isDigit(c);
+                            }
+                            if (isDig) {
+                                int actual = Integer.parseInt(input);//converting String input to integer for further processing
+                                if (!sud.isValidMove(rowsel, colsel, actual)) {
+                                    System.out.println("Potato");
+                                    cells[rowsel][colsel].setText("");
+                                }
+                                else{
+                                    System.out.println("Nice");
+                                }
+                            }
+                            else{
+                                System.out.println("Invalid Input");
+                                cells[rowsel][colsel].setText("");
+                            }
+                        }
+                    });
+                    cells[i][j].setText("");
+                   //cells[i][j].setFocusable(true);
+
+
                 }
                 cells[i][j].setHorizontalAlignment(JTextField.CENTER);
                 cells[i][j].setFont(font);
@@ -72,6 +99,5 @@ public class SudokuWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-
 
 }
