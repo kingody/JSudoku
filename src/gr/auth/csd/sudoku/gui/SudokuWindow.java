@@ -121,5 +121,14 @@ public class SudokuWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
+    public String convertLetterToStringValue(char letter){
+        int pos = -1;
+        for(int i=1;i<chars.length;i++){
+            if(chars[i]==letter){
+                pos = i;
+            }
+        }
+        return String.valueOf(pos);
+    }
 
 }

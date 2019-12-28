@@ -21,6 +21,7 @@ public class Menu extends JFrame {
 
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
         classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, numbers));
+        settings.addActionListener(click -> new SettingsWindow());
     }
 
     public static void main(String[] args) {
