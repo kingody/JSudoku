@@ -64,7 +64,7 @@ public class SudokuWindow extends JFrame {
                             String input = cells[rowsel][colsel].getText();
                             boolean isDig = true;
                             for (char c : input.toCharArray()) {//checking to see if user entered a digit
-                                isDig = Character.isDigit(c);
+                                isDig = Character.isDigit(c)&& c!= '0';
                             }
                             if (isDig && !cells[rowsel][colsel].getText().isEmpty()) {
                                 cells[rowsel][colsel].setBackground(Color.WHITE);
