@@ -69,7 +69,7 @@ public class SudokuWindow extends JFrame {
                         @Override
                         public void keyReleased(KeyEvent e) {//input is entered then processed
                             String input = cells[rowsel][colsel].getText();
-                            if(wordoku){
+                            if(wordoku&&!input.isEmpty()){
                                 input = convertLetterToNumericValue(input.charAt(0));
                             }
                             boolean isDig = true;
