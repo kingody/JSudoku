@@ -25,6 +25,7 @@ public class SudokuWindow extends JFrame {
         panel.setBackground(Color.DARK_GRAY);
         JPanel board2 = new JPanel(new GridLayout(size, size));
         JTextField[][] cells = new JTextField[size][size];
+        boolean wordoku = chars[1]=='A';
 
 
         for (int i = 0; i < size; i++) {
@@ -32,9 +33,15 @@ public class SudokuWindow extends JFrame {
                 cells[i][j] = new JTextField();
                 cells[i][j].setDocument(new TextLimit(1));
                 if (sud.getCell(i, j) != 0) {//cells from file are initiliazed to corresponding value and not to be edited
-                    cells[i][j].setText(Integer.toString(sud.getCell(i, j)));
+                    String num = Integer.toString(sud.getCell(i, j));
+                    cells[i][j].setText(num);
+                    if(wordoku){
+                        int pos = Integer.parseInt(num);
+                        cells[i][j].setText(Character.toString(chars[pos]));
+                    }
                     cells[i][j].setEditable(false);
                     cells[i][j].setBackground(fixedColor);
+
                 } else {//empty cells
                     cells[i][j].addMouseListener(new MouseAdapter() {//finding the selected cell from mouse click
                         @Override
@@ -60,8 +67,11 @@ public class SudokuWindow extends JFrame {
                     });
                     cells[i][j].addKeyListener(new KeyAdapter() {//waiting for user input in mouse selected cell
                         @Override
-                        public void keyReleased(KeyEvent e) {
+                        public void keyReleased(KeyEvent e) {//input is entered then processed
                             String input = cells[rowsel][colsel].getText();
+                            if(wordoku){
+                                input = convertLetterToNumericValue(input.charAt(0));
+                            }
                             boolean isDig = true;
                             for (char c : input.toCharArray()) {//checking to see if user entered a digit
                                 isDig = Character.isDigit(c)&& c!= '0';
@@ -73,7 +83,6 @@ public class SudokuWindow extends JFrame {
                                 if (!sud.isValidMove(rowsel, colsel, actual)) {
                                     System.out.println("Potato");
                                     cells[rowsel][colsel].setBackground(wrongColor);
-                                    //cells[rowsel][colsel].setText("");
 
                                 }
                                 else{
@@ -121,14 +130,19 @@ public class SudokuWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-    public String convertLetterToStringValue(char letter){
+    public String convertLetterToNumericValue(char letter){
         int pos = -1;
         for(int i=1;i<chars.length;i++){
             if(chars[i]==letter){
                 pos = i;
             }
         }
+        if(pos==-1){
+            return "Z";
+        }
         return String.valueOf(pos);
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,17 +22,30 @@ public class Menu extends JFrame {
     private final char[] numbers = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
                          letters = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
 
+
     public Menu() {
         add(panel);
 
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
-        classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, numbers));
-        settings.addActionListener(click -> new SettingsWindow());
+        classic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (wordoku){
+                    new SudokuWindow("Classic",sudoku,letters);
+                    System.out.println("Wordoku");
+                }
+                else{
+                    new SudokuWindow("Classic",sudoku,numbers);
+                }
+            }
+        });
 
+        settings.addActionListener(click -> new SettingsWindow(this));
 
     }
     public void setWordoku(boolean b){
         wordoku = b;
+
     }
 
     public static void main(String[] args) {

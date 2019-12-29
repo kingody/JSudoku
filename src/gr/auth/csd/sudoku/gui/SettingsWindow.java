@@ -17,24 +17,16 @@ public class SettingsWindow extends JFrame{
     private JButton greekButton;
     private JButton closeButton;
     private boolean isWordoku;
-    private Menu instance =new Menu();
 
 
-    public SettingsWindow(){
+    public SettingsWindow(Menu menu){
         super("Settings");
 
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                menu.setWordoku(wordokuCheckBox.isSelected());
                 dispose();
-            }
-        });
-        wordokuCheckBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                isWordoku = e.getStateChange() == ItemEvent.SELECTED;
-                System.out.println(isWordoku);
-                instance.setWordoku(isWordoku);
             }
         });
 
