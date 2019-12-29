@@ -43,6 +43,7 @@ public class Menu extends JFrame {
 
         settings.addActionListener(click -> new SettingsWindow(this));
 
+
     }
     public void setWordoku(boolean b){
         wordoku = b;

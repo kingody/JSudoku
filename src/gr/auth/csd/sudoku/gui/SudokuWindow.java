@@ -127,7 +127,7 @@ public class SudokuWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFrame hint = new JFrame();
                 JPanel hintPanel = new JPanel();
-                JLabel hintLabel = new JLabel("The following are acceptable: ");
+                JLabel hintLabel = new JLabel("The following are acceptable:  ");
                 StringBuilder display = new StringBuilder();
                 for(char c: chars){
                     if(wordoku && sud.isValidMove(rowsel,colsel,Integer.parseInt(convertLetterToNumericValue(c)))){
@@ -176,7 +176,7 @@ public class SudokuWindow extends JFrame {
             }
         }
         if(pos==-1){
-            return "69";
+            return "0";
         }
         return String.valueOf(pos);
     }
