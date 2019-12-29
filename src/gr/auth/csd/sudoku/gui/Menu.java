@@ -26,10 +26,11 @@ public class Menu extends JFrame {
     public Menu() {
         add(panel);
 
-        ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
+
         classic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
                 if (wordoku){
                     new SudokuWindow("Classic",sudoku,letters);
                     System.out.println("Wordoku");

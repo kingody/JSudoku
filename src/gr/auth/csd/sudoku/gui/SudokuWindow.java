@@ -14,6 +14,7 @@ public class SudokuWindow extends JFrame {
     private char[] chars;
     private int rowsel;
     private int colsel;
+    private JButton hint = new JButton("Hint");
 
 
     public SudokuWindow(String mode, ClassicSudoku sud, char[] chars) {
@@ -121,15 +122,49 @@ public class SudokuWindow extends JFrame {
             }
         }
 
+        hint.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame hint = new JFrame("Hint");
+                JPanel hintPanel = new JPanel();
+                JLabel hintLabel = new JLabel("The following are acceptable: ");
+                StringBuilder display = new StringBuilder();
+                for(char c: chars){
+                    if(sud.isValidMove(rowsel,colsel,Character.getNumericValue(c))){
+                        display.append(c+" ");
+                    }
+                }
+                JLabel hints = new JLabel(display.toString());
+                hintPanel.add(hintLabel);
+                hintPanel.add(hints);
+                hint.add(hintPanel);
+                hint.setSize(200,100);
+                hint.setVisible(true);
+                hint.setLocationRelativeTo(null);
+                hint.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                hint.setResizable(false);
+            }
+
+
+        });
+
 
         board2.setPreferredSize(new Dimension(630, 630));
         panel.add(board2);
+        panel.add(hint);
         this.add(panel);
         setSize(700, 700);
         setLocationRelativeTo(null);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+        });
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
+
     public String convertLetterToNumericValue(char letter){
         int pos = -1;
         for(int i=1;i<chars.length;i++){
