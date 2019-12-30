@@ -33,6 +33,13 @@ public class Sudoku {
         return grid[row][col];
     }
 
+    /**
+     * Sets a value to a cell.
+     * @param row The row of the Cell.
+     * @param col The Column of the Cell.
+     * @param value The chosen value.
+     * @return True if the move was valid, false otherwise.
+     */
     public boolean setCell(int row, int col, int value) {
         if (isValidMove(row, col, value)) {
             grid[row][col] = value;
@@ -50,6 +57,8 @@ public class Sudoku {
     public int[][] getGrid() {
         return grid;
     }
+
+    public int getSize() { return gridSize; }
 
     private boolean isOutOfBounds(int row, int col) {
         return (row < 0) || (row >= gridSize) || (col < 0) || (col >= gridSize);
