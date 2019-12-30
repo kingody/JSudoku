@@ -4,15 +4,19 @@ import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 import gr.auth.csd.sudoku.variants.killer.Area;
 import gr.auth.csd.sudoku.variants.killer.Index;
 import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
+
+import javax.swing.*;
 import java.util.Random;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class KillerWindow extends SudokuWindow {
     private Color[] colors;
+    private KillerSudoku sud;
 
     public KillerWindow(String mode, KillerSudoku sud, char[] chars) {
         super(mode, sud, chars);
+        this.sud = sud;
         ArrayList<Area> areas = new ArrayList<>(sud.getAreas());
         ArrayList<Index> connectedCells;
         colors = new Color[11];
@@ -28,19 +32,19 @@ public class KillerWindow extends SudokuWindow {
         colors[9] = new Color(79, 77, 8);
         colors[10] = new Color(30, 0, 255);
         System.out.println("Lol");
-        int i=0;
-        for(Area area : areas){
+        int i = 0;
+
+
+        for (Area area : areas) {
             connectedCells = new ArrayList<>(area.getCells());
-            for(Index coord: connectedCells){
+            for (Index coord : connectedCells) {
                 int row = coord.getRow();
                 int col = coord.getColumn();
-                cells[row][col].setBackground(colors[i%11]);
+                cells[row][col].setBackground(colors[i % 11]);
             }
             i++;
         }
 
-
-
-
     }
+
 }

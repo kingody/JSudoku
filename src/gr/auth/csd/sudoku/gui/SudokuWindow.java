@@ -17,11 +17,13 @@ public class SudokuWindow extends JFrame {
     protected final Color wrongColor = new Color(255, 28, 4);
     protected final Font font = new Font("Helvetica", Font.BOLD, 14);
     private ClassicSudoku sud;
-    private char[] charSet;
+    protected char[] charSet;
     protected int rowsel;
     protected int colsel;
     protected JButton hint = new JButton("Hint");
     protected JTextField[][] cells;
+    protected MyKeyListener a;
+    protected JPanel board2;
 
     /**
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
@@ -37,96 +39,9 @@ public class SudokuWindow extends JFrame {
         int size = sud.getGrid().length;
         JPanel panel = new JPanel();
         panel.setBackground(Color.DARK_GRAY);
-        JPanel board2 = new JPanel(new GridLayout(size, size));
+        board2 = new JPanel(new GridLayout(size, size));
         cells = new JTextField[size][size];
-
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                cells[i][j] = new JTextField();
-                cells[i][j].setDocument(new TextLimit(1));
-                if (sud.getCell(i, j) != 0) {
-                    //cells from file are initiliazed to corresponding value and not to be edited
-                    String num = String.valueOf(charSet[sud.getCell(i, j)]);
-                    cells[i][j].setText(num);
-                    cells[i][j].setEditable(false);
-                    cells[i][j].setBackground(fixedColor);
-
-                }
-                else {
-                    //empty cells
-                    cells[i][j].addMouseListener(new MouseAdapter() {//finding the selected cell from mouse click
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-                            JTextField selected = (JTextField)e.getSource();
-                            boolean flag = true;
-                            int row = -69;
-                            int col = -69;
-                            for(int i=0;i<size && flag;i++){
-                                for(int j=0;j<size && flag;j++){
-                                    if(selected.equals(cells[i][j])){
-                                        flag = false;
-                                        row = i;
-                                        col = j;
-                                    }
-                                }
-                            }
-                            rowsel = row;
-                            colsel = col;
-                            System.out.println("You selected :"+rowsel+" "+colsel);
-                        }
-                    });
-                    cells[i][j].addKeyListener(new KeyAdapter() {//waiting for user input in mouse selected cell
-                        @Override
-                        public void keyReleased(KeyEvent e) {
-                            String input = cells[rowsel][colsel].getText();
-                            if (input.isEmpty()) {
-                                cells[rowsel][colsel].setBackground(Color.WHITE);
-                                cells[rowsel][colsel].setText("");
-                                sud.clearCell(rowsel,colsel);
-                                return;
-                            }
-
-                            char value = input.charAt(0);
-
-                            cells[rowsel][colsel].setBackground(Color.WHITE);
-                            sud.clearCell(rowsel, colsel);
-
-                            if (isValidLetter(value)) {
-                                int numValue = getIndex(value);
-                                boolean validMove = sud.setCell(rowsel, colsel, numValue);
-
-                                Color color = validMove ? Color.WHITE : wrongColor;
-                                cells[rowsel][colsel].setBackground(color);
-
-                            }
-                            else {
-                                cells[rowsel][colsel].setBackground(Color.WHITE);
-                                cells[rowsel][colsel].setText("");
-                                sud.clearCell(rowsel,colsel);
-                            }
-
-                        }
-
-                        @Override
-                        public void keyPressed(KeyEvent e) {
-                            for (char c : charSet)
-                                if (c == e.getKeyChar()) {
-                                    cells[rowsel][colsel].setText("");
-                                    return;
-                                }
-                        }
-                    });
-
-                    cells[i][j].setText("");
-                }
-
-                cells[i][j].setHorizontalAlignment(JTextField.CENTER);
-                cells[i][j].setFont(font);
-                board2.add(cells[i][j]);
-            }
-        }
-
+        initializeGrid();
         hint.addActionListener(click -> {
             JFrame hint = new JFrame();
             JPanel hintPanel = new JPanel();
@@ -169,5 +84,120 @@ public class SudokuWindow extends JFrame {
 
     public boolean isValidLetter(char c) {
         return getIndex(c) > 0;
+    }
+
+    public void initializeGrid(){
+        int size = sud.getGrid().length;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                cells[i][j] = new JTextField();
+                cells[i][j].setDocument(new TextLimit(1));
+                if (sud.getCell(i, j) != 0) {
+                    //cells from file are initiliazed to corresponding value and not to be edited
+                    String num = String.valueOf(charSet[sud.getCell(i, j)]);
+                    cells[i][j].setText(num);
+                    cells[i][j].setEditable(false);
+                    cells[i][j].setBackground(fixedColor);
+
+                }
+                else {
+                    //empty cells
+                    cells[i][j].addMouseListener(new MyMouseListener()); //finding the selected cell from mouse click
+                    MyKeyListener a = new MyKeyListener();
+                    cells[i][j].addKeyListener(a);//waiting for user input in mouse selected cell
+                    cells[i][j].setText("");
+                }
+
+                cells[i][j].setHorizontalAlignment(JTextField.CENTER);
+                cells[i][j].setFont(font);
+                board2.add(cells[i][j]);
+            }
+        }
+
+    }
+
+    public class MyMouseListener implements MouseListener{
+
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            JTextField selected = (JTextField)e.getSource();
+            boolean flag = true;
+            int row = -69;
+            int col = -69;
+            for(int i=0;i<sud.getGrid().length && flag;i++){
+                for(int j=0;j<sud.getGrid().length && flag;j++){
+                    if(selected.equals(cells[i][j])){
+                        flag = false;
+                        row = i;
+                        col = j;
+                    }
+                }
+            }
+            rowsel = row;
+            colsel = col;
+            System.out.println("You selected :"+rowsel+" "+colsel);
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {}
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+        @Override
+        public void mouseExited(MouseEvent e) {}
+    }
+
+
+
+    public class MyKeyListener implements KeyListener{
+        protected Color cellColor;
+
+        public void setCellColor(Color cellColor) {
+            this.cellColor = cellColor;
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {}
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            for (char c : charSet)
+                if (c == e.getKeyChar()) {
+                    cells[rowsel][colsel].setText("");
+                    return;
+                }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            String input = cells[rowsel][colsel].getText();
+            if (input.isEmpty()) {
+                cells[rowsel][colsel].setBackground(cellColor);
+                cells[rowsel][colsel].setText("");
+                sud.clearCell(rowsel,colsel);
+                return;
+            }
+
+            char value = input.charAt(0);
+
+            cells[rowsel][colsel].setBackground(cellColor);
+            sud.clearCell(rowsel, colsel);
+
+            if (isValidLetter(value)) {
+                int numValue = getIndex(value);
+                boolean validMove = sud.setCell(rowsel, colsel, numValue);
+
+                Color color = validMove ? cellColor : wrongColor;
+                cells[rowsel][colsel].setBackground(color);
+
+            }
+            else {
+                cells[rowsel][colsel].setBackground(cellColor);
+                cells[rowsel][colsel].setText("");
+                sud.clearCell(rowsel,colsel);
+            }
+
+        }
     }
 }
