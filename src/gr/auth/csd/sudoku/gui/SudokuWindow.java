@@ -1,5 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.Sudoku;
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 
 import javax.swing.*;
@@ -7,68 +8,55 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This class represents the GUI on which the user plays the classic version of sudoku or wordoku
+ * This class represents the GUI on which the user plays the classic version of Sudoku.
  */
-
 public class SudokuWindow extends JFrame {
-
-
     protected Color fixedColor = Color.gray;
     protected final Color wrongColor = new Color(255, 28, 4);
     protected final Font font = new Font("Helvetica", Font.BOLD, 14);
-    private ClassicSudoku sud;
+    private Sudoku sudoku;
     protected char[] charSet;
     protected int rowsel;
     protected int colsel;
-    protected JButton hint = new JButton("Hint");
+    protected JButton hint;
     protected JTextField[][] cells;
     protected MyKeyListener a;
-    protected JPanel board2;
+    protected JPanel grid;
 
     /**
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
-     * @param mode The mode played (classic,killer or wordoku)
-     * @param sud Sudoku object
-     * @param charSet Array with the characters used in game. Used to distinguish between wordoku and sudoku
+     * @param title The mode played (classic,killer or wordoku)
+     * @param sudoku Sudoku object
+     * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku
      */
-
-    public SudokuWindow(String mode, ClassicSudoku sud, char[] charSet) {
-        super(mode);
+    public SudokuWindow(String title, Sudoku sudoku, char[] charSet) {
+        super(title);
+        this.sudoku = sudoku;
         this.charSet = charSet;
-        this.sud = sud;
-        int size = sud.getGrid().length;
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.DARK_GRAY);
-        board2 = new JPanel(new GridLayout(size, size));
+        int size = sudoku.getSize();
+
+        JPanel background = new JPanel();
+        background.setBackground(Color.DARK_GRAY);
+        grid = new JPanel(new GridLayout(size, size));
         cells = new JTextField[size][size];
         initializeGrid();
+
+        hint = new JButton("Hint");
         hint.addActionListener(click -> {
-            JFrame hint = new JFrame();
-            JPanel hintPanel = new JPanel();
-            JLabel hintLabel = new JLabel("The following are acceptable:  ");
             StringBuilder display = new StringBuilder();
-            System.out.println("");
+
             for (char c: charSet) {
-                if(sud.isValidMove(rowsel,colsel,getIndex(c))){
+                if(sudoku.isValidMove(rowsel,colsel,getIndex(c))){
                     display.append(c).append(" ");
                 }
             }
-            JLabel hints = new JLabel(display.toString());
-            hintPanel.add(hintLabel);
-            hintPanel.add(hints);
-            hint.add(hintPanel);
-            hint.setSize(200,100);
-            hint.setLocationRelativeTo(null);
-            hint.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            hint.setResizable(false);
-            hint.setVisible(true);
+            new Hint(display.toString());
         });
 
-
-        board2.setPreferredSize(new Dimension(630, 630));
-        panel.add(board2);
-        panel.add(hint);
-        this.add(panel);
+        grid.setPreferredSize(new Dimension(630, 630));
+        background.add(grid);
+        background.add(hint);
+        this.add(background);
         setSize(700, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,23 +71,25 @@ public class SudokuWindow extends JFrame {
         return -1;
     }
 
-    public boolean isValidLetter(char c) {
-        return getIndex(c) > 0;
+    public boolean isValidChar(char c) {
+        int index = getIndex(c);
+        return index > 0 && index <= sudoku.getSize();
     }
 
     public void initializeGrid(){
-        int size = sud.getGrid().length;
+        int size = sudoku.getSize();
+
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 cells[i][j] = new JTextField();
                 cells[i][j].setDocument(new TextLimit(1));
-                if (sud.getCell(i, j) != 0) {
-                    //cells from file are initiliazed to corresponding value and not to be edited
-                    String num = String.valueOf(charSet[sud.getCell(i, j)]);
-                    cells[i][j].setText(num);
-                    cells[i][j].setEditable(false);
-                    cells[i][j].setBackground(fixedColor);
 
+                if (sudoku.getCell(i, j) != 0) {
+                    //cells from file are initiliazed to corresponding value and not to be edited
+                    String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
+                    cells[i][j].setText(num);
+                    cells[i][j].setBackground(fixedColor);
+                    cells[i][j].setEditable(false);
                 }
                 else {
                     //empty cells
@@ -111,40 +101,39 @@ public class SudokuWindow extends JFrame {
 
                 cells[i][j].setHorizontalAlignment(JTextField.CENTER);
                 cells[i][j].setFont(font);
-                board2.add(cells[i][j]);
+                grid.add(cells[i][j]);
             }
         }
-
     }
 
     public class MyMouseListener implements MouseListener{
 
-
         @Override
         public void mouseClicked(MouseEvent e) {
             JTextField selected = (JTextField)e.getSource();
-            boolean flag = true;
-            int row = -69;
-            int col = -69;
-            for(int i=0;i<sud.getGrid().length && flag;i++){
-                for(int j=0;j<sud.getGrid().length && flag;j++){
-                    if(selected.equals(cells[i][j])){
-                        flag = false;
-                        row = i;
-                        col = j;
+            int size = sudoku.getSize();
+
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (selected.equals(cells[i][j])) {
+                        rowsel = i;
+                        colsel = j;
+                        System.out.println("You selected :" + rowsel + " " + colsel);
+                        return;
                     }
                 }
             }
-            rowsel = row;
-            colsel = col;
-            System.out.println("You selected :"+rowsel+" "+colsel);
         }
+
         @Override
         public void mousePressed(MouseEvent e) {}
+
         @Override
         public void mouseReleased(MouseEvent e) {}
+
         @Override
         public void mouseEntered(MouseEvent e) {}
+
         @Override
         public void mouseExited(MouseEvent e) {}
     }
@@ -176,18 +165,18 @@ public class SudokuWindow extends JFrame {
             if (input.isEmpty()) {
                 cells[rowsel][colsel].setBackground(cellColor);
                 cells[rowsel][colsel].setText("");
-                sud.clearCell(rowsel,colsel);
+                sudoku.clearCell(rowsel,colsel);
                 return;
             }
 
             char value = input.charAt(0);
 
             cells[rowsel][colsel].setBackground(cellColor);
-            sud.clearCell(rowsel, colsel);
+            sudoku.clearCell(rowsel, colsel);
 
-            if (isValidLetter(value)) {
+            if (isValidChar(value)) {
                 int numValue = getIndex(value);
-                boolean validMove = sud.setCell(rowsel, colsel, numValue);
+                boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
 
                 Color color = validMove ? cellColor : wrongColor;
                 cells[rowsel][colsel].setBackground(color);
@@ -196,7 +185,7 @@ public class SudokuWindow extends JFrame {
             else {
                 cells[rowsel][colsel].setBackground(cellColor);
                 cells[rowsel][colsel].setText("");
-                sud.clearCell(rowsel,colsel);
+                sudoku.clearCell(rowsel,colsel);
             }
 
         }

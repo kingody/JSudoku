@@ -12,17 +12,17 @@
     <children>
       <component id="d33ff" class="javax.swing.JLabel" binding="title">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="20" right="0" weightx="0.0" weighty="0.0" ipadx="10" ipady="10"/>
         </constraints>
         <properties>
-          <font name="Arial Black" size="20" style="1"/>
+          <font size="18"/>
           <text value="Settings"/>
         </properties>
       </component>
       <grid id="bd266" binding="settingsPanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -40,7 +40,7 @@
               <text value="Wordoku"/>
             </properties>
           </component>
-          <component id="fd275" class="javax.swing.JLabel" binding="lanuageLabel">
+          <component id="fd275" class="javax.swing.JLabel" binding="languageLabel">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag top="10" left="0" bottom="5" right="0" weightx="0.0" weighty="0.0"/>
@@ -58,16 +58,16 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="98284" class="javax.swing.JButton" binding="englishButton">
+              <component id="bd5aa" class="javax.swing.JRadioButton" binding="englishButton">
                 <constraints/>
                 <properties>
                   <text value="English"/>
                 </properties>
               </component>
-              <component id="3fde2" class="javax.swing.JButton" binding="greekButton">
+              <component id="bde93" class="javax.swing.JRadioButton" binding="greekButton">
                 <constraints/>
                 <properties>
-                  <text value="Ελληνικά"/>
+                  <text value="Greek"/>
                 </properties>
               </component>
             </children>
@@ -76,7 +76,7 @@
       </grid>
       <component id="d18c9" class="javax.swing.JButton" binding="closeButton">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -86,4 +86,10 @@
       </component>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="buttonGroup">
+      <member id="bd5aa"/>
+      <member id="bde93"/>
+    </group>
+  </buttonGroups>
 </form>

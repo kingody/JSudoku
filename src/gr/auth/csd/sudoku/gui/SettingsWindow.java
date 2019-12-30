@@ -1,36 +1,32 @@
 package gr.auth.csd.sudoku.gui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class SettingsWindow extends JFrame{
     private JPanel panel;
-    private JLabel title;
     private JPanel settingsPanel;
-    private JCheckBox wordokuCheckBox;
-    private JLabel lanuageLabel;
-    private JButton englishButton;
     private JPanel languages;
-    private JButton greekButton;
+    private JLabel title;
+    private JCheckBox wordokuCheckBox;
+    private JLabel languageLabel;
     private JButton closeButton;
-    private boolean isWordoku;
-    private int charSetIndex = 1; //Default to English
+    private JRadioButton englishButton;
+    private JRadioButton greekButton;
+    //Default to English
+    private int charSetIndex = 1;
 
 
     public SettingsWindow(Menu menu){
         super("Settings");
 
         closeButton.addActionListener(click -> {
-//            menu.setWordoku(wordokuCheckBox.isSelected());
-        menu.setCharSet(wordokuCheckBox.isSelected() ? charSetIndex : 0);
-        setVisible(false);
+            menu.setCharSet(wordokuCheckBox.isSelected() ? charSetIndex : 0);
+            setVisible(false);
         });
 
-        greekButton.addActionListener(click -> charSetIndex = 2);
+        englishButton.setSelected(true);
         englishButton.addActionListener(click -> charSetIndex = 1);
+        greekButton.addActionListener(click -> charSetIndex = 2);
 
         add(panel);
         setSize(300,300);
@@ -41,11 +37,4 @@ public class SettingsWindow extends JFrame{
     public void showWindow() {
         setVisible(true);
     }
-
-
-    public boolean getWordoku() {
-        return isWordoku;
-    }
-
-
-    }
+}
