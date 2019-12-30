@@ -34,22 +34,14 @@ public class Menu extends JFrame {
     public Menu() {
         add(panel);
 
-
-        classic.addActionListener(click -> {
-            ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
-//            if (wordoku){
-//                new SudokuWindow("Classic", sudoku, charSet[1]);
-//                System.out.println("Wordoku");
-//            }
-//            else{
-//                new SudokuWindow("Classic", sudoku, charSet[0]);
-//            }
-            new SudokuWindow("Classic", sudoku, current);
-        });
+        ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
+
+        classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current));
+
         System.out.println("lol");
 
-        killer.addActionListener(click -> new KillerWindow("killer",kil,charSet[0]));
+        killer.addActionListener(click -> new KillerWindow("killer", kil, current));
 
         settings.addActionListener(click -> settingsWindow.showWindow());
 
