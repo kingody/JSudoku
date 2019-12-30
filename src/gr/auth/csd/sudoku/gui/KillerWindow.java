@@ -27,6 +27,7 @@ public class KillerWindow extends SudokuWindow {
         colors[8] = new Color(255, 138, 231);
         colors[9] = new Color(79, 77, 8);
         colors[10] = new Color(30, 0, 255);
+        System.out.println("Lol");
         int i=0;
         for(Area area : areas){
             connectedCells = new ArrayList<>(area.getCells());

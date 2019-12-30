@@ -41,6 +41,7 @@ public class Menu extends JFrame {
             }
         });
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
+        System.out.println("lol");
 
         killer.addActionListener(click -> new KillerWindow("killer",kil,numbers));
 
