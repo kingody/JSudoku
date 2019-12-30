@@ -49,7 +49,7 @@ public class Menu extends JFrame {
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
         System.out.println("lol");
 
-        killer.addActionListener(click -> new KillerWindow("killer",kil,numbers));
+        killer.addActionListener(click -> new KillerWindow("killer",kil,charSet[0]));
 
         settings.addActionListener(click -> settingsWindow.showWindow());
 
