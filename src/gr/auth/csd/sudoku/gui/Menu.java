@@ -56,7 +56,7 @@ public class Menu extends JFrame {
     }
 
     public void setCharSet(int index) {
-        if (index > 0 && index < charSet.length)
+        if (index >= 0 && index < charSet.length)
             current = charSet[index];
     }
 
