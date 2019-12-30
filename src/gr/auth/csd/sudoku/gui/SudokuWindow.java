@@ -6,16 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class represents the GUI on which the user plays the classic version of sudoku or wordoku
+ */
+
 public class SudokuWindow extends JFrame {
-    final Color fixedColor = Color.gray;
-    final Color wrongColor = new Color(255, 28, 4);
-    final Font font = new Font("Helvetica", Font.BOLD, 14);
+
+
+    protected Color fixedColor = Color.gray;
+    protected final Color wrongColor = new Color(255, 28, 4);
+    protected final Font font = new Font("Helvetica", Font.BOLD, 14);
     private ClassicSudoku sud;
     private char[] charSet;
-    private int rowsel;
-    private int colsel;
-    private JButton hint = new JButton("Hint");
+    protected int rowsel;
+    protected int colsel;
+    protected JButton hint = new JButton("Hint");
+    protected JTextField[][] cells;
 
+    /**
+     * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
+     * @param mode The mode played (classic,killer or wordoku)
+     * @param sud Sudoku object
+     * @param chars Array with the characters used in game. Used to distinguish between wordoku and sudoku
+     */
 
     public SudokuWindow(String mode, ClassicSudoku sud, char[] charSet) {
         super(mode);
@@ -25,7 +38,7 @@ public class SudokuWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setBackground(Color.DARK_GRAY);
         JPanel board2 = new JPanel(new GridLayout(size, size));
-        JTextField[][] cells = new JTextField[size][size];
+        cells = new JTextField[size][size];
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -145,12 +158,6 @@ public class SudokuWindow extends JFrame {
         this.add(panel);
         setSize(700, 700);
         setLocationRelativeTo(null);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-
-            }
-        });
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }

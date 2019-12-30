@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
@@ -45,6 +46,10 @@ public class Menu extends JFrame {
 //            }
             new SudokuWindow("Classic", sudoku, current);
         });
+        KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
+        System.out.println("lol");
+
+        killer.addActionListener(click -> new KillerWindow("killer",kil,numbers));
 
         settings.addActionListener(click -> settingsWindow.showWindow());
 
