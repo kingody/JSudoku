@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
@@ -40,6 +41,9 @@ public class Menu extends JFrame {
                 }
             }
         });
+        KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
+
+        killer.addActionListener(click -> new KillerWindow("killer",kil,numbers));
 
         settings.addActionListener(click -> new SettingsWindow(this));
 
