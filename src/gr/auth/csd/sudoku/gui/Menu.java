@@ -2,11 +2,8 @@ package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
 import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
-import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
     private JPanel panel;
@@ -19,8 +16,7 @@ public class Menu extends JFrame {
     private JPanel menu;
     private JButton userButton;
 
-    private SettingsWindow settingsWindow = new SettingsWindow(this);
-
+    private Settings settingsWindow = new Settings(this);
 
     private final char[][] charSet = {
             {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
@@ -38,20 +34,13 @@ public class Menu extends JFrame {
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
 
         classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current));
-
-
         killer.addActionListener(click -> new KillerWindow("killer", kil, current));
-
         settings.addActionListener(click -> settingsWindow.showWindow());
 
         setTitle("Sudoku");
         setSize(300, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public void setWordoku(boolean b){
-        wordoku = b;
     }
 
     public void setCharSet(int index) {

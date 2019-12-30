@@ -2,7 +2,7 @@ package gr.auth.csd.sudoku.gui;
 
 import javax.swing.*;
 
-public class SettingsWindow extends JFrame{
+public class Settings extends JFrame{
     private JPanel panel;
     private JPanel settingsPanel;
     private JPanel languages;
@@ -16,7 +16,7 @@ public class SettingsWindow extends JFrame{
     private int charSetIndex = 1;
 
 
-    public SettingsWindow(Menu menu){
+    public Settings(Menu menu){
         super("Settings");
 
         closeButton.addActionListener(click -> {
