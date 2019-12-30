@@ -19,6 +19,8 @@ public class Menu extends JFrame {
     private JPanel menu;
     private JButton userButton;
 
+    private SettingsWindow settingsWindow = new SettingsWindow(this);
+
 
     private final char[] numbers = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
                          letters = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
@@ -28,24 +30,21 @@ public class Menu extends JFrame {
         add(panel);
 
 
-        classic.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
-                if (wordoku){
-                    new SudokuWindow("Classic",sudoku,letters);
-                    System.out.println("Wordoku");
-                }
-                else{
-                    new SudokuWindow("Classic",sudoku,numbers);
-                }
+        classic.addActionListener(click -> {
+            ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
+            if (wordoku){
+                new SudokuWindow("Classic",sudoku,letters);
+                System.out.println("Wordoku");
+            }
+            else{
+                new SudokuWindow("Classic",sudoku,numbers);
             }
         });
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
 
         killer.addActionListener(click -> new KillerWindow("killer",kil,numbers));
 
-        settings.addActionListener(click -> new SettingsWindow(this));
+        settings.addActionListener(click -> settingsWindow.showWindow());
 
 
     }
