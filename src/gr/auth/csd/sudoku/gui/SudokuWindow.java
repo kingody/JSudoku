@@ -47,6 +47,7 @@ public class SudokuWindow extends JFrame {
             JPanel hintPanel = new JPanel();
             JLabel hintLabel = new JLabel("The following are acceptable:  ");
             StringBuilder display = new StringBuilder();
+            System.out.println("");
             for (char c: charSet) {
                 if(sud.isValidMove(rowsel,colsel,getIndex(c))){
                     display.append(c).append(" ");
