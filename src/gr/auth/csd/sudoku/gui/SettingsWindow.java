@@ -17,15 +17,20 @@ public class SettingsWindow extends JFrame{
     private JButton greekButton;
     private JButton closeButton;
     private boolean isWordoku;
+    private int charSetIndex = 1; //Default to English
 
 
     public SettingsWindow(Menu menu){
         super("Settings");
 
         closeButton.addActionListener(click -> {
-            menu.setWordoku(wordokuCheckBox.isSelected());
-            setVisible(false);
+//            menu.setWordoku(wordokuCheckBox.isSelected());
+        menu.setCharSet(wordokuCheckBox.isSelected() ? charSetIndex : 0);
+        setVisible(false);
         });
+
+        greekButton.addActionListener(click -> charSetIndex = 2);
+        englishButton.addActionListener(click -> charSetIndex = 1);
 
         add(panel);
         setSize(300,300);

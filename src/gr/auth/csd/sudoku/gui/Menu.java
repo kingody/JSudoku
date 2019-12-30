@@ -21,8 +21,13 @@ public class Menu extends JFrame {
     private SettingsWindow settingsWindow = new SettingsWindow(this);
 
 
-    private final char[] numbers = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
-                         letters = {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+    private final char[][] charSet = {
+            {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
+            {' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'},
+            {' ', 'Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ζ', 'Η', 'Θ', 'Ι'}
+    };
+
+    private char[] current = charSet[0];
 
 
     public Menu() {
@@ -31,30 +36,35 @@ public class Menu extends JFrame {
 
         classic.addActionListener(click -> {
             ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
-            if (wordoku){
-                new SudokuWindow("Classic",sudoku,letters);
-                System.out.println("Wordoku");
-            }
-            else{
-                new SudokuWindow("Classic",sudoku,numbers);
-            }
+//            if (wordoku){
+//                new SudokuWindow("Classic", sudoku, charSet[1]);
+//                System.out.println("Wordoku");
+//            }
+//            else{
+//                new SudokuWindow("Classic", sudoku, charSet[0]);
+//            }
+            new SudokuWindow("Classic", sudoku, current);
         });
 
         settings.addActionListener(click -> settingsWindow.showWindow());
 
-
+        setTitle("Sudoku");
+        setSize(300, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
     public void setWordoku(boolean b){
         wordoku = b;
+    }
 
+    public void setCharSet(int index) {
+        if (index > 0 && index < charSet.length)
+            current = charSet[index];
     }
 
     public static void main(String[] args) {
         JFrame frame = new Menu();
-        frame.setTitle("Sudoku");
-        frame.setSize(300, 300);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }

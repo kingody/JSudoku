@@ -33,9 +33,13 @@ public class Sudoku {
         return grid[row][col];
     }
 
-    public void setCell(int row, int col, int value) {
-        if (isValidMove(row, col, value))
+    public boolean setCell(int row, int col, int value) {
+        if (isValidMove(row, col, value)) {
             grid[row][col] = value;
+            return true;
+        }
+
+        return false;
     }
 
     public void clearCell(int row, int col) {
