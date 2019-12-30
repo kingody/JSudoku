@@ -27,7 +27,7 @@ public class SudokuWindow extends JFrame {
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
      * @param mode The mode played (classic,killer or wordoku)
      * @param sud Sudoku object
-     * @param chars Array with the characters used in game. Used to distinguish between wordoku and sudoku
+     * @param charSet Array with the characters used in game. Used to distinguish between wordoku and sudoku
      */
 
     public SudokuWindow(String mode, ClassicSudoku sud, char[] charSet) {
@@ -127,28 +127,25 @@ public class SudokuWindow extends JFrame {
             }
         }
 
-        hint.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame hint = new JFrame();
-                JPanel hintPanel = new JPanel();
-                JLabel hintLabel = new JLabel("The following are acceptable:  ");
-                StringBuilder display = new StringBuilder();
-                for (char c: charSet) {
-                    if(sud.isValidMove(rowsel,colsel,getIndex(c))){
-                        display.append(c).append(" ");
-                    }
+        hint.addActionListener(click -> {
+            JFrame hint = new JFrame();
+            JPanel hintPanel = new JPanel();
+            JLabel hintLabel = new JLabel("The following are acceptable:  ");
+            StringBuilder display = new StringBuilder();
+            for (char c: charSet) {
+                if(sud.isValidMove(rowsel,colsel,getIndex(c))){
+                    display.append(c).append(" ");
                 }
-                JLabel hints = new JLabel(display.toString());
-                hintPanel.add(hintLabel);
-                hintPanel.add(hints);
-                hint.add(hintPanel);
-                hint.setSize(200,100);
-                hint.setLocationRelativeTo(null);
-                hint.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                hint.setResizable(false);
-                hint.setVisible(true);
             }
+            JLabel hints = new JLabel(display.toString());
+            hintPanel.add(hintLabel);
+            hintPanel.add(hints);
+            hint.add(hintPanel);
+            hint.setSize(200,100);
+            hint.setLocationRelativeTo(null);
+            hint.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            hint.setResizable(false);
+            hint.setVisible(true);
         });
 
 
