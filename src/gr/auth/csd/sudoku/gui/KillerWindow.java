@@ -13,9 +13,12 @@ import java.util.ArrayList;
 public class KillerWindow extends SudokuWindow {
     private Color[] colors;
     private KillerSudoku sud;
+    private ArrayList<Area>areas;
+    private ArrayList<Index>connectedCells;
+    private JLabel sum;
 
     public KillerWindow(String mode, KillerSudoku sud, char[] chars) {
-        super(mode, sud, chars);
+        super(mode,sud,chars,true);
         this.sud = sud;
         ArrayList<Area> areas = new ArrayList<>(sud.getAreas());
         ArrayList<Index> connectedCells;
@@ -32,6 +35,7 @@ public class KillerWindow extends SudokuWindow {
         colors[9] = new Color(79, 77, 8);
         colors[10] = new Color(30, 0, 255);
         System.out.println("Lol");
+
         int i = 0;
 
 
@@ -40,10 +44,13 @@ public class KillerWindow extends SudokuWindow {
             for (Index coord : connectedCells) {
                 int row = coord.getRow();
                 int col = coord.getColumn();
-                cells[row][col].setBackground(colors[i % 11]);
+                cells[row][col].setBackground(colors[i%11]);
+
+
             }
             i++;
         }
+
 
     }
 

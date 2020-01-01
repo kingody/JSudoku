@@ -20,8 +20,9 @@ public class SudokuWindow extends JFrame {
     protected int colsel;
     protected JButton hint;
     protected JTextField[][] cells;
-    protected MyKeyListener a;
     protected JPanel grid;
+    private boolean kill;
+
 
     /**
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
@@ -29,11 +30,12 @@ public class SudokuWindow extends JFrame {
      * @param sudoku Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku
      */
-    public SudokuWindow(String title, Sudoku sudoku, char[] charSet) {
+    public SudokuWindow(String title, Sudoku sudoku, char[] charSet, boolean kill) {
         super(title);
         this.sudoku = sudoku;
         this.charSet = charSet;
         int size = sudoku.getSize();
+        this.kill = kill;
 
         JPanel background = new JPanel();
         background.setBackground(Color.DARK_GRAY);
@@ -141,11 +143,7 @@ public class SudokuWindow extends JFrame {
 
 
     public class MyKeyListener implements KeyListener{
-        protected Color cellColor;
 
-        public void setCellColor(Color cellColor) {
-            this.cellColor = cellColor;
-        }
 
         @Override
         public void keyTyped(KeyEvent e) {}
@@ -163,7 +161,9 @@ public class SudokuWindow extends JFrame {
         public void keyReleased(KeyEvent e) {
             String input = cells[rowsel][colsel].getText();
             if (input.isEmpty()) {
-                cells[rowsel][colsel].setBackground(cellColor);
+                if(!kill){
+                    cells[rowsel][colsel].setBackground(Color.WHITE);
+                }
                 cells[rowsel][colsel].setText("");
                 sudoku.clearCell(rowsel,colsel);
                 return;
@@ -171,23 +171,32 @@ public class SudokuWindow extends JFrame {
 
             char value = input.charAt(0);
 
-            cells[rowsel][colsel].setBackground(cellColor);
+            if(!kill){
+                cells[rowsel][colsel].setBackground(Color.WHITE);
+            }
             sudoku.clearCell(rowsel, colsel);
 
             if (isValidChar(value)) {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
-
-                Color color = validMove ? cellColor : wrongColor;
-                cells[rowsel][colsel].setBackground(color);
+                if(kill){
+                    if(!validMove){cells[rowsel][colsel].setBackground(wrongColor);}
+                }
+                else {
+                    Color color = validMove ? Color.WHITE : wrongColor;
+                    cells[rowsel][colsel].setBackground(color);
+                }
 
             }
             else {
-                cells[rowsel][colsel].setBackground(cellColor);
+                if(!kill) {
+                    cells[rowsel][colsel].setBackground(Color.WHITE);
+                }
                 cells[rowsel][colsel].setText("");
                 sudoku.clearCell(rowsel,colsel);
             }
 
         }
+
     }
 }
