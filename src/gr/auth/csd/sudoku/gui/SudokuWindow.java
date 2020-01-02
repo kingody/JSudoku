@@ -83,7 +83,7 @@ public class SudokuWindow extends JFrame {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                cells[i][j] = new SudCell();
+                cells[i][j] = new SudCell(kill);
                 /*cells[i][j] =  new JTextField();
                 cells[i][j].setDocument(new TextLimit(1));*/
 
