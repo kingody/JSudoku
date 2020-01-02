@@ -44,7 +44,9 @@ public class KillerWindow extends SudokuWindow {
                 int row = coord.getRow();
                 int col = coord.getColumn();
                 cells[row][col].getInputTextfield().setBackground(colors[i%11]);
-
+                if(j==0){
+                    cells[row][col].setSum(Integer.toString(area.getSum()));
+                }
                 j++;
             }
             j=0;

@@ -15,18 +15,20 @@ public class SudCell extends JPanel {
 
 
     public SudCell() {
-        setLayout(new OverlayLayout(this));
+        setLayout(new BorderLayout());
         inputText = new JTextField();
         inputText.setDocument(new TextLimit(1));
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
         sum = new JLabel();
         sum.setLabelFor(inputText);
-        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.BLACK));
-        sum.setAlignmentX(0f);
+        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
+        sum.setMinimumSize(new Dimension(10,10));
+        sum.setPreferredSize(new Dimension(10,10));
+        sum.setMaximumSize(new Dimension(10,10));
         sum.setVisible(true);
-        add(sum);
-        add(inputText);
+        add(sum,BorderLayout.NORTH);
+        add(inputText,BorderLayout.CENTER);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 
