@@ -23,9 +23,9 @@ public class SudCell extends JPanel {
         sum = new JLabel();
         sum.setLabelFor(inputText);
         sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
-        sum.setMinimumSize(new Dimension(10,10));
-        sum.setPreferredSize(new Dimension(10,10));
-        sum.setMaximumSize(new Dimension(10,10));
+        sum.setMinimumSize(new Dimension(10,12));
+        sum.setPreferredSize(new Dimension(10,12));
+        sum.setMaximumSize(new Dimension(10,12));
 
         if(!kill)
         {
@@ -45,7 +45,7 @@ public class SudCell extends JPanel {
     }
     public void setSum(String s,Color color){
         sum.setText(s);
-        sum.setBackground(color);
+        setBackground(color);
     }
     public JLabel getSumLabel(){
         return  sum;
