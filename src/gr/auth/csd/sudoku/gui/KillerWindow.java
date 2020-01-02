@@ -37,15 +37,17 @@ public class KillerWindow extends SudokuWindow {
         System.out.println("Lol");
 
         int i = 0;
-
-
         for (Area area : areas) {
+            int j=0;
             connectedCells = new ArrayList<>(area.getCells());
             for (Index coord : connectedCells) {
                 int row = coord.getRow();
                 int col = coord.getColumn();
-                cells[row][col].setBackground(colors[i%11]);
+                cells[row][col].getInputTextfield().setBackground(colors[i%11]);
+
+                j++;
             }
+            j=0;
             i++;
         }
 

@@ -4,34 +4,43 @@ import gr.auth.csd.sudoku.Sudoku;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class SudCell extends JPanel {
     private JLabel sum;
     private JTextField inputText;
-    protected Color fixedColor = Color.gray;
 
 
-
-    public SudCell(int row,int col, Sudoku sudoku, char[] charSet){
-        setLayout(new BorderLayout());
+    public SudCell() {
+        setLayout(new OverlayLayout(this));
         inputText = new JTextField();
         inputText.setDocument(new TextLimit(1));
-        if (sudoku.getCell(row, col) != 0) {
-            //cells from file are initiliazed to corresponding value and not to be edited
-            String num = String.valueOf(charSet[sudoku.getCell(row,col)]);
-            inputText.setText(num);
-            //cells[i][j].inputText.setText(num);
-            setBackground(fixedColor);
-            inputText.setEditable(false);
-        }
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
-
-
         sum = new JLabel();
-        add(sum,BorderLayout.NORTH);
-        add(inputText,BorderLayout.CENTER);
+        sum.setLabelFor(inputText);
+        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.BLACK));
+        sum.setAlignmentX(0f);
+        sum.setVisible(true);
+        add(sum);
+        add(inputText);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 
     }
-
+    public JTextField getInputTextfield(){
+        return inputText;
+    }
+    public void setInputText(String s){
+        inputText.setText(s);
+    }
+    public void setSum(String s){
+        sum.setText(s);
+    }
+    public JLabel getSumLabel(){
+        return  sum;
+    }
 }
