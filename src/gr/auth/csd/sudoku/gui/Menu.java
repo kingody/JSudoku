@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
 import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 
 import javax.swing.*;
@@ -32,10 +33,13 @@ public class Menu extends JFrame {
 
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
         KillerSudoku kil = new KillerSudoku(9,"killer1.txt");
+        Duidoku dui = new Duidoku(4);
 
         classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current,false));
         killer.addActionListener(click -> new KillerWindow("killer", kil, current));
+        duidoku.addActionListener(click->new DuidokuWindow("Duidoku",dui,current));
         settings.addActionListener(click -> settingsWindow.showWindow());
+
 
         setTitle("Sudoku");
         setSize(300, 300);

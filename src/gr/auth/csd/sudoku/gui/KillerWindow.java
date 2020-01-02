@@ -45,11 +45,10 @@ public class KillerWindow extends SudokuWindow {
                 int row = coord.getRow();
                 int col = coord.getColumn();
                 cells[row][col].setBackground(colors[i%11]);
-
-
             }
             i++;
         }
+
 
 
     }

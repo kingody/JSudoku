@@ -19,6 +19,7 @@ public class SudokuWindow extends JFrame {
     protected int rowsel;
     protected int colsel;
     protected JButton hint;
+    //protected SudCell[][] cells;
     protected JTextField[][] cells;
     protected JPanel grid;
     private boolean kill;
@@ -55,11 +56,11 @@ public class SudokuWindow extends JFrame {
             new Hint(display.toString());
         });
 
-        grid.setPreferredSize(new Dimension(630, 630));
+        grid.setPreferredSize(new Dimension(630,630));
         background.add(grid);
         background.add(hint);
         this.add(background);
-        setSize(700, 700);
+        setSize(710, 710);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -83,13 +84,15 @@ public class SudokuWindow extends JFrame {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                cells[i][j] = new JTextField();
+                //cells[i][j] = new SudCell(i,j,sudoku,charSet);
+                cells[i][j] =  new JTextField();
                 cells[i][j].setDocument(new TextLimit(1));
 
                 if (sudoku.getCell(i, j) != 0) {
                     //cells from file are initiliazed to corresponding value and not to be edited
                     String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
                     cells[i][j].setText(num);
+                    //cells[i][j].inputText.setText(num);
                     cells[i][j].setBackground(fixedColor);
                     cells[i][j].setEditable(false);
                 }
@@ -99,6 +102,7 @@ public class SudokuWindow extends JFrame {
                     MyKeyListener a = new MyKeyListener();
                     cells[i][j].addKeyListener(a);//waiting for user input in mouse selected cell
                     cells[i][j].setText("");
+                    //cells[i][j].inputText.setText("");
                 }
 
                 cells[i][j].setHorizontalAlignment(JTextField.CENTER);
@@ -112,7 +116,7 @@ public class SudokuWindow extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            JTextField selected = (JTextField)e.getSource();
+            JTextField selected = (JTextField) e.getSource();
             int size = sudoku.getSize();
 
             for (int i = 0; i < size; i++) {
