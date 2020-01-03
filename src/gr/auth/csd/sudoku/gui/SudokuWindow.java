@@ -103,14 +103,14 @@ public class SudokuWindow extends JFrame {
                     String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
                     //cells[i][j].setText(num);
                     cells[i][j].setInputText(num);
-                    cells[i][j].getInputTextfield().setBackground(fixedColor);
-                    cells[i][j].getInputTextfield().setEditable(false);
+                    cells[i][j].setColor(fixedColor);
+                    cells[i][j].getInputTextField().setEditable(false);
                 }
                 else {
                     //empty cells
-                    cells[i][j].getInputTextfield().addMouseListener(new MyMouseListener()); //finding the selected cell from mouse click
+                    cells[i][j].getInputTextField().addMouseListener(new MyMouseListener()); //finding the selected cell from mouse click
                     MyKeyListener a = new MyKeyListener();
-                    cells[i][j].getInputTextfield().addKeyListener(a);//waiting for user input in mouse selected cell
+                    cells[i][j].getInputTextField().addKeyListener(a);//waiting for user input in mouse selected cell
                     //cells[i][j].setText("");
                     cells[i][j].setInputText("");
                 }
@@ -130,7 +130,7 @@ public class SudokuWindow extends JFrame {
 
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
-                    if (selected.equals(cells[i][j].getInputTextfield())) {
+                    if (selected.equals(cells[i][j].getInputTextField())) {
                         rowsel = i;
                         colsel = j;
                         System.out.println("You selected :" + rowsel + " " + colsel);
@@ -176,9 +176,9 @@ public class SudokuWindow extends JFrame {
         public void keyReleased(KeyEvent e) {
             //String input = cells[rowsel][colsel].getText();
             Color previous = cells[rowsel][colsel].getCellColor();
-            String input = cells[rowsel][colsel].getInputTextfield().getText();
+            String input = cells[rowsel][colsel].getInputTextField().getText();
             if (input.isEmpty()) {
-                cells[rowsel][colsel].getInputTextfield().setBackground(previous);
+                cells[rowsel][colsel].getInputTextField().setBackground(previous);
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
                 return;
@@ -186,7 +186,7 @@ public class SudokuWindow extends JFrame {
 
             char value = input.charAt(0);
 
-            cells[rowsel][colsel].getInputTextfield().setBackground(previous);
+            cells[rowsel][colsel].getInputTextField().setBackground(previous);
 
             sudoku.clearCell(rowsel, colsel);
 
@@ -194,7 +194,7 @@ public class SudokuWindow extends JFrame {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
                 Color color = validMove ? previous : wrongColor;
-                cells[rowsel][colsel].getInputTextfield().setBackground(color);
+                cells[rowsel][colsel].getInputTextField().setBackground(color);
 
             }
             else {

@@ -6,33 +6,35 @@ import java.awt.*;
 public class SudCell extends JPanel {
     private JLabel sum;
     private JTextField inputText;
-    private Color cellColor =Color.WHITE ;
-    private static final Font font = new Font("Serif", Font.BOLD, 15);
+    private Color cellColor = Color.WHITE;
+    private static final Font font = new Font("Arial", Font.BOLD, 15);
 
 
     public SudCell() {
         setLayout(new BorderLayout());
         inputText = new JTextField();
+        inputText.setFont(font.deriveFont(Font.BOLD, 18));
         inputText.setBorder(BorderFactory.createEmptyBorder());
         inputText.setDocument(new TextLimit(1));
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
-        sum = new JLabel();
+        add(inputText,BorderLayout.CENTER);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    }
+
+    public void addLabel(String text) {
+        sum = new JLabel(text);
         sum.setFont(font);
-        sum.setForeground(new Color(0,0,0));
-//        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
+        sum.setForeground(Color.BLACK);
         sum.setMinimumSize(new Dimension(10,15));
         sum.setPreferredSize(new Dimension(10,15));
         sum.setMaximumSize(new Dimension(10,15));
-        sum.setVisible(false);
         add(sum,BorderLayout.NORTH);
-        add(inputText,BorderLayout.CENTER);
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-
+        sum.setVisible(true);
     }
 
-    public JTextField getInputTextfield(){
+    public JTextField getInputTextField(){
         return inputText;
     }
 
@@ -40,17 +42,10 @@ public class SudCell extends JPanel {
         inputText.setText(s);
     }
 
-    public void setSum(String s){
-        sum.setText(s);
-
-    }
-    public JLabel getSumLabel(){
-        return  sum;
-    }
-
-    public void setCellColor(Color cellColor) {
+    public void setColor(Color cellColor) {
         this.cellColor = cellColor;
         setBackground(cellColor);
+        inputText.setBackground(cellColor);
     }
 
     public Color getCellColor(){return cellColor;}
