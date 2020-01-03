@@ -1,31 +1,26 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.Sudoku;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class SudCell extends JPanel {
     private JLabel sum;
     private JTextField inputText;
     private Color cellColor =Color.WHITE ;
-    private final Font font = new Font("Serif", Font.BOLD, 15);
+    private static final Font font = new Font("Serif", Font.BOLD, 15);
 
 
     public SudCell() {
         setLayout(new BorderLayout());
         inputText = new JTextField();
+        inputText.setBorder(BorderFactory.createEmptyBorder());
         inputText.setDocument(new TextLimit(1));
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
         sum = new JLabel();
         sum.setFont(font);
         sum.setForeground(new Color(0,0,0));
-        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
+//        sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
         sum.setMinimumSize(new Dimension(10,15));
         sum.setPreferredSize(new Dimension(10,15));
         sum.setMaximumSize(new Dimension(10,15));
@@ -36,15 +31,18 @@ public class SudCell extends JPanel {
 
 
     }
+
     public JTextField getInputTextfield(){
         return inputText;
     }
+
     public void setInputText(String s){
         inputText.setText(s);
     }
-    public void setSum(String s,Color color){
+
+    public void setSum(String s){
         sum.setText(s);
-        setBackground(color);
+
     }
     public JLabel getSumLabel(){
         return  sum;
@@ -52,6 +50,7 @@ public class SudCell extends JPanel {
 
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
+        setBackground(cellColor);
     }
 
     public Color getCellColor(){return cellColor;}
