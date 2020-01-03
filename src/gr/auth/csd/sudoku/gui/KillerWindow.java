@@ -29,15 +29,12 @@ public class KillerWindow extends SudokuWindow {
             Index first = connectedCells.get(0);
             int row = first.getRow(), col = first.getColumn();
 
-//            cells[row][col].setSum(Integer.toString(area.getSum()));
-//            cells[row][col].getSumLabel().setVisible(true);
             cells[row][col].addLabel(Integer.toString(area.getSum()));
 
             for (Index position : connectedCells) {
                 row = position.getRow();
                 col = position.getColumn();
 
-//                cells[row][col].getInputTextfield().setBackground(color);
                 cells[row][col].setColor(color);
             }
         }

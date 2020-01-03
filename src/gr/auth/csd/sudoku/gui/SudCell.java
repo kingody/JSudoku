@@ -7,6 +7,7 @@ public class SudCell extends JPanel {
     private JLabel sum;
     private JTextField inputText;
     private Color cellColor = Color.WHITE;
+    private static final Color wrongColor = new Color(255, 28, 4);
     private static final Font font = new Font("Arial", Font.BOLD, 15);
 
 
@@ -48,5 +49,14 @@ public class SudCell extends JPanel {
         inputText.setBackground(cellColor);
     }
 
-    public Color getCellColor(){return cellColor;}
+    public void setWarning(boolean flag) {
+        if (flag) {
+        setBackground(wrongColor);
+        inputText.setBackground(wrongColor);
+        } else {
+            setColor(cellColor);
+        }
+    }
+
+    public Color getCellColor(){ return cellColor; }
 }

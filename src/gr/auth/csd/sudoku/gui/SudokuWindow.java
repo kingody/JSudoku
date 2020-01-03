@@ -156,7 +156,7 @@ public class SudokuWindow extends JFrame {
 
 
     public class MyKeyListener implements KeyListener{
-        Color previous = cells[rowsel][colsel].getCellColor();
+//        Color previous = cells[rowsel][colsel].getCellColor();
 
 
         @Override
@@ -175,10 +175,11 @@ public class SudokuWindow extends JFrame {
         @Override
         public void keyReleased(KeyEvent e) {
             //String input = cells[rowsel][colsel].getText();
-            Color previous = cells[rowsel][colsel].getCellColor();
+//            Color previous = cells[rowsel][colsel].getCellColor();
             String input = cells[rowsel][colsel].getInputTextField().getText();
             if (input.isEmpty()) {
-                cells[rowsel][colsel].getInputTextField().setBackground(previous);
+//                cells[rowsel][colsel].getInputTextField().setBackground(previous);
+                cells[rowsel][colsel].setWarning(false);
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
                 return;
@@ -186,20 +187,21 @@ public class SudokuWindow extends JFrame {
 
             char value = input.charAt(0);
 
-            cells[rowsel][colsel].getInputTextField().setBackground(previous);
-
+//            cells[rowsel][colsel].getInputTextField().setBackground(previous);
+            cells[rowsel][colsel].setWarning(false);
             sudoku.clearCell(rowsel, colsel);
 
             if (isValidChar(value)) {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
-                Color color = validMove ? previous : wrongColor;
-                cells[rowsel][colsel].getInputTextField().setBackground(color);
+//                Color color = validMove ? previous : wrongColor;
+//                cells[rowsel][colsel].getInputTextField().setBackground(color);
+                cells[rowsel][colsel].setWarning(!validMove);
 
             }
             else {
-                cells[rowsel][colsel].setBackground(previous);
-                //cells[rowsel][colsel].setText("");
+//                cells[rowsel][colsel].setBackground(previous);
+                cells[rowsel][colsel].setWarning(false);
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
             }
