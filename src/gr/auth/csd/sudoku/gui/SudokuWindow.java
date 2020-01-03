@@ -28,7 +28,7 @@ public class SudokuWindow extends JFrame {
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
      * @param title The mode played (classic,killer or wordoku)
      * @param sudoku Sudoku object
-     * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku
+     * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
     public SudokuWindow(String title, Sudoku sudoku, char[] charSet, boolean kill) {
         super(title);
@@ -65,6 +65,12 @@ public class SudokuWindow extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Converts input character to numeric value
+     * @param c the input character
+     * @return numeric value of character if it belongs to the valid characters of charSet. Else returns -1
+     */
+
     public int getIndex(char c) {
         for (int i = 0; i < charSet.length; i++) {
             if (c == charSet[i])
@@ -72,6 +78,12 @@ public class SudokuWindow extends JFrame {
         }
         return -1;
     }
+
+    /**
+     * Checks if char c is valid
+     * @param c char whose validity is to be determined
+     * @return true if it is valid, else false
+     */
 
     public boolean isValidChar(char c) {
         int index = getIndex(c);
@@ -181,6 +193,9 @@ public class SudokuWindow extends JFrame {
 
             if(!kill){
                 cells[rowsel][colsel].setBackground(Color.WHITE);
+            }
+            else{
+                cells[rowsel][colsel].getInputTextfield().setBackground(previous);
             }
             sudoku.clearCell(rowsel, colsel);
 
