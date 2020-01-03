@@ -28,9 +28,9 @@ public class KillerWindow extends SudokuWindow {
         colors[2] = Color.orange;
         colors[3] = Color.magenta;
         colors[4] = new Color(0x475035);
-        colors[5] = Color.lightGray;
+        colors[5] = Color.GRAY;
         colors[6] = Color.WHITE;
-        colors[7] = Color.yellow;
+        colors[7] = new Color(189, 160, 25);
         colors[8] = new Color(255, 138, 231);
         colors[9] = new Color(79, 77, 8);
         colors[10] = new Color(30, 0, 255);
@@ -40,23 +40,29 @@ public class KillerWindow extends SudokuWindow {
         for (Area area : areas) {
             int j=0;
             connectedCells = new ArrayList<>(area.getCells());
+            double randomizer = Math.random();
+            double sature = Math.random()*(0.7-0.2)+0.2;
+            double brightness = Math.random()*(1-0.5)+0.5;
+            int rgb = Color.HSBtoRGB((float) randomizer,(float)sature,(float) brightness);
+            Color color = new Color(rgb);
+            //Color color = new Color((int)(Math.random() * 0x1000000));
             for (Index coord : connectedCells) {
                 int row = coord.getRow();
                 int col = coord.getColumn();
-                cells[row][col].getInputTextfield().setBackground(colors[i%11]);
-                if(j==0){
-                    cells[row][col].setSum(Integer.toString(area.getSum()),colors[i%11]);
+                cells[row][col].getInputTextfield().setBackground(color);
+                cells[row][col].setCellColor(color);
+                if (j == 0) {
+                    cells[row][col].setSum(Integer.toString(area.getSum()), color);
                 }
-                else{
+                else {
                     cells[row][col].getSumLabel().setVisible(false);
                 }
+
                 j++;
             }
             j=0;
             i++;
         }
-
-
 
     }
 

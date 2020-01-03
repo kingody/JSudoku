@@ -12,7 +12,7 @@ import java.awt.event.*;
 public class SudokuWindow extends JFrame {
     protected Color fixedColor = Color.gray;
     protected final Color wrongColor = new Color(255, 28, 4);
-    protected final Font font = new Font("Helvetica", Font.BOLD, 14);
+
     private Sudoku sudoku;
     protected char[] charSet;
     protected int rowsel;
@@ -105,7 +105,6 @@ public class SudokuWindow extends JFrame {
                 }
 
                 //cells[i][j].setHorizontalAlignment(JTextField.CENTER);
-                cells[i][j].setFont(font);
                 grid.add(cells[i][j]);
             }
         }
@@ -164,12 +163,15 @@ public class SudokuWindow extends JFrame {
         @Override
         public void keyReleased(KeyEvent e) {
             //String input = cells[rowsel][colsel].getText();
+            Color previous = cells[rowsel][colsel].getCellColor();
             String input = cells[rowsel][colsel].getInputTextfield().getText();
             if (input.isEmpty()) {
                 if(!kill){
                     cells[rowsel][colsel].getInputTextfield().setBackground(Color.WHITE);
                 }
-                //cells[rowsel][colsel].setText("");
+                else{
+                    cells[rowsel][colsel].getInputTextfield().setBackground(previous);
+                }
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
                 return;
@@ -186,6 +188,7 @@ public class SudokuWindow extends JFrame {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
                 if(kill){
+                    cells[rowsel][colsel].setCellColor(previous);
                     if(!validMove){cells[rowsel][colsel].getInputTextfield().setBackground(wrongColor);}
                 }
                 else {

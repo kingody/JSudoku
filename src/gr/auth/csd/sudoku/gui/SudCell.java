@@ -12,6 +12,8 @@ import java.awt.event.MouseListener;
 public class SudCell extends JPanel {
     private JLabel sum;
     private JTextField inputText;
+    private Color cellColor =Color.WHITE ;
+    private final Font font = new Font("Serif", Font.BOLD, 15);
 
 
     public SudCell(boolean kill) {
@@ -21,11 +23,12 @@ public class SudCell extends JPanel {
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
         sum = new JLabel();
-        sum.setLabelFor(inputText);
+        sum.setFont(font);
+        sum.setForeground(new Color(0,0,0));
         sum.setBorder(BorderFactory.createMatteBorder(0,0,1,1,Color.GRAY));
-        sum.setMinimumSize(new Dimension(10,12));
-        sum.setPreferredSize(new Dimension(10,12));
-        sum.setMaximumSize(new Dimension(10,12));
+        sum.setMinimumSize(new Dimension(10,15));
+        sum.setPreferredSize(new Dimension(10,15));
+        sum.setMaximumSize(new Dimension(10,15));
 
         if(!kill)
         {
@@ -50,4 +53,10 @@ public class SudCell extends JPanel {
     public JLabel getSumLabel(){
         return  sum;
     }
+
+    public void setCellColor(Color cellColor) {
+        this.cellColor = cellColor;
+    }
+
+    public Color getCellColor(){return cellColor;}
 }
