@@ -16,7 +16,7 @@ public class SudCell extends JPanel {
     private final Font font = new Font("Serif", Font.BOLD, 15);
 
 
-    public SudCell(boolean kill) {
+    public SudCell() {
         setLayout(new BorderLayout());
         inputText = new JTextField();
         inputText.setDocument(new TextLimit(1));
@@ -29,11 +29,7 @@ public class SudCell extends JPanel {
         sum.setMinimumSize(new Dimension(10,15));
         sum.setPreferredSize(new Dimension(10,15));
         sum.setMaximumSize(new Dimension(10,15));
-
-        if(!kill)
-        {
-            sum.setVisible(false);
-        }
+        sum.setVisible(false);
         add(sum,BorderLayout.NORTH);
         add(inputText,BorderLayout.CENTER);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));

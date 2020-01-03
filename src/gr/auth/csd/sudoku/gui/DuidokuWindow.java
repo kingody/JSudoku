@@ -8,7 +8,7 @@ import java.awt.*;
 public class DuidokuWindow extends SudokuWindow {
 
     public DuidokuWindow(String title, Duidoku duidoku, char[] charSet) {
-        super(title, duidoku, charSet, false);
+        super(title, duidoku, charSet);
         grid.setPreferredSize(new Dimension(280,280));
         setSize(400,400);
     }

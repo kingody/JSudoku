@@ -35,7 +35,7 @@ public class Menu extends JFrame {
         KillerSudoku kil = new KillerSudoku(9,"killer2.txt");
         Duidoku dui = new Duidoku(4);
 
-        classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current,false));
+        classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current));
         killer.addActionListener(click -> new KillerWindow("killer", kil, current));
         duidoku.addActionListener(click->new DuidokuWindow("Duidoku",dui,current));
         settings.addActionListener(click -> settingsWindow.showWindow());

@@ -18,7 +18,7 @@ public class KillerWindow extends SudokuWindow {
     private JLabel sum;
 
     public KillerWindow(String mode, KillerSudoku sud, char[] chars) {
-        super(mode,sud,chars,true);
+        super(mode,sud,chars);
         this.sud = sud;
         ArrayList<Area> areas = new ArrayList<>(sud.getAreas());
         ArrayList<Index> connectedCells;
@@ -52,11 +52,10 @@ public class KillerWindow extends SudokuWindow {
                 cells[row][col].getInputTextfield().setBackground(color);
                 cells[row][col].setCellColor(color);
                 if (j == 0) {
+                    cells[row][col].getSumLabel().setVisible(true);
                     cells[row][col].setSum(Integer.toString(area.getSum()), color);
                 }
-                else {
-                    cells[row][col].getSumLabel().setVisible(false);
-                }
+
 
                 j++;
             }

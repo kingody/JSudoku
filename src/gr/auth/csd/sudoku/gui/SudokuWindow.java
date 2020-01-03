@@ -21,7 +21,6 @@ public class SudokuWindow extends JFrame {
     protected SudCell[][] cells;
     //protected JTextField[][] cells;
     protected JPanel grid;
-    private boolean kill;
 
 
     /**
@@ -30,12 +29,12 @@ public class SudokuWindow extends JFrame {
      * @param sudoku Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
-    public SudokuWindow(String title, Sudoku sudoku, char[] charSet, boolean kill) {
+    public SudokuWindow(String title, Sudoku sudoku, char[] charSet) {
         super(title);
         this.sudoku = sudoku;
         this.charSet = charSet;
         int size = sudoku.getSize();
-        this.kill = kill;
+
 
         JPanel background = new JPanel();
         background.setBackground(Color.DARK_GRAY);
@@ -95,7 +94,7 @@ public class SudokuWindow extends JFrame {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                cells[i][j] = new SudCell(kill);
+                cells[i][j] = new SudCell();
                 /*cells[i][j] =  new JTextField();
                 cells[i][j].setDocument(new TextLimit(1));*/
 
@@ -157,6 +156,7 @@ public class SudokuWindow extends JFrame {
 
 
     public class MyKeyListener implements KeyListener{
+        Color previous = cells[rowsel][colsel].getCellColor();
 
 
         @Override
@@ -178,12 +178,7 @@ public class SudokuWindow extends JFrame {
             Color previous = cells[rowsel][colsel].getCellColor();
             String input = cells[rowsel][colsel].getInputTextfield().getText();
             if (input.isEmpty()) {
-                if(!kill){
-                    cells[rowsel][colsel].getInputTextfield().setBackground(Color.WHITE);
-                }
-                else{
-                    cells[rowsel][colsel].getInputTextfield().setBackground(previous);
-                }
+                cells[rowsel][colsel].getInputTextfield().setBackground(previous);
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
                 return;
@@ -191,31 +186,19 @@ public class SudokuWindow extends JFrame {
 
             char value = input.charAt(0);
 
-            if(!kill){
-                cells[rowsel][colsel].setBackground(Color.WHITE);
-            }
-            else{
-                cells[rowsel][colsel].getInputTextfield().setBackground(previous);
-            }
+            cells[rowsel][colsel].getInputTextfield().setBackground(previous);
+
             sudoku.clearCell(rowsel, colsel);
 
             if (isValidChar(value)) {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
-                if(kill){
-                    cells[rowsel][colsel].setCellColor(previous);
-                    if(!validMove){cells[rowsel][colsel].getInputTextfield().setBackground(wrongColor);}
-                }
-                else {
-                    Color color = validMove ? Color.WHITE : wrongColor;
-                    cells[rowsel][colsel].getInputTextfield().setBackground(color);
-                }
+                Color color = validMove ? previous : wrongColor;
+                cells[rowsel][colsel].getInputTextfield().setBackground(color);
 
             }
             else {
-                if(!kill) {
-                    cells[rowsel][colsel].setBackground(Color.WHITE);
-                }
+                cells[rowsel][colsel].setBackground(previous);
                 //cells[rowsel][colsel].setText("");
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);
