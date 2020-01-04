@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class KillerWindow extends SudokuWindow {
     private ArrayList<Area> areas;
-    private JLabel sum;
+
 
     public KillerWindow(String mode, KillerSudoku sud, char[] chars) {
         super(mode,sud,chars);
-        ArrayList<Area> areas = sud.getAreas();
+        areas = sud.getAreas();
         System.out.println("Lol");
 
         for (Area area : areas) {

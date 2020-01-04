@@ -11,7 +11,6 @@ import java.awt.event.*;
  */
 public class SudokuWindow extends JFrame {
     protected Color fixedColor = Color.gray;
-    protected final Color wrongColor = new Color(255, 28, 4);
 
     private Sudoku sudoku;
     protected char[] charSet;
