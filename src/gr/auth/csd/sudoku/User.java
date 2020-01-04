@@ -3,6 +3,7 @@ package gr.auth.csd.sudoku;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -59,6 +60,26 @@ public class User {
         return new User(username);
     }
 
+    public static ArrayList<User> loadAll() {
+        File directory = new File(dir);
+        File[] files = directory.listFiles();
+
+        if (files == null)
+            return null;
+
+        ArrayList<User> users = new ArrayList<>();
+        for (File file : files) {
+            if (file == null || file.isDirectory())
+                continue;
+
+            User user = loadUser(file);
+            if (user != null)
+                users.add(user);
+        }
+
+        return users;
+    }
+
     /**
      * Loads a user from disk.
      * @param username The user's nickname.
@@ -67,10 +88,17 @@ public class User {
     public static User loadUser(String username) {
         File file = new File(dir + username + ".txt");
 
+        User user = loadUser(file);
+        if (user == null)
+            System.out.println("User " + username + " does not exist.");
+
+        return user;
+    }
+
+    private static User loadUser(File file) {
         if (file.exists())
             return new User(file);
 
-        System.out.println("User " + username + " does not exist.");
         return null;
     }
 
