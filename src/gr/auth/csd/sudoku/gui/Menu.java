@@ -13,11 +13,11 @@ public class Menu extends JFrame {
     private JButton killer;
     private JButton settings;
     private JButton duidoku;
-    private boolean wordoku;
     private JPanel menu;
     private JButton userButton;
 
     private Settings settingsWindow = new Settings(this);
+
 
     private final char[][] charSet = {
             {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
@@ -39,6 +39,9 @@ public class Menu extends JFrame {
         killer.addActionListener(click -> new KillerWindow("killer", kil, current));
         duidoku.addActionListener(click->new DuidokuWindow("Duidoku",dui,current));
         settings.addActionListener(click -> settingsWindow.showWindow());
+        userButton.addActionListener(click-> new UserWindow());
+
+
 
 
         setTitle("Sudoku");
