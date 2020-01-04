@@ -1,5 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,6 +21,7 @@ public class InputUsername extends JFrame {
 
         closeButton.addActionListener(click -> {
             userWindow.setUsername(textField.getText());
+            User.newUser(textField.getText());
             setVisible(false);
         });
 
