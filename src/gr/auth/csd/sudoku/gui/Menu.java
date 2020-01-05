@@ -32,7 +32,7 @@ public class Menu extends JFrame {
         add(panel);
 
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic1.txt");
-        KillerSudoku kil = new KillerSudoku(9,"killer2.txt");
+        KillerSudoku kil = new KillerSudoku(9,"killer10.txt");
         Duidoku dui = new Duidoku(4);
 
         classic.addActionListener(click -> new SudokuWindow("Classic", sudoku, current));
