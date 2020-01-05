@@ -32,6 +32,7 @@ public class Settings extends JFrame{
         setSize(300,300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
+        getRootPane().setDefaultButton(closeButton);
     }
 
     public void showWindow() {

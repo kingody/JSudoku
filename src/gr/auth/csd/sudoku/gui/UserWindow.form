@@ -9,7 +9,7 @@
     <children>
       <scrollpane id="262d6">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -18,45 +18,68 @@
           <component id="cc1b3" class="javax.swing.JList" binding="list" custom-create="true">
             <constraints/>
             <properties>
+              <requestFocusEnabled value="false"/>
               <selectionMode value="0"/>
             </properties>
           </component>
         </children>
       </scrollpane>
-      <hspacer id="92570">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-      </hspacer>
-      <vspacer id="68eab">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-      </vspacer>
       <grid id="9dfe7" binding="buttonpanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="82c57" class="javax.swing.JButton" binding="newUser">
-            <constraints/>
-            <properties>
-              <text value="Add new user"/>
-            </properties>
-          </component>
           <component id="5b980" class="javax.swing.JButton" binding="viewStatsButton" default-binding="true">
             <constraints/>
             <properties>
+              <focusPainted value="false"/>
               <text value="View Stats"/>
+            </properties>
+          </component>
+          <component id="e5755" class="javax.swing.JButton" binding="selectButton">
+            <constraints/>
+            <properties>
+              <focusPainted value="false"/>
+              <text value="Select User"/>
             </properties>
           </component>
         </children>
       </grid>
+      <component id="4b601" class="javax.swing.JLabel" binding="title">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <text value="Existing Users:"/>
+        </properties>
+      </component>
+      <component id="3308e" class="javax.swing.JButton" binding="addUserButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <focusPainted value="false"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="Add User"/>
+        </properties>
+      </component>
+      <component id="25322" class="javax.swing.JButton" binding="noUserButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="10" left="0" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <text value="Play Without a User"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

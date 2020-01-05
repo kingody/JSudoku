@@ -35,6 +35,7 @@
             </constraints>
             <properties>
               <enabled value="true"/>
+              <focusPainted value="false"/>
               <horizontalAlignment value="10"/>
               <selected value="false"/>
               <text value="Wordoku"/>
@@ -61,12 +62,14 @@
               <component id="bd5aa" class="javax.swing.JRadioButton" binding="englishButton">
                 <constraints/>
                 <properties>
+                  <focusPainted value="false"/>
                   <text value="English"/>
                 </properties>
               </component>
               <component id="bde93" class="javax.swing.JRadioButton" binding="greekButton">
                 <constraints/>
                 <properties>
+                  <focusPainted value="false"/>
                   <text value="Greek"/>
                 </properties>
               </component>
@@ -81,6 +84,7 @@
         </constraints>
         <properties>
           <enabled value="true"/>
+          <focusPainted value="false"/>
           <text value="OK"/>
         </properties>
       </component>

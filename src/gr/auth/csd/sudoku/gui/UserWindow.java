@@ -3,29 +3,36 @@ package gr.auth.csd.sudoku.gui;
 import gr.auth.csd.sudoku.User;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UserWindow extends  JFrame{
+public class UserWindow extends JFrame {
     private JPanel panel;
     private JList<String> list;
     private JPanel buttonpanel;
-    private JButton newUser;
     private JButton viewStatsButton;
-    private String username="";
-    private InputUsername inputUsername = new InputUsername(this);
+    private JButton selectButton;
+    private JLabel title;
+    private JButton addUserButton;
+    private JButton noUserButton;
+    private String currentUser = "";
+    private InputUsername inputUsername;
+
+    private DefaultListModel<String> model;
 
     public UserWindow(){
         super("Select User");
-        newUser.addActionListener(click -> inputUsername.showWindow());
-        viewStatsButton.addActionListener(click->{
+        inputUsername = new InputUsername(this);
+
+        addUserButton.addActionListener(click -> inputUsername.showWindow());
+        viewStatsButton.addActionListener(click -> {
             JFrame stats = new JFrame("stats");
             JLabel label = new JLabel();
-            if(!username.equals("")) {
-                User a = User.loadUser(username);
-                label.setText("User " + username + " has " + a.getWins() + " wins and " + a.getLosses() + " loses");
+
+            if(!currentUser.equals("")) {
+                User a = User.loadUser(currentUser);
+                label.setText("User " + currentUser + " has " + a.getWins() + " wins and " + a.getLosses() + " loses");
             }
             else{
                 label.setText("Please select a user first");
@@ -39,33 +46,50 @@ public class UserWindow extends  JFrame{
             stats.setVisible(true);
         });
 
+        selectButton.addActionListener(click -> {
+            if(!currentUser.equals("")) {
+                User user = User.loadUser(currentUser);
+                setVisible(false);
+            }
+        });
+
+        noUserButton.addActionListener(click -> {
+            currentUser = "";
+            setVisible(false);
+        });
+
         add(panel);
-
-
 
         setSize(350,350);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public void setUsername(String str){
-        username = str;
-    }
 
     private void createUIComponents() {
-        DefaultListModel<String> model = new DefaultListModel<>();
+        model = new DefaultListModel<>();
         list = new JList<>(model);
-        ArrayList<User> users = new ArrayList<>(User.loadAll());
+
+        ArrayList<User> users = User.loadAll();
+        if (users == null)
+            return;
+
         for(User user: users){
-            model.addElement(user.getUsername());
+            addUserToList(user);
         }
+
         list.getSelectionModel().addListSelectionListener(e -> {
-            username = list.getSelectedValue();
-            System.out.println(username);
+            //Stops event from happening many times
+            if (e.getValueIsAdjusting())
+                return;
+
+            currentUser = list.getSelectedValue();
+            System.out.println(currentUser);
         });
+    }
 
-        
-
-
+    public void addUserToList(User user) {
+        model.addElement(user.getUsername());
+        list.setSelectedIndex(list.getLastVisibleIndex());
     }
 }

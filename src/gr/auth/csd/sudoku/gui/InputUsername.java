@@ -15,13 +15,21 @@ public class InputUsername extends JFrame {
         panel.setLayout(new FlowLayout());
         label = new JLabel("Enter your username (up to 15 characters)");
         textField = new JTextField(15);
-        closeButton = new JButton("Ok");
+        closeButton = new JButton("Add");
         textField.setDocument(new TextLimit(15));
 
-
+        getRootPane().setDefaultButton(closeButton);
         closeButton.addActionListener(click -> {
-            userWindow.setUsername(textField.getText());
-            User.newUser(textField.getText());
+            String username = textField.getText();
+
+            if (!username.equals("")) {
+                User user = User.newUser(username);
+
+                if (user != null) {
+                    userWindow.addUserToList(user);
+                }
+            }
+
             setVisible(false);
         });
 

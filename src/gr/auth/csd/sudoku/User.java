@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class User {
     private static final String dir = "Users/";
-    private String username;
+    private final String username;
     private HashSet<String> solvedSudokus;
     private int wins, losses;
 
