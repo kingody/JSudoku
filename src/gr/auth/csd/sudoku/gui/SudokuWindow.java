@@ -5,6 +5,8 @@ import gr.auth.csd.sudoku.Sudoku;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * This class represents the GUI on which the user plays the classic version of Sudoku.
@@ -28,7 +30,7 @@ public class SudokuWindow extends JFrame {
      * @param sudoku Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
-    public SudokuWindow(String title, Sudoku sudoku, char[] charSet) {
+    public SudokuWindow(String title, Sudoku sudoku, char[] charSet, ResourceBundle bundle) {
         super(title);
         this.sudoku = sudoku;
         this.charSet = charSet;
@@ -41,7 +43,8 @@ public class SudokuWindow extends JFrame {
         cells = new SudCell[size][size];
         initializeGrid();
 
-        hint = new JButton("Hint");
+        hint = new JButton();
+        hint.setText(bundle.getString("hint"));
         hint.addActionListener(click -> {
             StringBuilder display = new StringBuilder();
 

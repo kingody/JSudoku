@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import javax.swing.*;
+import java.util.Locale;
 
 public class Settings extends JFrame{
     private JPanel panel;
@@ -12,8 +13,9 @@ public class Settings extends JFrame{
     private JButton closeButton;
     private JRadioButton englishButton;
     private JRadioButton greekButton;
-    //Default to English
-    private int charSetIndex = 1;
+    //Default to greek
+    private int charSetIndex = 2;
+
 
 
     public Settings(Menu menu){
@@ -21,10 +23,10 @@ public class Settings extends JFrame{
 
         closeButton.addActionListener(click -> {
             menu.setCharSet(wordokuCheckBox.isSelected() ? charSetIndex : 0);
+            menu.setCurrLanguage(englishButton.isSelected() ? 1 : 0);
             setVisible(false);
         });
 
-        englishButton.setSelected(true);
         englishButton.addActionListener(click -> charSetIndex = 1);
         greekButton.addActionListener(click -> charSetIndex = 2);
 

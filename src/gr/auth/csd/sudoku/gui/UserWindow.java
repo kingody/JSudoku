@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class UserWindow extends JFrame {
     private JPanel panel;
@@ -20,24 +21,32 @@ public class UserWindow extends JFrame {
     private JButton noUserButton;
     private String currentUser = "";
     private InputUsername inputUsername;
+    public ResourceBundle bundle;
 
     private DefaultListModel<String> model;
 
-    public UserWindow(){
-        super("Select User");
+    public UserWindow(ResourceBundle bundle){
+        super(bundle.getString("selectUser"));
+        this.bundle = bundle;
         inputUsername = new InputUsername(this);
+        title.setText(bundle.getString("existinUser"));
+        addUserButton.setText(bundle.getString("addUser"));
+        viewStatsButton.setText(bundle.getString("statisticButton"));
+        selectButton.setText(bundle.getString("selectUser"));
+        noUserButton.setText(bundle.getString("noUser"));
+
 
         addUserButton.addActionListener(click -> inputUsername.showWindow());
         viewStatsButton.addActionListener(click -> {
-            JFrame stats = new JFrame("stats");
+            JFrame stats = new JFrame(bundle.getString("stats"));
             JLabel label = new JLabel();
 
             if(!currentUser.equals("")) {
                 User a = User.loadUser(currentUser);
-                label.setText("User " + currentUser + " has " + a.getWins() + " wins and " + a.getLosses() + " loses");
+                label.setText(bundle.getString("user") + currentUser + bundle.getString("has") + a.getWins() +bundle.getString("wins") + a.getLosses() + bundle.getString("loses"));
             }
             else{
-                label.setText("Please select a user first");
+                label.setText(bundle.getString("noUserWarn"));
             }
             label.setHorizontalAlignment(SwingConstants.CENTER);
             stats.add(label);

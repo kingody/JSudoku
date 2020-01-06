@@ -7,13 +7,15 @@ import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class KillerWindow extends SudokuWindow {
     private ArrayList<Area> areas;
 
 
-    public KillerWindow(String mode, KillerSudoku sud, char[] chars) {
-        super(mode,sud,chars);
+    public KillerWindow(String mode, KillerSudoku sud, char[] chars, ResourceBundle bundle) {
+        super(mode,sud,chars,bundle);
         areas = sud.getAreas();
         System.out.println("Lol");
 

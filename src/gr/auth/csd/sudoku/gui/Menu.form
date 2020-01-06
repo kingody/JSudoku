@@ -19,7 +19,7 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Let's Play Sudoku!"/>
+          <text value=""/>
           <verticalAlignment value="0"/>
         </properties>
       </component>
@@ -39,7 +39,7 @@
             <properties>
               <focusPainted value="false"/>
               <opaque value="true"/>
-              <text value="Classic Sudoku"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="932ff" class="javax.swing.JButton" binding="killer">
@@ -49,7 +49,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value="Killer Sudoku"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="f01f9" class="javax.swing.JButton" binding="duidoku">
@@ -59,7 +59,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value="Duidoku"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="bad3d" class="javax.swing.JButton" binding="settings">
@@ -69,7 +69,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value="Settings"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="1597" class="javax.swing.JButton" binding="userButton">
@@ -79,7 +79,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value="Select User"/>
+              <text value=""/>
             </properties>
           </component>
         </children>

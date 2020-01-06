@@ -14,11 +14,11 @@ public class InputUsername extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        label = new JLabel("Enter your username (up to 15 characters)");
+        label = new JLabel(userWindow.bundle.getString("inputLabel"));
         textField = new JTextField(15);
         textField.setDocument(new TextLimit(15));
 
-        closeButton = new JButton("Add");
+        closeButton = new JButton(userWindow.bundle.getString("add"));
         closeButton.addActionListener(click -> {
             String username = textField.getText();
 

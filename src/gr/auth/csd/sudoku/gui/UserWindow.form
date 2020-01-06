@@ -36,7 +36,7 @@
             <constraints/>
             <properties>
               <focusPainted value="false"/>
-              <text value="Select User"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="5b980" class="javax.swing.JButton" binding="viewStatsButton" default-binding="true">
@@ -54,7 +54,7 @@
           <gridbag top="0" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value="Existing Users:"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="3308e" class="javax.swing.JButton" binding="addUserButton" default-binding="true">
