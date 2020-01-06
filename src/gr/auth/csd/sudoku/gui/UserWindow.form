@@ -32,18 +32,18 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="5b980" class="javax.swing.JButton" binding="viewStatsButton" default-binding="true">
-            <constraints/>
-            <properties>
-              <focusPainted value="false"/>
-              <text value="View Stats"/>
-            </properties>
-          </component>
           <component id="e5755" class="javax.swing.JButton" binding="selectButton">
             <constraints/>
             <properties>
               <focusPainted value="false"/>
               <text value="Select User"/>
+            </properties>
+          </component>
+          <component id="5b980" class="javax.swing.JButton" binding="viewStatsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <focusPainted value="false"/>
+              <text value="View Stats"/>
             </properties>
           </component>
         </children>
