@@ -17,18 +17,13 @@ public class Settings extends JFrame{
     private JRadioButton englishButton;
     private JRadioButton greekButton;
 
-    //System default Locale
-    private Language lang = Localization.getLanguage();
-
-
-
     public Settings(Menu menu){
-        super("Settings");
 
         closeButton.addActionListener(click -> {
             menu.setWordoku(wordokuCheckBox.isSelected());
             menu.localize(englishButton.isSelected() ? new Locale("en", "US") : new Locale("el", "GR"));
             setVisible(false);
+            setText();
         });
 
         englishButton.setSelected(true);
@@ -41,8 +36,13 @@ public class Settings extends JFrame{
     }
 
     public void setText() {
+        Language lang = Localization.getLanguage();
+
+        setTitle(lang.getString("settings"));
+
         title.setText(lang.getString("settings"));
         wordokuCheckBox.setText(lang.getString("wordoku"));
+        languageLabel.setText(lang.getString("languageSelect"));
         englishButton.setText(lang.getString("english"));
         greekButton.setText(lang.getString("greek"));
     }

@@ -17,7 +17,7 @@ public class Language_el_GR extends Language {
                 {"acceptable", "Τα παρακάτω είναι αποδεκτά:"},
                 {"settings", "Ρυθμίσεις"},
                 {"wordoku", "Σουντόκου με γράμματα"},
-                {"languageSetting", "Επέλεξε γλώσσα"},
+                {"languageSelect", "Επέλεξε γλώσσα"},
                 {"english", "Αγγλικά"},
                 {"greek", "Ελληνικά"},
                 {"userB", "Επέλεξε χρήστη"},

@@ -8,6 +8,7 @@ import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 
 import javax.swing.*;
 import java.util.Locale;
+import java.util.Random;
 
 public class Menu extends JFrame {
     private JPanel panel;
@@ -21,7 +22,7 @@ public class Menu extends JFrame {
     private Language lang;
 
     private boolean isWordoku = false;
-    private Settings settingsWindow = new Settings(this);
+    private Settings settingsWindow;
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char[] charSet;
@@ -31,11 +32,14 @@ public class Menu extends JFrame {
 
         localize(Locale.getDefault());
 
-
-        ClassicSudoku sudoku = new ClassicSudoku(9,"classic10.txt");
-        KillerSudoku kil = new KillerSudoku(9,"killer10.txt");
+        Random random = new Random();
+        String classicNum = Integer.toString(1 + random.nextInt(10));
+        String killerNum  = Integer.toString(1 + random.nextInt(10));
+        ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
+        KillerSudoku kil = new KillerSudoku(9,"killer" + killerNum + ".txt");
         Duidoku dui = new Duidoku(4);
 
+        settingsWindow = new Settings(this);
         classic.addActionListener(click -> new SudokuWindow(sudoku, charSet));
         killer.addActionListener(click -> new KillerWindow(kil, charSet));
         duidoku.addActionListener(click->new DuidokuWindow(dui, charSet));

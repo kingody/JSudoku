@@ -20,7 +20,7 @@ public class Language_en_US extends Language {
                 {"english", "English"},
                 {"greek", "Greek"},
                 {"userB", "Select user"},
-                {"languageSetting", "Select language"},
+                {"languageSelect", "Select language"},
                 {"existingUser", "Existing users: "},
                 {"addUser", "Add user"},
                 {"newUser", "New user"},
