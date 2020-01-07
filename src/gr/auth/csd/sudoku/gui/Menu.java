@@ -37,12 +37,11 @@ public class Menu extends JFrame {
         String killerNum  = Integer.toString(1 + random.nextInt(10));
         ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
         KillerSudoku kil = new KillerSudoku(9,"killer" + killerNum + ".txt");
-        Duidoku dui = new Duidoku(4);
 
         settingsWindow = new Settings(this);
         classic.addActionListener(click -> new SudokuWindow(sudoku, charSet));
         killer.addActionListener(click -> new KillerWindow(kil, charSet));
-        duidoku.addActionListener(click->new DuidokuWindow(dui, charSet));
+        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
         settings.addActionListener(click -> settingsWindow.showWindow());
         userButton.addActionListener(click-> new UserWindow());
 

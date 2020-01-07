@@ -15,7 +15,7 @@ import java.awt.event.*;
 public class SudokuWindow extends JFrame {
     protected Color fixedColor = Color.gray;
 
-    private Sudoku sudoku;
+    protected Sudoku sudoku;
     protected char[] charSet;
     protected int rowsel;
     protected int colsel;
@@ -26,12 +26,16 @@ public class SudokuWindow extends JFrame {
 
     protected Language lang = Localization.getLanguage();
 
+    public SudokuWindow(Sudoku sudoku, char[] charSet) {
+        this(sudoku, charSet, true);
+    }
+
     /**
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
      * @param sudoku Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
-    public SudokuWindow(Sudoku sudoku, char[] charSet) {
+    public SudokuWindow(Sudoku sudoku, char[] charSet, boolean setKeyListeners) {
         this.sudoku = sudoku;
         this.charSet = charSet;
         int size = sudoku.getSize();
@@ -40,7 +44,7 @@ public class SudokuWindow extends JFrame {
         background.setBackground(Color.DARK_GRAY);
         grid = new JPanel(new GridLayout(size, size));
         cells = new SudCell[size][size];
-        initializeGrid();
+        initializeGrid(setKeyListeners);
         hint = new JButton();
         hint.setText(lang.getString("hint"));
         hint.addActionListener(click -> {
@@ -90,7 +94,7 @@ public class SudokuWindow extends JFrame {
         return index > 0 && index <= sudoku.getSize();
     }
 
-    public void initializeGrid(){
+    public void initializeGrid(boolean setKeyListeners){
         int size = sudoku.getSize();
 
         for (int i = 0; i < size; i++) {
@@ -109,11 +113,16 @@ public class SudokuWindow extends JFrame {
                 }
                 else {
                     //empty cells
-                    cells[i][j].getInputTextField().addMouseListener(new MyMouseListener()); //finding the selected cell from mouse click
-                    MyKeyListener a = new MyKeyListener();
-                    cells[i][j].getInputTextField().addKeyListener(a);//waiting for user input in mouse selected cell
-                    //cells[i][j].setText("");
                     cells[i][j].setInputText("");
+                    //finding the selected cell from mouse click
+                    cells[i][j].getInputTextField().addMouseListener(new MyMouseListener());
+
+                    if (setKeyListeners) {
+                        //waiting for user input in mouse selected cell
+                        MyKeyListener a = new MyKeyListener();
+                        cells[i][j].getInputTextField().addKeyListener(a);
+                    }
+
                 }
 
                 //cells[i][j].setHorizontalAlignment(JTextField.CENTER);

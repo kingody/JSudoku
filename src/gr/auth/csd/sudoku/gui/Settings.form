@@ -63,6 +63,7 @@
                 <constraints/>
                 <properties>
                   <focusPainted value="false"/>
+                  <selected value="false"/>
                   <text value="English"/>
                 </properties>
               </component>
@@ -91,7 +92,7 @@
     </children>
   </grid>
   <buttonGroups>
-    <group name="buttonGroup">
+    <group name="languageGroup">
       <member id="bd5aa"/>
       <member id="bde93"/>
     </group>

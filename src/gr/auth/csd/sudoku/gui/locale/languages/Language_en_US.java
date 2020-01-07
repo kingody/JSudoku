@@ -9,7 +9,7 @@ public class Language_en_US extends Language {
 
         contents = new Object[][] {
                 {"menuTitle", "Sudoku"},
-                {"greeting", "Let's play sudoku!"},
+                {"greeting", "Let's play Sudoku!"},
                 {"classic", "Classic Sudoku"},
                 {"kill", "Killer Sudoku"},
                 {"duidoku", "Duidoku"},

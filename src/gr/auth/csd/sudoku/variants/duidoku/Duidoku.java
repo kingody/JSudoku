@@ -1,7 +1,9 @@
 package gr.auth.csd.sudoku.variants.duidoku;
 
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.killer.Index;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Duidoku extends ClassicSudoku {
@@ -27,17 +29,45 @@ public class Duidoku extends ClassicSudoku {
         return true;
     }
 
-    public void computerMove() {
-        Random random = new Random();
-        int row, col, value;
+    private ArrayList<Index> getFreeCells() {
+        ArrayList<Index> freeCells = new ArrayList<>();
 
-        do {
-            row = random.nextInt(gridSize);
-            col = random.nextInt(gridSize);
-        } while (grid[row][col] != 0);
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                if (grid[i][j] == 0 && hasLegalMoves(i, j)) {
+                    freeCells.add(new Index(i, j));
+                }
+            }
+        }
+
+        return freeCells;
+    }
+
+    private boolean hasLegalMoves(int row, int col) {
+        for (int val = 1; val <= gridSize; val++) {
+            if (isValidMove(row, col, val))
+                return true;
+        }
+
+        return false;
+    }
+
+    public Index computerMove() {
+        Random random = new Random();
+        ArrayList<Index> freeCells = getFreeCells();
+        Index index = freeCells.get(random.nextInt(freeCells.size()));
+        int row = index.getRow(), col = index.getColumn(), value;
+
+//        do {
+//            row = random.nextInt(gridSize);
+//            col = random.nextInt(gridSize);
+//        } while (grid[row][col] != 0);
 
         do {
             value = 1 + random.nextInt(gridSize);
         } while(!isValidMove(row, col, value));
+
+        setCell(row, col, value);
+        return new Index(row, col);
     }
 }

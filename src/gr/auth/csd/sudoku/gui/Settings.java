@@ -20,7 +20,6 @@ public class Settings extends JFrame{
 
     public Settings(Menu menu){
         setText();
-        System.out.println("hi");
 
         closeButton.addActionListener(click -> {
             menu.setWordoku(wordokuCheckBox.isSelected());
@@ -28,15 +27,15 @@ public class Settings extends JFrame{
             setVisible(false);
             setText();
         });
-        System.out.println(Locale.getDefault().equals(Locale.ENGLISH));
-        if(Locale.getDefault().equals(Locale.ENGLISH)){
+
+        if (Locale.getDefault().equals(new Locale("en", "US"))) {
             englishButton.setSelected(true);
         }
-        else{
+        else {
             greekButton.setSelected(true);
         }
 
-        englishButton.setSelected(true);
+//        englishButton.setSelected(true);
 
         add(panel);
         setSize(300,300);
@@ -46,7 +45,7 @@ public class Settings extends JFrame{
     }
 
     public void setText() {
-        Language lang = Localization.getLanguage();
+        lang = Localization.getLanguage();
 
         setTitle(lang.getString("settings"));
 
