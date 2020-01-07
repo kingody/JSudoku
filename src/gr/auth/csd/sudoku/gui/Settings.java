@@ -20,6 +20,7 @@ public class Settings extends JFrame{
 
     public Settings(Menu menu){
         setText();
+        System.out.println("hi");
 
         closeButton.addActionListener(click -> {
             menu.setWordoku(wordokuCheckBox.isSelected());
