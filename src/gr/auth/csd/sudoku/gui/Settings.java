@@ -16,8 +16,10 @@ public class Settings extends JFrame{
     private JButton closeButton;
     private JRadioButton englishButton;
     private JRadioButton greekButton;
+    private Language lang;
 
     public Settings(Menu menu){
+        setText();
 
         closeButton.addActionListener(click -> {
             menu.setWordoku(wordokuCheckBox.isSelected());
@@ -25,6 +27,13 @@ public class Settings extends JFrame{
             setVisible(false);
             setText();
         });
+        System.out.println(Locale.getDefault().equals(Locale.ENGLISH));
+        if(Locale.getDefault().equals(Locale.ENGLISH)){
+            englishButton.setSelected(true);
+        }
+        else{
+            greekButton.setSelected(true);
+        }
 
         englishButton.setSelected(true);
 

@@ -3,6 +3,7 @@ package gr.auth.csd.sudoku.gui;
 import gr.auth.csd.sudoku.Sudoku;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
+import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
 
 import javax.swing.*;
 import java.awt.*;
@@ -159,6 +160,7 @@ public class SudokuWindow extends JFrame {
 //        Color previous = cells[rowsel][colsel].getCellColor();
 
 
+
         @Override
         public void keyTyped(KeyEvent e) {}
 
@@ -200,7 +202,6 @@ public class SudokuWindow extends JFrame {
 
             }
             else {
-//                cells[rowsel][colsel].setBackground(previous);
                 cells[rowsel][colsel].setWarning(false);
                 cells[rowsel][colsel].setInputText("");
                 sudoku.clearCell(rowsel,colsel);

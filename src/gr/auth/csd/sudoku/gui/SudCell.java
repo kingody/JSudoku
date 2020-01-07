@@ -9,6 +9,7 @@ public class SudCell extends JPanel {
     private Color cellColor = Color.WHITE;
     private static final Color wrongColor = new Color(255, 28, 4);
     private static final Font font = new Font("Arial", Font.BOLD, 15);
+    private boolean pcMove=false;
 
 
     public SudCell() {
@@ -58,6 +59,7 @@ public class SudCell extends JPanel {
             setColor(cellColor);
         }
     }
+
 
     public Color getCellColor(){ return cellColor; }
 }
