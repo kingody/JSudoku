@@ -57,6 +57,7 @@ public class KillerSudoku extends ClassicSudoku {
         int sum = value;
         for (Area area : areas) {
             ArrayList<Index> cells = area.getCells();
+            boolean isFull = true;
 
             if (cells.contains(currentCell)) {
                 for(Index cell : cells) {
@@ -65,13 +66,19 @@ public class KillerSudoku extends ClassicSudoku {
 
                     int cellValue = getCell(cell.getRow(), cell.getColumn());
 
+                    if (cellValue == 0)
+                        isFull = false;
+
                     if (cellValue == value)
                         return false;
 
                     sum += cellValue;
                 }
 
-                return sum <= area.getSum();
+                if (isFull)
+                    return sum == area.getSum();
+                else
+                    return sum < area.getSum();
             }
         }
         return false;
