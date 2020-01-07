@@ -1,5 +1,8 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.gui.locale.Language;
+import gr.auth.csd.sudoku.gui.locale.Localization;
+
 import javax.swing.*;
 import java.util.Locale;
 
@@ -13,8 +16,9 @@ public class Settings extends JFrame{
     private JButton closeButton;
     private JRadioButton englishButton;
     private JRadioButton greekButton;
-    //Default to greek
-    private int charSetIndex = 2;
+
+    //System default Locale
+    private Language lang = Localization.getLanguage();
 
 
 
@@ -22,19 +26,25 @@ public class Settings extends JFrame{
         super("Settings");
 
         closeButton.addActionListener(click -> {
-            menu.setCharSet(wordokuCheckBox.isSelected() ? charSetIndex : 0);
-            menu.setCurrLanguage(englishButton.isSelected() ? 1 : 0);
+            menu.setWordoku(wordokuCheckBox.isSelected());
+            menu.localize(englishButton.isSelected() ? new Locale("en", "US") : new Locale("el", "GR"));
             setVisible(false);
         });
 
-        englishButton.addActionListener(click -> charSetIndex = 1);
-        greekButton.addActionListener(click -> charSetIndex = 2);
+        englishButton.setSelected(true);
 
         add(panel);
         setSize(300,300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         getRootPane().setDefaultButton(closeButton);
+    }
+
+    public void setText() {
+        title.setText(lang.getString("settings"));
+        wordokuCheckBox.setText(lang.getString("wordoku"));
+        englishButton.setText(lang.getString("english"));
+        greekButton.setText(lang.getString("greek"));
     }
 
     public void showWindow() {

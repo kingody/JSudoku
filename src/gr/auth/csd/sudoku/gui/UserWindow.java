@@ -1,14 +1,11 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.User;
+import gr.auth.csd.sudoku.gui.locale.Language;
+import gr.auth.csd.sudoku.gui.locale.Localization;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class UserWindow extends JFrame {
     private JPanel panel;
@@ -21,32 +18,32 @@ public class UserWindow extends JFrame {
     private JButton noUserButton;
     private String currentUser = "";
     private InputUsername inputUsername;
-    public ResourceBundle bundle;
+    private Language lang;
 
     private DefaultListModel<String> model;
 
-    public UserWindow(ResourceBundle bundle){
-        super(bundle.getString("selectUser"));
-        this.bundle = bundle;
+    public UserWindow(){
+        lang = Localization.getLanguage();
+
         inputUsername = new InputUsername(this);
-        title.setText(bundle.getString("existinUser"));
-        addUserButton.setText(bundle.getString("addUser"));
-        viewStatsButton.setText(bundle.getString("statisticButton"));
-        selectButton.setText(bundle.getString("selectUser"));
-        noUserButton.setText(bundle.getString("noUser"));
+        title.setText(lang.getString("existingUser"));
+        addUserButton.setText(lang.getString("addUser"));
+        viewStatsButton.setText(lang.getString("statisticButton"));
+        selectButton.setText(lang.getString("selectUser"));
+        noUserButton.setText(lang.getString("noUser"));
 
 
         addUserButton.addActionListener(click -> inputUsername.showWindow());
         viewStatsButton.addActionListener(click -> {
-            JFrame stats = new JFrame(bundle.getString("stats"));
+            JFrame stats = new JFrame(lang.getString("stats"));
             JLabel label = new JLabel();
 
             if(!currentUser.equals("")) {
                 User a = User.loadUser(currentUser);
-                label.setText(bundle.getString("user") + currentUser + bundle.getString("has") + a.getWins() +bundle.getString("wins") + a.getLosses() + bundle.getString("loses"));
+                label.setText(lang.getString("user") + currentUser + lang.getString("has") + a.getWins() +lang.getString("wins") + a.getLosses() + lang.getString("loses"));
             }
             else{
-                label.setText(bundle.getString("noUserWarn"));
+                label.setText(lang.getString("noUserWarn"));
             }
             label.setHorizontalAlignment(SwingConstants.CENTER);
             stats.add(label);
@@ -71,6 +68,7 @@ public class UserWindow extends JFrame {
 
         add(panel);
 
+        setTitle(lang.getString("selectUser"));
         setSize(350,350);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);

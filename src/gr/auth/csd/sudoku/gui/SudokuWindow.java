@@ -1,12 +1,12 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.Sudoku;
+import gr.auth.csd.sudoku.gui.locale.Language;
+import gr.auth.csd.sudoku.gui.locale.Localization;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * This class represents the GUI on which the user plays the classic version of Sudoku.
@@ -23,28 +23,25 @@ public class SudokuWindow extends JFrame {
     //protected JTextField[][] cells;
     protected JPanel grid;
 
+    protected Language lang = Localization.getLanguage();
 
     /**
      * The constructor initializes the GUI grid, sets the properties of each cell (color, initial values, editability, mouse and keylisteners etc)
-     * @param title The mode played (classic,killer or wordoku)
      * @param sudoku Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
-    public SudokuWindow(String title, Sudoku sudoku, char[] charSet, ResourceBundle bundle) {
-        super(title);
+    public SudokuWindow(Sudoku sudoku, char[] charSet) {
         this.sudoku = sudoku;
         this.charSet = charSet;
         int size = sudoku.getSize();
-
 
         JPanel background = new JPanel();
         background.setBackground(Color.DARK_GRAY);
         grid = new JPanel(new GridLayout(size, size));
         cells = new SudCell[size][size];
         initializeGrid();
-
         hint = new JButton();
-        hint.setText(bundle.getString("hint"));
+        hint.setText(lang.getString("hint"));
         hint.addActionListener(click -> {
             StringBuilder display = new StringBuilder();
 
@@ -60,6 +57,8 @@ public class SudokuWindow extends JFrame {
         background.add(grid);
         background.add(hint);
         this.add(background);
+
+        setTitle(lang.getString("menuTitle"));
         setSize(710, 710);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,7 +70,6 @@ public class SudokuWindow extends JFrame {
      * @param c the input character
      * @return numeric value of character if it belongs to the valid characters of charSet. Else returns -1
      */
-
     public int getIndex(char c) {
         for (int i = 0; i < charSet.length; i++) {
             if (c == charSet[i])

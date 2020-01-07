@@ -1,6 +1,8 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.User;
+import gr.auth.csd.sudoku.gui.locale.Language;
+import gr.auth.csd.sudoku.gui.locale.Localization;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +16,13 @@ public class InputUsername extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        label = new JLabel(userWindow.bundle.getString("inputLabel"));
+        Language lang = Localization.getLanguage();
+
+        label = new JLabel(lang.getString("inputLabel"));
         textField = new JTextField(15);
         textField.setDocument(new TextLimit(15));
 
-        closeButton = new JButton(userWindow.bundle.getString("add"));
+        closeButton = new JButton(lang.getString("add"));
         closeButton.addActionListener(click -> {
             String username = textField.getText();
 
@@ -38,6 +42,7 @@ public class InputUsername extends JFrame {
         panel.add(closeButton);
         add(panel);
 
+        setTitle(lang.getString("newUser"));
         setSize(300, 100);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         getRootPane().setDefaultButton(closeButton);

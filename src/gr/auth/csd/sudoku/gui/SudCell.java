@@ -17,6 +17,7 @@ public class SudCell extends JPanel {
         inputText.setFont(font.deriveFont(Font.BOLD, 18));
         inputText.setBorder(BorderFactory.createEmptyBorder());
         inputText.setDocument(new TextLimit(1));
+        inputText.setForeground(Color.BLACK);
         inputText.setHorizontalAlignment(JTextField.CENTER);
 
         add(inputText,BorderLayout.CENTER);

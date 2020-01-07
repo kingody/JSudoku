@@ -1,6 +1,10 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.gui.locale.Localization;
+
 import javax.swing.*;
+import java.awt.*;
+import java.util.concurrent.Flow;
 
 public class Hint extends JFrame {
     private JPanel panel;
@@ -9,7 +13,7 @@ public class Hint extends JFrame {
 
     public Hint(String chars) {
         panel = new JPanel();
-        title = new JLabel("The following are acceptable:  ");
+        title = new JLabel(Localization.getLanguage().getString("acceptable"));
         validChars = new JLabel(chars);
 
         panel.add(title);

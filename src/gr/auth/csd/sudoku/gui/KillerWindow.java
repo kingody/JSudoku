@@ -1,21 +1,18 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.variants.killer.Area;
 import gr.auth.csd.sudoku.variants.killer.Index;
 import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class KillerWindow extends SudokuWindow {
     private ArrayList<Area> areas;
 
-
-    public KillerWindow(String mode, KillerSudoku sud, char[] chars, ResourceBundle bundle) {
-        super(mode,sud,chars,bundle);
+    public KillerWindow(KillerSudoku sud, char[] chars) {
+        super(sud,chars);
         areas = sud.getAreas();
         System.out.println("Lol");
 
@@ -41,6 +38,7 @@ public class KillerWindow extends SudokuWindow {
             }
         }
 
+        setTitle(lang.getString("kill"));
     }
 
 }
