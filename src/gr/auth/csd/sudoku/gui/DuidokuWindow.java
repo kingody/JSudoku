@@ -80,14 +80,12 @@ public class DuidokuWindow extends SudokuWindow {
         Duidoku duidoku = (Duidoku) sudoku;
 
         @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
+        public void keyTyped(KeyEvent e) {}
 
         /**
          *  The cell is emptied when the user input is an accepted character.
          *  This also prevents the user from entering invalid characters to occupied cells.
-         * @param e Key event
+         * @param e Information about the event
          */
         @Override
         public void keyPressed(KeyEvent e) {
@@ -106,7 +104,7 @@ public class DuidokuWindow extends SudokuWindow {
          * Then, we check is the user won with this move. If not, the computers move is calculated and set on the GUI grid for the user to see
          * The cells on which this took place is made ineditable and its listeners are removed. Lastly we check if the user lost with this move
          *
-         * @param e the KeyEvent object
+         * @param e Information about the event
          */
         @Override
         public void keyReleased(KeyEvent e) {

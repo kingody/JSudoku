@@ -33,7 +33,7 @@ public class Menu extends JFrame {
     private char[] charSet;
 
     /**
-     * Adds all the components to the panel, initializes randomly the puzzles, adds the action listeners to the buttons and sets the properties of Menu
+     * Adds all the components to the panel, initializes the puzzles randomly, adds the action listeners to the buttons and sets the properties of Menu
      */
     public Menu() {
         add(panel);
@@ -77,15 +77,6 @@ public class Menu extends JFrame {
     public void setWordoku(boolean set) {
         isWordoku = set;
         setCharSet();
-    }
-
-    /**
-     * Used to localize everything on the menu and settingsWindow
-     * @param locale Locale instance
-     */
-    public void localizeAll(Locale locale) {
-        localize(locale);
-        settingsWindow.setText();
     }
 
     public void localize(Locale locale) {

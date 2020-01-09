@@ -32,7 +32,7 @@ public class SudCell extends JPanel {
 
     /**
      * This method adds the sum Label to the cell, after having set its properties(size,font etc.)
-     * @param text
+     * @param text The label's text
      */
     public void addLabel(String text) {
         sum = new JLabel(text);
@@ -56,7 +56,7 @@ public class SudCell extends JPanel {
 
     /**
      * Sets the background of both the SudCell and its inputText to cellColor
-     * @param cellColor
+     * @param cellColor The color that the cell will be set to
      */
     public void setColor(Color cellColor) {
         this.cellColor = cellColor;
@@ -66,8 +66,8 @@ public class SudCell extends JPanel {
 
     /**
      * This method is used to set the color of the cell based on the value of flag
-     * If true, both SudCell's and inputText's color is set to wrong color, else the SedCell's color is restored
-     * @param flag
+     * If true, both SudCell's and inputText's color is set to wrongColor, else the SedCell's color is restored
+     * @param flag changes the color if true, restores it if false
      */
     public void setWarning(boolean flag) {
         if (flag) {

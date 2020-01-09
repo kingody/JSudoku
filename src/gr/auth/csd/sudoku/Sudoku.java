@@ -4,6 +4,7 @@ package gr.auth.csd.sudoku;
  * This class represents a basic Sudoku puzzle.
  */
 public class Sudoku {
+    //Sudoku file directory
     protected final String fileDir = "Sudokus/";
     protected final int gridSize;
     protected int[][] grid;
@@ -38,28 +39,19 @@ public class Sudoku {
      * @param row The row of the Cell.
      * @param col The Column of the Cell.
      * @param value The chosen value.
-     * @return True if the move was valid, false otherwise.
+     * @return true if the move was valid, false otherwise.
      */
     public boolean setCell(int row, int col, int value) {
         if (isValidMove(row, col, value)) {
             grid[row][col] = value;
             return true;
         }
-
         return false;
     }
 
     public void clearCell(int row, int col) {
         if (!isOutOfBounds(row, col))
             grid[row][col] = 0;
-    }
-
-    /**
-     * getter for Sudoku's grid
-     * @return grid
-     */
-    public int[][] getGrid() {
-        return grid;
     }
 
     public int getSize() { return gridSize; }
@@ -98,7 +90,6 @@ public class Sudoku {
                     return false;
             }
         }
-
         return true;
     }
 }

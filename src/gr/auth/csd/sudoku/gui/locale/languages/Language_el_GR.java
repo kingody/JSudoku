@@ -3,7 +3,7 @@ package gr.auth.csd.sudoku.gui.locale.languages;
 import gr.auth.csd.sudoku.gui.locale.Language;
 
 /**
- * This class represents the greek translation
+ * This class contains the greek translation
  */
 public class Language_el_GR extends Language {
 
@@ -12,7 +12,7 @@ public class Language_el_GR extends Language {
 
         contents = new Object[][] {
                 {"menuTitle", "Σουντόκου"},
-                {"greeting", "Ας παίξουμε Σουντόκου"},
+                {"greeting", "Ας παίξουμε Σουντόκου!"},
                 {"classic", "Κλασσικό Σουντόκου"},
                 {"kill", "Χρωμοσουντόκου"},
                 {"duidoku", "Διντόκου"},

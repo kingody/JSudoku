@@ -52,7 +52,8 @@ public class UserWindow extends JFrame {
 
             if(!currentUser.equals("")) {
                 User a = User.loadUser(currentUser);
-                label.setText(lang.getString("user") + currentUser + lang.getString("has") + a.getWins() +lang.getString("wins") + a.getLosses() + lang.getString("loses"));
+                label.setText(lang.getString("user") + currentUser + lang.getString("has") +
+                        a.getWins() + lang.getString("wins") + a.getLosses() + lang.getString("loses"));
             }
             else{
                 label.setText(lang.getString("noUserWarn"));

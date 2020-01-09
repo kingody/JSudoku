@@ -3,7 +3,6 @@ package gr.auth.csd.sudoku.gui;
 import gr.auth.csd.sudoku.Sudoku;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
-import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +27,8 @@ public class SudokuWindow extends JFrame {
     /**
      * This constructor is used to call the other constructor with sudoku and charSet as parameters
      * The boolean true indicates that there will be KeyListeners
-     * @param sudoku
-     * @param charSet
+     * @param sudoku The Sudoku object
+     * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      */
     public SudokuWindow(Sudoku sudoku, char[] charSet) {
         this(sudoku, charSet, true);
@@ -40,7 +39,7 @@ public class SudokuWindow extends JFrame {
      * The hint button is added to the frame and the properties of the grid and background panels as well as the frame are set
      * Upon pressing the hint button, all the available characters for current cell are calculated and passed to a new object Hint as parameters
      * The grid panel and the hint button are added to the background panel, with itself being added in turn to our SudokuWindow.
-     * @param sudoku Sudoku object
+     * @param sudoku The Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
      * @param setKeyListeners determines whether or not the keylisteners will be set for each cell
      */
@@ -80,9 +79,11 @@ public class SudokuWindow extends JFrame {
     }
 
     /**
-     * Converts input character to numeric value
+     * Converts a character to it's numeric value. Used to separate the logic(everything in numbers)
+     * from the GUI(user can choose between numbers and letters) for abstraction purposes.
      * @param c the input character
-     * @return numeric value of character if it belongs to the valid characters of charSet. Else returns -1
+     * @return numeric value of character if it belongs to the valid characters of charSet(essentially it's index).
+     * Returns -1 if not found.
      */
     public int getIndex(char c) {
         for (int i = 0; i < charSet.length; i++) {
@@ -93,7 +94,7 @@ public class SudokuWindow extends JFrame {
     }
 
     /**
-     * Checks if char c is valid
+     * Checks if char c is valid in the context of the current sudoku mode(numbers or letters).
      * @param c char whose validity is to be determined
      * @return true if it is valid, else false
      */
@@ -104,12 +105,11 @@ public class SudokuWindow extends JFrame {
 
     /**
      * Creates SudCell objects to fill the Cells array. Creates fixed cells that are used for the classic sudoku.
-     * The remaining cells are initialized to an empty string and have a MyMouseListener mouse listener associated with them
-     * A MyKeyListener is also added to the cells if setKeyListener is true
-     * Finally, the cells are added to the grid
-     * @param setKeyListeners determines if the cells will have key listeners
+     * The remaining cells are initialized to an empty string and have a MyMouseListener mouse listener associated with them.
+     * A MyKeyListener is also added to the cells if setKeyListener is true.
+     * Finally, the cells are added to the grid.
+     * @param setKeyListeners determines if the cells will have the default key listeners
      */
-
     public void initializeGrid(boolean setKeyListeners) {
         int size = sudoku.getSize();
 
@@ -128,11 +128,11 @@ public class SudokuWindow extends JFrame {
                     //empty cells
                     cells[i][j].setInputText("");
                     //finding the selected cell from mouse click
-                    cells[i][j].getInputTextField().addMouseListener(new MyMouseListener());
+                    cells[i][j].getInputTextField().addMouseListener(new DefaultMouseListener());
 
                     if (setKeyListeners) {
                         //waiting for user input in mouse selected cell
-                        MyKeyListener a = new MyKeyListener();
+                        DefaultKeyListener a = new DefaultKeyListener();
                         cells[i][j].getInputTextField().addKeyListener(a);
                     }
 
@@ -143,10 +143,11 @@ public class SudokuWindow extends JFrame {
     }
 
     /**
-     * This class represents our implementation of the MouseListener interface
-     * In the mousePressed method we obtain the coordinates of the cell in the grid chosen by the user via mouse, for further processing
+     * This class represents our implementation of the MouseListener interface.
+     * In the mousePressed method we obtain the coordinates of the cell in the grid chosen
+     * by the user via mouse, for further processing.
      */
-    public class MyMouseListener implements MouseListener{
+    public class DefaultMouseListener implements MouseListener{
         int tempRow, tempCol;
 
         @Override
@@ -184,7 +185,7 @@ public class SudokuWindow extends JFrame {
     /**
      * This class represents our implementation of the KeyListener interface
      */
-    public class MyKeyListener implements KeyListener{
+    public class DefaultKeyListener implements KeyListener{
 
         @Override
         public void keyTyped(KeyEvent e) {}
@@ -192,7 +193,7 @@ public class SudokuWindow extends JFrame {
         /**
          *  The cell is emptied when the user input is an accepted character.
          *  This also prevents the user from entering invalid characters to occupied cells.
-         * @param e Key event
+         * @param e Information about the event
          */
         @Override
         public void keyPressed(KeyEvent e) {
@@ -204,14 +205,13 @@ public class SudokuWindow extends JFrame {
         }
 
         /**
-         * We obtain the input (String) from the cell in question, based on the coordinates obtained via MyMouseListener.
-         * If the input is empty (backspace, delete or space button), the cell in both Cells[][] array and Sudoku object grid is cleared.
-         * char value is set to the first character of input String and the respective cell in Sudoku object grid is cleared
+         * We obtain the input from the cell in question, based on the coordinates obtained via MyMouseListener.
+         * If the input is empty (backspace, delete or space button), the selected cell is cleared.
          *
-         * If value is a valid char, we get the numeric value of it and check if it is a valid move and set the color of the SudCell accordingly
-         * At the same time if it is a valid move the respective cell in Sudoku grid is set to said numeric value.
-         * If value is not a valid char, the color of the SudCell is restored, and the cell in both Cells[][] array and Sudoku object grid is cleared.
-         * @param e KeyEvent
+         * If the input is a valid char, we get the numeric value of it
+         * and check if it is a valid move and set the number and color of the Cell accordingly.
+         * If value is not a valid char, the color of the Cell is restored, and the cell is cleared.
+         * @param e Information about the event
          */
         @Override
         public void keyReleased(KeyEvent e) {

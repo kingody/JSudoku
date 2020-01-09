@@ -27,7 +27,7 @@ public class Settings extends JFrame{
      * It also calls the localize method of menu and with the Locale parameter being determined based on the state of the JRadioButtons
      * Hides the Setting object and then calls setText
      * Lastly, the constructor determines which JRadioButton will be selected upon showing the window, and sets the properties of Settings
-     * @param menu
+     * @param menu The current instance of the Menu
      */
     public Settings(Menu menu){
         setText();
@@ -45,8 +45,6 @@ public class Settings extends JFrame{
         else {
             greekButton.setSelected(true);
         }
-
-//        englishButton.setSelected(true);
 
         add(panel);
         setSize(300,300);
@@ -70,6 +68,9 @@ public class Settings extends JFrame{
         greekButton.setText(lang.getString("greek"));
     }
 
+    /**
+     * Sets the visibility of the Settings window to true
+     */
     public void showWindow() {
         setVisible(true);
     }

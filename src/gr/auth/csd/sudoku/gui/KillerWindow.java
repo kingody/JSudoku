@@ -11,7 +11,6 @@ import java.util.ArrayList;
 /**
  * This class represents the GUI on which the user plays the Killer version of Sudoku and is a child of SudokuWindow
  */
-
 public class KillerWindow extends SudokuWindow {
     private ArrayList<Area> areas;
 

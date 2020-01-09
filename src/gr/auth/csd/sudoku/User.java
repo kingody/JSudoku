@@ -11,6 +11,7 @@ import java.util.Scanner;
  * This class represents a player and records their stats
  */
 public class User {
+    //Save file directory
     private static final String dir = "Users/";
     private final String username;
     private HashSet<String> solvedSudokus;
@@ -71,7 +72,7 @@ public class User {
 
     /**
      * Used to load every user stored
-     * @return ArrayList of Users stored
+     * @return ArrayList of Users stored in the disk
      */
     public static ArrayList<User> loadAll() {
         File directory = new File(dir);
@@ -116,7 +117,7 @@ public class User {
     }
 
     /**
-     * Saves User to file
+     * Saves the User's data to a file
      */
     public void saveToFile() {
         String path = dir + username + ".txt";
@@ -157,7 +158,7 @@ public class User {
     }
 
     /**
-     * Checks to see if filename Sudoku has been solved by the user
+     * Checks to see if the Sudoku stored in filename.txt has been solved by the user
      * @param filename the name of Sudoku file
      * @return true if it has been solved, false otherwise
      */
@@ -172,16 +173,13 @@ public class User {
 
     /**
      * Overriding the toString method to best fit the file handling
-     * @return
+     * @return the text that contains all the necessary information to create a new User
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(username)
-                .append('\n')
-                .append(wins)
-                .append('\n')
-                .append(losses)
-                .append('\n');
+        StringBuilder str = new StringBuilder(username).append('\n')
+                .append(wins).append('\n')
+                .append(losses).append('\n');
 
         for (String sudoku : solvedSudokus) {
             str.append(sudoku).append('\n');
