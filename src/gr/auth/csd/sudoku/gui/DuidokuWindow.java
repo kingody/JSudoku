@@ -49,12 +49,21 @@ public class DuidokuWindow extends SudokuWindow {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            if (rowsel == -1 || colsel == -1)
+                return;
 
+            for (char c : charSet)
+                if (c == e.getKeyChar()) {
+                    cells[rowsel][colsel].setInputText("");
+                    return;
+                }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-//            super.keyReleased(e);
+            if (rowsel == -1 || colsel == -1)
+                return;
+
             String input = cells[rowsel][colsel].getInputTextField().getText();
             if (input.isEmpty())
                 return;
@@ -80,6 +89,9 @@ public class DuidokuWindow extends SudokuWindow {
                 return;
             }
 
+            rowsel = -1;
+            colsel = -1;
+
             Index compMove = duidoku.computerMove();
 
 
@@ -87,6 +99,7 @@ public class DuidokuWindow extends SudokuWindow {
             int val = duidoku.getCell(row, col);
             cells[row][col].setInputText(String.valueOf(charSet[val]));
             cells[row][col].getInputTextField().setEditable(false);
+            cells[row][col].getInputTextField().setForeground(Color.RED);
             removeListeners(cells[row][col].getInputTextField());
 
             if (duidoku.checkVictory()) {
