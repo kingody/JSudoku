@@ -22,7 +22,7 @@ public class UserWindow extends JFrame {
 
     private DefaultListModel<String> model;
 
-    public UserWindow(){
+    public UserWindow(Menu menu){
         lang = Localization.getLanguage();
 
         inputUsername = new InputUsername(this);
@@ -57,12 +57,14 @@ public class UserWindow extends JFrame {
         selectButton.addActionListener(click -> {
             if(!currentUser.equals("")) {
                 User user = User.loadUser(currentUser);
+                menu.setUser(user);
                 setVisible(false);
             }
         });
 
         noUserButton.addActionListener(click -> {
             currentUser = "";
+            menu.removeUser();
             setVisible(false);
         });
 

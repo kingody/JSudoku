@@ -1,5 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
 import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
@@ -19,10 +20,12 @@ public class Menu extends JFrame {
     private JButton duidoku;
     private JPanel menu;
     private JButton userButton;
+    private JLabel currentUser;
     private Language lang;
 
     private boolean isWordoku = false;
     private Settings settingsWindow;
+    private User user;
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char[] charSet;
@@ -43,11 +46,22 @@ public class Menu extends JFrame {
         killer.addActionListener(click -> new KillerWindow(kil, charSet));
         duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
         settings.addActionListener(click -> settingsWindow.showWindow());
-        userButton.addActionListener(click-> new UserWindow());
+        userButton.addActionListener(click-> new UserWindow(this));
 
         setSize(300, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        currentUser.setText(lang.getString("currentUser") + user.getUsername());
+        currentUser.setVisible(true);
+    }
+
+    public void removeUser() {
+        user = null;
+        currentUser.setVisible(false);
     }
 
     public void setWordoku(boolean set) {
@@ -75,6 +89,10 @@ public class Menu extends JFrame {
         duidoku.setText(lang.getString("duidoku"));
         settings.setText(lang.getString("settings"));
         userButton.setText(lang.getString("selectUser"));
+        currentUser.setText(lang.getString("currentUser"));
+
+        if (user != null)
+            setUser(user);
     }
 
     private void setCharSet() {

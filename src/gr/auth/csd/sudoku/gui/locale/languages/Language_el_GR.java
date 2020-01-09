@@ -24,6 +24,7 @@ public class Language_el_GR extends Language {
                 {"existingUser", "Υπάρχων χρήστες:"},
                 {"addUser", "Πρόσθεσε χρήστη"},
                 {"newUser", "Νέος χρήστης"},
+                {"currentUser", "Χρήστης: "},
                 {"statisticButton", "Δες τα στατιστικά"},
                 {"selectUser", "Επέλεξε χρήστη"},
                 {"noUser", "Παίξε χωρίς χρήστη"},

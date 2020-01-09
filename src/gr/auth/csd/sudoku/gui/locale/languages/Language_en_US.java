@@ -24,6 +24,7 @@ public class Language_en_US extends Language {
                 {"existingUser", "Existing users: "},
                 {"addUser", "Add user"},
                 {"newUser", "New user"},
+                {"currentUser", "Current User: "},
                 {"statisticButton", "View Stats"},
                 {"selectUser", "Select user"},
                 {"noUser", "Play without a user"},
