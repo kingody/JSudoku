@@ -6,6 +6,9 @@ import gr.auth.csd.sudoku.gui.locale.Localization;
 import javax.swing.*;
 import java.util.Locale;
 
+/**
+ * This class represents our settings window, from which the user can easily configure the application's settings
+ */
 public class Settings extends JFrame{
     private JPanel panel;
     private JPanel settingsPanel;
@@ -18,6 +21,14 @@ public class Settings extends JFrame{
     private JRadioButton greekButton;
     private Language lang;
 
+    /**
+     * Adds an action listener to the close button.
+     * It calls the setWordoku method of menu with the selection state of wordokuCheckBox as its parameter
+     * It also calls the localize method of menu and with the Locale parameter being determined based on the state of the JRadioButtons
+     * Hides the Setting object and then calls setText
+     * Lastly, the constructor determines which JRadioButton will be selected upon showing the window, and sets the properties of Settings
+     * @param menu
+     */
     public Settings(Menu menu){
         setText();
 
@@ -44,6 +55,9 @@ public class Settings extends JFrame{
         getRootPane().setDefaultButton(closeButton);
     }
 
+    /**
+     * Used to localize language-sensitive properties of components
+     */
     public void setText() {
         lang = Localization.getLanguage();
 

@@ -7,6 +7,9 @@ import gr.auth.csd.sudoku.gui.locale.Localization;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * This class represents our window for the management of stored users
+ */
 public class UserWindow extends JFrame {
     private JPanel panel;
     private JList<String> list;
@@ -22,6 +25,15 @@ public class UserWindow extends JFrame {
 
     private DefaultListModel<String> model;
 
+    /**
+     * First gets the language via Localization.getLanguage and sets the components' language-sensitive properties
+     * Adds ActionListeners to the buttons. The add user button simply makes the inputUsername visible
+     * The view stats button allows the user to view the stats of  currentUser, as long as currentUser is not empty
+     * Then the User with the username currentUser is loaded and his stats are displayed in a pop-up window
+     * The selectUser button loads the User user with the the username currentUser(if it is not empty) and then user is passed as an argument to menu.setUser
+     * The noUser button removes any previously selected user
+     * @param menu instance of Menu
+     */
     public UserWindow(Menu menu){
         lang = Localization.getLanguage();
 
@@ -77,6 +89,11 @@ public class UserWindow extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Used for the configuration of our JList, where the stored usernames are displayed.
+     * It also adds a SelectionListener to the list, from which the current user is obtained and set
+     *
+     */
     private void createUIComponents() {
         model = new DefaultListModel<>();
         list = new JList<>(model);

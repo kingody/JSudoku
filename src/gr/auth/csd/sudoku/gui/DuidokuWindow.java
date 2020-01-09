@@ -31,6 +31,10 @@ public class DuidokuWindow extends SudokuWindow {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Utility method to show the user if he/she won.
+     * @param isWin
+     */
     public void finishGame(boolean isWin) {
         if (isWin)
             new Hint("YOU WIN");
@@ -39,7 +43,7 @@ public class DuidokuWindow extends SudokuWindow {
     }
 
     /**
-     * Adds DuidokuKeyListener to each cells
+     * Adds DuidokuKeyListener to each cell's inputText
      */
     public void setListeners() {
         int size = sudoku.getSize();
@@ -53,7 +57,7 @@ public class DuidokuWindow extends SudokuWindow {
 
     /**
      * Removes listeners from a component
-     * @param comp JComponent whole listeners are to be removed
+     * @param comp JComponent whose listeners are to be removed
      */
     public void removeListeners(JComponent comp) {
         for (KeyListener listener : comp.getKeyListeners())
@@ -86,6 +90,12 @@ public class DuidokuWindow extends SudokuWindow {
         }
 
         /**
+         * We obtain the input (String) from the cell in question, based on the coordinates obtained via MyMouseListener.
+         * If the input is not emptychar value is set to the first character of input String. If it is an invalid character the SudCell is emptied
+         * Else, we get the numeric value of it and check if it is a valid move. if not the SudCell is emptied
+         * Otherwise, the respective cell in Sudoku grid is set, the inputText of said cells is made ineditable, and its listeners are removed
+         * Then, we check is the user won with this move. If not, the computers move is calculated and set on the GUI grid for the user to see
+         * The cells on which this took place is made ineditable and its listeners are removed. Lastly we check if the user lost with this move
          *
          * @param e
          */

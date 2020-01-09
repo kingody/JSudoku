@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * This class represents our main menu, which contains our main method
+ */
 public class Menu extends JFrame {
     private JPanel panel;
     private JLabel title;
@@ -30,6 +33,9 @@ public class Menu extends JFrame {
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char[] charSet;
 
+    /**
+     * Adds all the components to the panel, initializes randomly the puzzles, adds the action listeners to the buttons and sets the properties of Menu
+     */
     public Menu() {
         add(panel);
 
@@ -53,6 +59,10 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Sets Menu's user to user and the text of label currentUser
+     * @param user User object
+     */
     public void setUser(User user) {
         this.user = user;
         currentUser.setText(lang.getString("currentUser") + user.getUsername());
@@ -64,11 +74,16 @@ public class Menu extends JFrame {
         currentUser.setVisible(false);
     }
 
+
     public void setWordoku(boolean set) {
         isWordoku = set;
         setCharSet();
     }
 
+    /**
+     * Used to localize everything on the menu and settingsWindow
+     * @param locale Locale instance
+     */
     public void localizeAll(Locale locale) {
         localize(locale);
         settingsWindow.setText();
@@ -80,6 +95,9 @@ public class Menu extends JFrame {
         setCharSet();
     }
 
+    /**
+     * This function sets all the language-sensitive properties of our components
+     */
     private void setText() {
         setTitle(lang.getString("menuTitle"));
 
@@ -95,6 +113,9 @@ public class Menu extends JFrame {
             setUser(user);
     }
 
+    /**
+     * Sets the characters for the game based on the value of isWordoku boolean
+     */
     private void setCharSet() {
             charSet = isWordoku ? lang.getCharSet() : numberSet;
     }

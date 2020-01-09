@@ -2,6 +2,9 @@ package gr.auth.csd.sudoku.gui.locale.languages;
 
 import gr.auth.csd.sudoku.gui.locale.Language;
 
+/**
+ * This class represents the english language
+ */
 public class Language_en_US extends Language {
 
     public Language_en_US() {
