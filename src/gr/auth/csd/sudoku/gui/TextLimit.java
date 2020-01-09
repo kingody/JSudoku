@@ -4,6 +4,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+/**
+ * Utility class to limit the size of the JTextFields used in the programme to a number of our choosing. It does not allow fo further text after the limit at all.
+ */
+
 public class TextLimit extends PlainDocument {
     private int limit;
     public TextLimit(int limit){

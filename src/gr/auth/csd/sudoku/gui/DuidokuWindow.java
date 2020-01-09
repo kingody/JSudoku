@@ -9,8 +9,17 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * This class represents the GUI on which the user plays Duidoku against the pc. It is a child of SudokuWindow class
+ */
 public class DuidokuWindow extends SudokuWindow {
-
+    /**
+     * Calls super contructor with duidoku charSet and false as parameters. Basically this creates a SudokuWindow with no key Listeners
+     * Then calls setListeners and sets the properties of DuidokuWindow
+     * @param duidoku Duidoku object
+     * @param charSet Acceptable characters
+     * @param user User object
+     */
     public DuidokuWindow(Duidoku duidoku, char[] charSet, User user) {
         super(duidoku, charSet, false);
         setListeners();
@@ -29,6 +38,9 @@ public class DuidokuWindow extends SudokuWindow {
             new Hint("YOU LOSE");
     }
 
+    /**
+     * Adds DuidokuKeyListener to each cells
+     */
     public void setListeners() {
         int size = sudoku.getSize();
 
@@ -39,11 +51,18 @@ public class DuidokuWindow extends SudokuWindow {
         }
     }
 
+    /**
+     * Removes listeners from a component
+     * @param comp JComponent whole listeners are to be removed
+     */
     public void removeListeners(JComponent comp) {
         for (KeyListener listener : comp.getKeyListeners())
             comp.removeKeyListener(listener);
     }
 
+    /**
+     * This class represents our implementation of KeyListener interface for Duidoku
+     */
     public class DuidokuKeyListener implements KeyListener{
         Duidoku duidoku = (Duidoku) sudoku;
 
@@ -52,6 +71,11 @@ public class DuidokuWindow extends SudokuWindow {
 
         }
 
+        /**
+         *  The cell is emptied when the user input is an accepted character.
+         *  This also prevents the user from entering invalid characters to occupied cells.
+         * @param e Key event
+         */
         @Override
         public void keyPressed(KeyEvent e) {
             for (char c : charSet)
@@ -61,6 +85,10 @@ public class DuidokuWindow extends SudokuWindow {
                 }
         }
 
+        /**
+         *
+         * @param e
+         */
         @Override
         public void keyReleased(KeyEvent e) {
 

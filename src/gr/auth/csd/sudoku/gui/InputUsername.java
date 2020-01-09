@@ -7,11 +7,22 @@ import gr.auth.csd.sudoku.gui.locale.Localization;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class is used when the user wants to add a new user from the UserWindow
+ */
 public class InputUsername extends JFrame {
     private JTextField textField;
     private JLabel label;
     private JButton closeButton;
 
+    /**
+     * The constructor initializes our panel and sets its layout. Then the properties of the panel's components are set.
+     * Said components are then added to our panel and the properties of the InputUsername are set.
+     * Every language-sensitive property is set based on Language lang.
+     * Upon pressing the closeButton, the username from the textField is acquired. If it is not empty, the user is created.
+     * Upon successful creation, the new user is added to the list in userWindow
+     * @param userWindow UserWindow object
+     */
     public InputUsername(UserWindow userWindow) {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
