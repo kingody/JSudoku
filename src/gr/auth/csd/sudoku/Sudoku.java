@@ -54,6 +54,10 @@ public class Sudoku {
             grid[row][col] = 0;
     }
 
+    /**
+     * getter for Sudoku's grid
+     * @return grid
+     */
     public int[][] getGrid() {
         return grid;
     }
@@ -68,6 +72,13 @@ public class Sudoku {
         return (value > 0) && (value <= gridSize);
     }
 
+    /**
+     * Determines if a move obides by Sudoku's rules
+     * @param row Row of Cell
+     * @param col Column of Cell
+     * @param value Numeric value whose validity is to be determined
+     * @return Whether or not it is a valid move
+     */
     public boolean isValidMove(int row, int col, int value) {
         if (isOutOfBounds(row, col) || !isValidNumber(value))
             return false;

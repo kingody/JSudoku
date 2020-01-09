@@ -21,6 +21,11 @@ public class KillerSudoku extends ClassicSudoku {
         this.areas = areas;
     }
 
+    /**
+     * Creates a new Killer Sudoku from a file. The format of each area in the file is sum : x,y x1,y1 etc.
+     * @param size Size of grid
+     * @param filename Name of file
+     */
     public KillerSudoku(int size, String filename) {
         super(size);
         areas = new ArrayList<>();
@@ -49,6 +54,13 @@ public class KillerSudoku extends ClassicSudoku {
         return areas;
     }
 
+    /**
+     * Conducts same checks as ClassicSudoku. It also checks that if the move fills the area, the area's sum must be correct
+     * @param row Row of Cell
+     * @param col Column of Cell
+     * @param value Numeric value whose validity is to be determined
+     * @return True if it is valid, false otherwise
+     */
     public boolean isValidMove(int row, int col, int value) {
         if (!super.isValidMove(row, col, value))
             return false;

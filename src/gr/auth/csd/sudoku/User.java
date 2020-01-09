@@ -69,6 +69,10 @@ public class User {
         return new User(username);
     }
 
+    /**
+     * Used to load every user stored
+     * @return ArrayList of Users stored
+     */
     public static ArrayList<User> loadAll() {
         File directory = new File(dir);
         File[] files = directory.listFiles();
@@ -111,6 +115,9 @@ public class User {
         return null;
     }
 
+    /**
+     * Saves User to file
+     */
     public void saveToFile() {
         String path = dir + username + ".txt";
 
@@ -149,6 +156,11 @@ public class User {
         saveToFile();
     }
 
+    /**
+     * Checks to see if filename Sudoku has been solved by the user
+     * @param filename the name of Sudoku file
+     * @return true if it has been solved, false otherwise
+     */
     public boolean hasSolved(String filename) {
         return solvedSudokus.contains(filename);
     }
@@ -158,6 +170,10 @@ public class User {
         saveToFile();
     }
 
+    /**
+     * Overriding the toString method to best fit the file handling
+     * @return
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(username)
