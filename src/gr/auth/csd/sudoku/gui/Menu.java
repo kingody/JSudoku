@@ -44,11 +44,11 @@ public class Menu extends JFrame {
         settingsWindow = new Settings(this);
         classic.addActionListener(click -> new SudokuWindow(sudoku, charSet));
         killer.addActionListener(click -> new KillerWindow(kil, charSet));
-        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
+        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet, user));
         settings.addActionListener(click -> settingsWindow.showWindow());
         userButton.addActionListener(click-> new UserWindow(this));
 
-        setSize(300, 300);
+        setSize(300, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

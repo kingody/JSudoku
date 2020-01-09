@@ -1,5 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
 import gr.auth.csd.sudoku.variants.killer.Index;
 
@@ -10,18 +11,22 @@ import java.awt.event.KeyListener;
 
 public class DuidokuWindow extends SudokuWindow {
 
-    public DuidokuWindow(Duidoku duidoku, char[] charSet) {
+    public DuidokuWindow(Duidoku duidoku, char[] charSet, User user) {
         super(duidoku, charSet, false);
         setListeners();
 
         grid.setPreferredSize(new Dimension(280,280));
 
         setTitle(lang.getString("duidoku"));
-        setSize(400,400);
+        setSize(350,370);
+        setLocationRelativeTo(null);
     }
 
-    public void finishGame() {
-        new Hint("YOU WIN");
+    public void finishGame(boolean isWin) {
+        if (isWin)
+            new Hint("YOU WIN");
+        else
+            new Hint("YOU LOSE");
     }
 
     public void setListeners() {
@@ -80,7 +85,7 @@ public class DuidokuWindow extends SudokuWindow {
             removeListeners(cells[rowsel][colsel].getInputTextField());
 
             if (duidoku.checkVictory()) {
-                finishGame();
+                finishGame(true);
                 return;
             }
 
@@ -94,7 +99,7 @@ public class DuidokuWindow extends SudokuWindow {
             removeListeners(cells[row][col].getInputTextField());
 
             if (duidoku.checkVictory()) {
-                finishGame();
+                finishGame(false);
             }
         }
     }
