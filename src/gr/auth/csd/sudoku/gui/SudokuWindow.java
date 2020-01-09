@@ -130,7 +130,10 @@ public class SudokuWindow extends JFrame {
         int tempRow, tempCol;
 
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseClicked(MouseEvent e) {}
+
+        @Override
+        public void mousePressed(MouseEvent e) {
             JTextField selected = (JTextField) e.getSource();
             int size = sudoku.getSize();
 
@@ -146,9 +149,6 @@ public class SudokuWindow extends JFrame {
                 }
             }
         }
-
-        @Override
-        public void mousePressed(MouseEvent e) {}
 
         @Override
         public void mouseReleased(MouseEvent e) {}
