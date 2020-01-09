@@ -79,4 +79,15 @@ public class Sudoku {
         }
         return true;
     }
+
+    public boolean isCompleted() {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                if (grid[i][j] == 0)
+                    return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -13,6 +13,7 @@ import java.awt.*;
 public class InputUsername extends JFrame {
     private JTextField textField;
     private JLabel label;
+    private JLabel userExists;
     private JButton closeButton;
 
     /**
@@ -30,31 +31,40 @@ public class InputUsername extends JFrame {
         Language lang = Localization.getLanguage();
 
         label = new JLabel(lang.getString("inputLabel"));
+        userExists = new JLabel();
         textField = new JTextField(15);
         textField.setDocument(new TextLimit(15));
 
         closeButton = new JButton(lang.getString("add"));
         closeButton.addActionListener(click -> {
-            String username = textField.getText();
+            //Removes whitespace from the beginning and end of the name
+            String username = textField.getText().trim();
 
-            if (!username.equals("")) {
+            if (!username.isEmpty()) {
                 User user = User.newUser(username);
 
                 if (user != null) {
                     userWindow.addUserToList(user);
+                    setVisible(false);
+                    userExists.setVisible(false);
+                }
+                else {
+                    userExists.setText(lang.getString("user") + username + lang.getString("userExists"));
+                    userExists.setVisible(true);
                 }
             }
 
-            setVisible(false);
+
         });
 
         panel.add(label);
         panel.add(textField);
         panel.add(closeButton);
+        panel.add(userExists);
         add(panel);
 
         setTitle(lang.getString("newUser"));
-        setSize(300, 100);
+        setSize(320, 120);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         getRootPane().setDefaultButton(closeButton);
         setLocationRelativeTo(null);

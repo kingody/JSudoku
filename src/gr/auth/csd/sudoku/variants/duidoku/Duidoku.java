@@ -15,7 +15,8 @@ public class Duidoku extends ClassicSudoku {
         super(size);
     }
 
-    public boolean checkVictory() {
+    @Override
+    public boolean isCompleted() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (grid[i][j] == 0) {
@@ -57,11 +58,6 @@ public class Duidoku extends ClassicSudoku {
         ArrayList<Index> freeCells = getFreeCells();
         Index index = freeCells.get(random.nextInt(freeCells.size()));
         int row = index.getRow(), col = index.getColumn(), value;
-
-//        do {
-//            row = random.nextInt(gridSize);
-//            col = random.nextInt(gridSize);
-//        } while (grid[row][col] != 0);
 
         do {
             value = 1 + random.nextInt(gridSize);

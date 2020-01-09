@@ -18,9 +18,8 @@ public class DuidokuWindow extends SudokuWindow {
      * Then calls setListeners and sets the properties of DuidokuWindow
      * @param duidoku Duidoku object
      * @param charSet Acceptable characters
-     * @param user User object
      */
-    public DuidokuWindow(Duidoku duidoku, char[] charSet, User user) {
+    public DuidokuWindow(Duidoku duidoku, char[] charSet) {
         super(duidoku, charSet, false);
         setListeners();
 
@@ -32,14 +31,24 @@ public class DuidokuWindow extends SudokuWindow {
     }
 
     /**
-     * Utility method to show the user if he/she won.
-     * @param isWin
+     * Utility method to show the user if they won.
+     * @param isWin true if the user won, false otherwise
      */
     public void finishGame(boolean isWin) {
-        if (isWin)
+        User user =  User.getCurrentUser();
+
+        if (isWin) {
             new Hint("YOU WIN");
-        else
+
+            if (user != null)
+                user.incrementWins();
+        }
+        else {
             new Hint("YOU LOSE");
+
+            if (user != null)
+                user.incrementLosses();
+        }
     }
 
     /**
@@ -97,7 +106,7 @@ public class DuidokuWindow extends SudokuWindow {
          * Then, we check is the user won with this move. If not, the computers move is calculated and set on the GUI grid for the user to see
          * The cells on which this took place is made ineditable and its listeners are removed. Lastly we check if the user lost with this move
          *
-         * @param e
+         * @param e the KeyEvent object
          */
         @Override
         public void keyReleased(KeyEvent e) {
@@ -122,7 +131,7 @@ public class DuidokuWindow extends SudokuWindow {
             cells[rowsel][colsel].getInputTextField().setEditable(false);
             removeListeners(cells[rowsel][colsel].getInputTextField());
 
-            if (duidoku.checkVictory()) {
+            if (duidoku.isCompleted()) {
                 finishGame(true);
                 return;
             }
@@ -133,10 +142,10 @@ public class DuidokuWindow extends SudokuWindow {
             int val = duidoku.getCell(row, col);
             cells[row][col].setInputText(String.valueOf(charSet[val]));
             cells[row][col].getInputTextField().setEditable(false);
-            cells[row][col].getInputTextField().setForeground(Color.RED);
             removeListeners(cells[row][col].getInputTextField());
+            cells[row][col].getInputTextField().setForeground(Color.RED);
 
-            if (duidoku.checkVictory()) {
+            if (duidoku.isCompleted()) {
                 finishGame(false);
             }
         }

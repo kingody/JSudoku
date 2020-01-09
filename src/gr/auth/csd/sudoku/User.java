@@ -16,6 +16,8 @@ public class User {
     private HashSet<String> solvedSudokus;
     private int wins, losses;
 
+    private static User current = null;
+
     /**
      * Creates a new user and saves them to disk.
      * @param username The user's nickname.
@@ -46,6 +48,14 @@ public class User {
         }
     }
 
+    public static User getCurrentUser() {
+        return current;
+    }
+
+    public static void setCurrentUser(User user) {
+        current = user;
+    }
+
     /**
      * Creates a new user if the username is not taken.
      * @param username The user's nickname.
@@ -53,10 +63,9 @@ public class User {
      */
     public static User newUser(String username) {
         File file = new File(dir + username + ".txt");
-        if (file.exists()) {
-            System.out.println("User " + username + " already exists.");
+        if (file.exists())
             return null;
-        }
+
         return new User(username);
     }
 
@@ -106,21 +115,14 @@ public class User {
         String path = dir + username + ".txt";
 
         try {
-            //Overwrite old file if it exists
             File file = new File(path);
-            if (!file.delete())
-                System.out.println("Saving new user...");
-            if (!file.createNewFile()) {
-                System.out.println("Something went wrong.");
-                System.exit(-2);
-            }
 
             FileWriter writer = new FileWriter(file);
             writer.write(this.toString());
             writer.close();
         }
         catch (IOException e) {
-            System.out.println("Can't create user file.");
+            System.out.println("Can't create/open user file.");
             System.exit(-1);
         }
     }
@@ -135,6 +137,7 @@ public class User {
 
     public void incrementWins() {
         wins++;
+        saveToFile();
     }
 
     public int getLosses() {
@@ -143,6 +146,7 @@ public class User {
 
     public void incrementLosses() {
         losses++;
+        saveToFile();
     }
 
     public boolean hasSolved(String filename) {
@@ -151,6 +155,7 @@ public class User {
 
     public void addToSolved(String filename) {
         solvedSudokus.add(filename);
+        saveToFile();
     }
 
     @Override

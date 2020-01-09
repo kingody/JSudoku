@@ -3,7 +3,7 @@ package gr.auth.csd.sudoku.gui.locale.languages;
 import gr.auth.csd.sudoku.gui.locale.Language;
 
 /**
- * This class represents the english language
+ * This class represents the english translation
  */
 public class Language_en_US extends Language {
 
@@ -27,6 +27,7 @@ public class Language_en_US extends Language {
                 {"existingUser", "Existing users: "},
                 {"addUser", "Add user"},
                 {"newUser", "New user"},
+                {"userExists", " already exists"},
                 {"currentUser", "Current User: "},
                 {"statisticButton", "View Stats"},
                 {"selectUser", "Select user"},

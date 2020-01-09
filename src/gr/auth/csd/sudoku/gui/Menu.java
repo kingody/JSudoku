@@ -28,7 +28,6 @@ public class Menu extends JFrame {
 
     private boolean isWordoku = false;
     private Settings settingsWindow;
-    private User user;
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     private char[] charSet;
@@ -50,7 +49,7 @@ public class Menu extends JFrame {
         settingsWindow = new Settings(this);
         classic.addActionListener(click -> new SudokuWindow(sudoku, charSet));
         killer.addActionListener(click -> new KillerWindow(kil, charSet));
-        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet, user));
+        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
         settings.addActionListener(click -> settingsWindow.showWindow());
         userButton.addActionListener(click-> new UserWindow(this));
 
@@ -64,13 +63,13 @@ public class Menu extends JFrame {
      * @param user User object
      */
     public void setUser(User user) {
-        this.user = user;
+        User.setCurrentUser(user);
         currentUser.setText(lang.getString("currentUser") + user.getUsername());
         currentUser.setVisible(true);
     }
 
     public void removeUser() {
-        user = null;
+        User.setCurrentUser(null);
         currentUser.setVisible(false);
     }
 
@@ -109,6 +108,7 @@ public class Menu extends JFrame {
         userButton.setText(lang.getString("selectUser"));
         currentUser.setText(lang.getString("currentUser"));
 
+        User user = User.getCurrentUser();
         if (user != null)
             setUser(user);
     }

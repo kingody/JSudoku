@@ -3,15 +3,13 @@ package gr.auth.csd.sudoku.gui.locale.languages;
 import gr.auth.csd.sudoku.gui.locale.Language;
 
 /**
- * This class represents the greek language
+ * This class represents the greek translation
  */
 public class Language_el_GR extends Language {
 
     public Language_el_GR(){
         charSet = new char[] { ' ', 'Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ζ', 'Η', 'Θ', 'Ι' };
-/**
- * greek language dictionary
- */
+
         contents = new Object[][] {
                 {"menuTitle", "Σουντόκου"},
                 {"greeting", "Ας παίξουμε Σουντόκου"},
@@ -29,6 +27,7 @@ public class Language_el_GR extends Language {
                 {"existingUser", "Υπάρχων χρήστες:"},
                 {"addUser", "Πρόσθεσε χρήστη"},
                 {"newUser", "Νέος χρήστης"},
+                {"userExists", " υπάρχει ήδη"},
                 {"currentUser", "Χρήστης: "},
                 {"statisticButton", "Δες τα στατιστικά"},
                 {"selectUser", "Επέλεξε χρήστη"},

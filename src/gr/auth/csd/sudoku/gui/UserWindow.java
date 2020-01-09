@@ -92,7 +92,6 @@ public class UserWindow extends JFrame {
     /**
      * Used for the configuration of our JList, where the stored usernames are displayed.
      * It also adds a SelectionListener to the list, from which the current user is obtained and set
-     *
      */
     private void createUIComponents() {
         model = new DefaultListModel<>();
@@ -106,6 +105,10 @@ public class UserWindow extends JFrame {
             addUserToList(user);
         }
 
+        //Select the first user in the list by default
+        list.setSelectedIndex(0);
+        currentUser = list.getSelectedValue();
+
         list.getSelectionModel().addListSelectionListener(e -> {
             //Stops event from happening many times
             if (e.getValueIsAdjusting())
@@ -118,6 +121,9 @@ public class UserWindow extends JFrame {
 
     public void addUserToList(User user) {
         model.addElement(user.getUsername());
-        list.setSelectedIndex(list.getLastVisibleIndex());
+        int index = list.getModel().getSize() - 1;
+        list.ensureIndexIsVisible(index);
+        list.setSelectedIndex(index);
+        currentUser = list.getSelectedValue();
     }
 }
