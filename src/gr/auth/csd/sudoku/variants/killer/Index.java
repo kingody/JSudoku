@@ -2,9 +2,17 @@ package gr.auth.csd.sudoku.variants.killer;
 
 import java.util.Objects;
 
+/**
+ * This class represents a set of 2d coordinates
+ */
 public class Index {
     private int row, column;
 
+    /**
+     * Creates Index with row and column
+     * @param row
+     * @param column
+     */
     public Index(int row, int column) {
         this.row = row;
         this.column = column;
@@ -18,6 +26,11 @@ public class Index {
         return column;
     }
 
+    /**
+     * Overriding equals method to compare both coordinates
+     * @param o Object
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -26,6 +39,7 @@ public class Index {
         return row == index.row &&
                 column == index.column;
     }
+
 
     @Override
     public int hashCode() {

@@ -6,7 +6,7 @@ import gr.auth.csd.sudoku.Sudoku;
 import java.util.Scanner;
 
 /**
- * This class represents the Classic Sudoku.
+ * This class represents the Classic Sudoku. It is a child of Sudoku
  */
 public class ClassicSudoku extends Sudoku {
     /**
@@ -41,6 +41,13 @@ public class ClassicSudoku extends Sudoku {
         }
     }
 
+    /**
+     * Makes the same validity checks as the parent. It however conducts the square uniqueness check
+     * @param row Row of Cell
+     * @param col Column of Cell
+     * @param value Numeric value whose validity is to be determined
+     * @return Wheter or not is is a valid move.
+     */
     public boolean isValidMove(int row, int col, int value) {
         if (!super.isValidMove(row, col, value))
             return false;
