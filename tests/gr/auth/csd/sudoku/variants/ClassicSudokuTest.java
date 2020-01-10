@@ -16,4 +16,18 @@ class ClassicSudokuTest {
     void setCell() {
         assertTrue(sud.setCell(2,0,5));
     }
+
+    @Test
+    void clearCell(){
+        sud.clearCell(3,0);
+        assertEquals(0,sud.getCell(3,0));
+    }
+    @Test
+    void checkVictory(){
+        assertFalse(sud.isCompleted());
+    }
+    @Test
+    void getSize(){
+        assertEquals(9,sud.getSize());
+    }
 }
