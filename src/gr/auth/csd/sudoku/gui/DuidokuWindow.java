@@ -38,13 +38,13 @@ public class DuidokuWindow extends SudokuWindow {
         User user =  User.getCurrentUser();
 
         if (isWin) {
-            new Hint("YOU WIN");
+            new FinishWindow(true,this);
 
             if (user != null)
                 user.incrementWins();
         }
         else {
-            new Hint("YOU LOSE");
+            new FinishWindow(false,this);
 
             if (user != null)
                 user.incrementLosses();

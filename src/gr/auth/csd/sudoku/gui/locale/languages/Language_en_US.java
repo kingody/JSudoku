@@ -39,7 +39,10 @@ public class Language_en_US extends Language {
                 {"loses", " losses"},
                 {"noUserWarn", "Please select a user first"},
                 {"add", "Add"},
-                {"inputLabel", "Enter your username (up to 15 characters)"}
+                {"inputLabel", "Enter your username (up to 15 characters)"},
+                {"wonMessage","Congrats, you won!!"},
+                {"lostMessage","Seems like you lost"},
+                {"mainMenu","Return to main menu"}
         };
     }
 }
