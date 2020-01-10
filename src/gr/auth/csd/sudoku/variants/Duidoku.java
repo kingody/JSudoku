@@ -1,7 +1,6 @@
-package gr.auth.csd.sudoku.variants.duidoku;
+package gr.auth.csd.sudoku.variants;
 
-import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
-import gr.auth.csd.sudoku.variants.killer.Index;
+import gr.auth.csd.sudoku.utilities.Index;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,6 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.User;
+import gr.auth.csd.sudoku.utilities.User;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
 

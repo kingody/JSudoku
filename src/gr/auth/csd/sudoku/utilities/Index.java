@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.variants.killer;
+package gr.auth.csd.sudoku.utilities;
 
 import java.util.Objects;
 
@@ -9,9 +9,9 @@ public class Index {
     private int row, column;
 
     /**
-     * Creates Index with row and column
-     * @param row
-     * @param column
+     * Helper class to store positions in the Sudoku grid
+     * @param row the row
+     * @param column the column
      */
     public Index(int row, int column) {
         this.row = row;
@@ -26,11 +26,6 @@ public class Index {
         return column;
     }
 
-    /**
-     * Overriding equals method to compare both coordinates
-     * @param o Object
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

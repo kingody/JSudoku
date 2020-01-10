@@ -1,6 +1,7 @@
-package gr.auth.csd.sudoku.gui;
+package gr.auth.csd.sudoku.gui.variants;
 
-import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.gui.SudokuWindow;
+import gr.auth.csd.sudoku.variants.ClassicSudoku;
 
 import javax.swing.*;
 import javax.swing.border.Border;

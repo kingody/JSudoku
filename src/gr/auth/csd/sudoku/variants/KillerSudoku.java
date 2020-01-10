@@ -1,7 +1,8 @@
-package gr.auth.csd.sudoku.variants.killer;
+package gr.auth.csd.sudoku.variants;
 
-import gr.auth.csd.sudoku.FileHandler;
-import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
+import gr.auth.csd.sudoku.utilities.FileHandler;
+import gr.auth.csd.sudoku.utilities.Area;
+import gr.auth.csd.sudoku.utilities.Index;
 
 import java.util.ArrayList;
 import java.util.Scanner;

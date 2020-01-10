@@ -42,7 +42,7 @@ public class Language_el_GR extends Language {
                 {"inputLabel", "Εισήγαγε το όνομα χρήστη (μέχρι 15 χαρακτήρες)"},
                 {"wonMessage","Συγχαρητήρια κέρδισες!!"},
                 {"lostMessage","Δυστυχώς έχασες"},
-                {"mainMenu","Επιστροφή στο αρχκό μενού"}
+                {"mainMenu","Επιστροφή στο αρχικό μενού"}
         };
     }
 }

@@ -1,8 +1,9 @@
-package gr.auth.csd.sudoku.gui;
+package gr.auth.csd.sudoku.gui.variants;
 
-import gr.auth.csd.sudoku.User;
-import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
-import gr.auth.csd.sudoku.variants.killer.Index;
+import gr.auth.csd.sudoku.utilities.User;
+import gr.auth.csd.sudoku.gui.FinishWindow;
+import gr.auth.csd.sudoku.variants.Duidoku;
+import gr.auth.csd.sudoku.utilities.Index;
 
 import javax.swing.*;
 import java.awt.*;

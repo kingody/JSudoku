@@ -7,7 +7,7 @@ import java.awt.*;
  * This class represents a sudoku cell for the GUI. It contains a JLabel sum (for the Killer variant) and a JTextField inputText for the input
  */
 
-public class SudCell extends JPanel {
+public class SudokuCell extends JPanel {
     private static final Color warningColor = new Color(255, 28, 4);
     private static final Font font = new Font("Arial", Font.BOLD, 15);
 
@@ -18,7 +18,7 @@ public class SudCell extends JPanel {
     /**
      * In the constructor the layout and border of each SudCell are set as well as the properties(document,font etc.) of inputText which is then added to the cell
      */
-    public SudCell() {
+    public SudokuCell() {
         setLayout(new BorderLayout());
         inputText = new JTextField();
         inputText.setFont(font.deriveFont(Font.BOLD, 18));

@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.variants.killer;
+package gr.auth.csd.sudoku.utilities;
 
 import java.util.ArrayList;
 

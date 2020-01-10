@@ -1,12 +1,14 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.Sudoku;
-import gr.auth.csd.sudoku.User;
+import gr.auth.csd.sudoku.utilities.User;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
-import gr.auth.csd.sudoku.variants.classic.ClassicSudoku;
-import gr.auth.csd.sudoku.variants.duidoku.Duidoku;
-import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
+import gr.auth.csd.sudoku.gui.variants.ClassicWindow;
+import gr.auth.csd.sudoku.gui.variants.DuidokuWindow;
+import gr.auth.csd.sudoku.gui.variants.KillerWindow;
+import gr.auth.csd.sudoku.variants.ClassicSudoku;
+import gr.auth.csd.sudoku.variants.Duidoku;
+import gr.auth.csd.sudoku.variants.KillerSudoku;
 
 import javax.swing.*;
 import java.util.Locale;

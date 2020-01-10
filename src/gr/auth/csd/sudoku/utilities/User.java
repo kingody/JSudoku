@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku;
+package gr.auth.csd.sudoku.utilities;
 
 import java.io.File;
 import java.io.FileWriter;

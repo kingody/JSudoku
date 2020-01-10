@@ -20,7 +20,7 @@ public abstract class SudokuWindow extends JFrame {
     protected int selRow;
     protected int selCol;
     protected JButton hint;
-    protected SudCell[][] cells;
+    protected SudokuCell[][] cells;
     protected JPanel grid;
 
     protected MouseListener mouseListener;
@@ -43,7 +43,7 @@ public abstract class SudokuWindow extends JFrame {
 
         JPanel background = new JPanel();
         background.setBackground(Color.DARK_GRAY);
-        cells = new SudCell[size][size];
+        cells = new SudokuCell[size][size];
         hint = new JButton();
         hint.setText(lang.getString("hint"));
         hint.addActionListener(click -> {
@@ -111,7 +111,7 @@ public abstract class SudokuWindow extends JFrame {
     private void initializeGrid() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                cells[i][j] = new SudCell();
+                cells[i][j] = new SudokuCell();
 
                 String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
                 cells[i][j].setText(num);
@@ -141,7 +141,7 @@ public abstract class SudokuWindow extends JFrame {
      * In the mousePressed method we obtain the coordinates of the cell in the grid chosen
      * by the user via mouse, for further processing.
      */
-    protected class DefaultMouseListener implements MouseListener {
+    public class DefaultMouseListener implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
             JTextField selected = (JTextField) e.getSource();
@@ -169,7 +169,7 @@ public abstract class SudokuWindow extends JFrame {
     /**
      * This class represents our implementation of the KeyListener interface
      */
-    protected class DefaultKeyListener implements KeyListener{
+    public class DefaultKeyListener implements KeyListener {
         /**
          *  The cell is emptied when the user input is an accepted character.
          *  This also prevents the user from entering invalid characters to occupied cells.
