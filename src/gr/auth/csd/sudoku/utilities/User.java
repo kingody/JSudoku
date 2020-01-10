@@ -47,6 +47,8 @@ public class User {
         while (scanner.hasNext()) {
             solvedSudokus.add(scanner.nextLine());
         }
+
+        scanner.close();
     }
 
     public static User getCurrentUser() {
@@ -101,12 +103,7 @@ public class User {
      */
     public static User loadUser(String username) {
         File file = new File(dir + username + ".txt");
-
-        User user = loadUser(file);
-        if (user == null)
-            System.out.println("User " + username + " does not exist.");
-
-        return user;
+        return loadUser(file);
     }
 
     private static User loadUser(File file) {

@@ -18,14 +18,6 @@ public class ClassicSudoku extends Sudoku {
     }
 
     /**
-     * Creates a new Classic Sudoku from a grid.
-     * @param grid The Sudoku grid
-     */
-    public ClassicSudoku(int[][] grid) {
-        super(grid);
-    }
-
-    /**
      * Creates a new Classic Sudoku from a file.
      * @param size The Sudoku grid size.
      * @param filename The name of the file.

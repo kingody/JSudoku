@@ -71,6 +71,9 @@ public class Duidoku extends ClassicSudoku {
     public Index computerMove() {
         Random random = new Random();
         ArrayList<Index> freeCells = getFreeCells();
+        if (freeCells.size() == 0)
+            return new Index(-1, -1);
+
         Index index = freeCells.get(random.nextInt(freeCells.size()));
         int row = index.getRow(), col = index.getColumn(), value;
 

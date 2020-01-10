@@ -34,10 +34,4 @@ public class Index {
         return row == index.row &&
                 column == index.column;
     }
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(row, column);
-    }
 }

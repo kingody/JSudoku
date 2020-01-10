@@ -14,15 +14,6 @@ public class KillerSudoku extends ClassicSudoku {
     private ArrayList<Area> areas;
 
     /**
-     * Creates a new Killer Sudoku from a given size and list of areas.
-     * @param size The Sudoku grid size
-     */
-    public KillerSudoku(int size, ArrayList<Area> areas) {
-        super(size);
-        this.areas = areas;
-    }
-
-    /**
      * Creates a new Killer Sudoku from a file. The format of each area in the file is sum : x,y x1,y1 etc.
      * @param size Size of grid
      * @param filename Name of file

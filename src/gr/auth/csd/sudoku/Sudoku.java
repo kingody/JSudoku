@@ -18,15 +18,6 @@ public abstract class Sudoku {
         grid = new int[gridSize][gridSize];
     }
 
-    /**
-     * Creates a new Sudoku from a grid.
-     * @param grid The Sudoku grid
-     */
-    public Sudoku(int[][] grid) {
-        gridSize = grid.length;
-        this.grid = grid;
-    }
-
     public int getCell(int row, int col) {
         if (isOutOfBounds(row, col))
             return -1;
