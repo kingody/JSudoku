@@ -140,6 +140,12 @@ public class SudokuWindow extends JFrame {
                 grid.add(cells[i][j]);
             }
         }
+        for(int i = (int)Math.sqrt(size); i<size;i+=(int)Math.sqrt(size)){
+            for(int j =0;j<size;j++){
+                cells[i][j].setBorder(BorderFactory.createMatteBorder(3,1,1,1,Color.BLACK));
+                cells[j][i].setBorder(BorderFactory.createMatteBorder(1,3,1,1,Color.BLACK));
+            }
+        }
     }
 
     /**
