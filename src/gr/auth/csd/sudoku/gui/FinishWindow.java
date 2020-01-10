@@ -15,25 +15,23 @@ public class FinishWindow extends JDialog {
         super(frame);
         label = new JLabel();
         mainMenu = new JButton(Localization.getLanguage().getString("mainMenu"));
-        panel = new JPanel();
+        panel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,15));
         if(win){
             label.setText(Localization.getLanguage().getString("wonMessage"));
         }
         else{
             label.setText(Localization.getLanguage().getString("lostMessage"));
         }
-        mainMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                dispose();
-            }
+        mainMenu.addActionListener(click -> {
+            frame.dispose();
+            dispose();
         });
         label.setHorizontalAlignment(SwingConstants.CENTER);
         mainMenu.setPreferredSize(new Dimension(200,30));
         panel.add(label);
         panel.add(mainMenu);
         add(panel);
+        setBackground(Color.lightGray);
         setResizable(false);
         setSize(250,150);
         setLocationRelativeTo(null);
