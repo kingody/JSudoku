@@ -1,8 +1,8 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.utilities.User;
-import gr.auth.csd.sudoku.gui.locale.Language;
-import gr.auth.csd.sudoku.gui.locale.Localization;
+import gr.auth.csd.sudoku.utilities.locale.Language;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.gui.variants.ClassicWindow;
 import gr.auth.csd.sudoku.gui.variants.DuidokuWindow;
 import gr.auth.csd.sudoku.gui.variants.KillerWindow;

@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.gui.locale;
+package gr.auth.csd.sudoku.utilities.locale;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
  * This class is responsible for the localization of our program
  */
 public class Localization {
-    private static final String baseName = "gr.auth.csd.sudoku.gui.locale.languages.Language";
+    private static final String baseName = "gr.auth.csd.sudoku.utilities.locale.languages.Language";
     private static Language language;
 
     //supported languages

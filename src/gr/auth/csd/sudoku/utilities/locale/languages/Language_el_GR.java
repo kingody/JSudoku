@@ -1,6 +1,6 @@
-package gr.auth.csd.sudoku.gui.locale.languages;
+package gr.auth.csd.sudoku.utilities.locale.languages;
 
-import gr.auth.csd.sudoku.gui.locale.Language;
+import gr.auth.csd.sudoku.utilities.locale.Language;
 
 /**
  * This class contains the greek translation

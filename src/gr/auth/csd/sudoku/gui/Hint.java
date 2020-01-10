@@ -1,10 +1,8 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.gui.locale.Localization;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.concurrent.Flow;
 
 /**
  * This class is used when the user wishes to see hints

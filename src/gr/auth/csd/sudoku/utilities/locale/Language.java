@@ -1,4 +1,4 @@
-package gr.auth.csd.sudoku.gui.locale;
+package gr.auth.csd.sudoku.utilities.locale;
 
 import java.util.ListResourceBundle;
 
