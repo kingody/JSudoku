@@ -1,5 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
+import gr.auth.csd.sudoku.Sudoku;
 import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
@@ -41,14 +42,30 @@ public class Menu extends JFrame {
         localize(Locale.getDefault());
 
         Random random = new Random();
-        String classicNum = Integer.toString(1 + random.nextInt(10));
-        String killerNum  = Integer.toString(1 + random.nextInt(10));
-        ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
-        KillerSudoku kil = new KillerSudoku(9,"killer" + killerNum + ".txt");
 
         settingsWindow = new Settings(this);
-        classic.addActionListener(click -> new SudokuWindow(sudoku, charSet));
-        killer.addActionListener(click -> new KillerWindow(kil, charSet));
+        classic.addActionListener(click ->{
+            String classicNum = Integer.toString(1 + random.nextInt(10));
+            if(User.getCurrentUser()!=null) {
+                while (User.getCurrentUser().hasSolved("classic" + classicNum + ".txt")) {
+                    classicNum = Integer.toString(1 + random.nextInt(10));
+                }
+            }
+            ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
+            new SudokuWindow(sudoku, charSet);
+        });
+
+        killer.addActionListener(click ->{
+            String killerNum  = Integer.toString(1 + random.nextInt(10));
+            if(User.getCurrentUser()!=null) {
+                while (User.getCurrentUser().hasSolved("classic" + killerNum + ".txt")) {
+                    killerNum = Integer.toString(1 + random.nextInt(10));
+                }
+            }
+            KillerSudoku kil = new KillerSudoku(9,"killer" + killerNum + ".txt");
+            new KillerWindow(kil, charSet);
+        });
+
         duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
         settings.addActionListener(click -> settingsWindow.showWindow());
         userButton.addActionListener(click-> new UserWindow(this));
