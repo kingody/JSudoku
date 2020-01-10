@@ -74,6 +74,10 @@ public abstract class Sudoku {
         return true;
     }
 
+    /**
+     * Used to determine if the puzzle is completed
+     * @return true if it is, false otherwise
+     */
     public boolean isCompleted() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {

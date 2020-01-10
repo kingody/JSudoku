@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This class represents the GUI on which the user plays the classic version of Sudoku. Language lang represents the language being used
+ * This class represents the basis for all game modes' Windows. Language lang represents the language being used
  */
 public abstract class SudokuWindow extends JFrame {
     private final Color fixedColor = Color.lightGray;
@@ -98,6 +98,9 @@ public abstract class SudokuWindow extends JFrame {
         return index > 0 && index <= sudoku.getSize();
     }
 
+    /**
+     * Utility method used to set Listeners
+     */
     protected void setListeners() {
         mouseListener = new DefaultMouseListener();
         keyListener = new DefaultKeyListener();
@@ -134,6 +137,9 @@ public abstract class SudokuWindow extends JFrame {
         }
     }
 
+    /**
+     * Utility method for grid Styling
+     */
     protected void styleGrid() {}
 
     /**

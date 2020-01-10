@@ -140,6 +140,9 @@ public class User {
         return wins;
     }
 
+    /**
+     * Increments wins by 1 and updates the user's file
+     */
     public void incrementWins() {
         wins++;
         saveToFile();

@@ -38,7 +38,7 @@ public class ClassicSudoku extends Sudoku {
      * @param row Row of Cell
      * @param col Column of Cell
      * @param value Numeric value whose validity is to be determined
-     * @return Wheter or not is is a valid move.
+     * @return Whether or not is is a valid move.
      */
     public boolean isValidMove(int row, int col, int value) {
         if (!super.isValidMove(row, col, value))

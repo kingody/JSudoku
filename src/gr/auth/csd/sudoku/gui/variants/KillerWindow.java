@@ -8,14 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * This class represents the GUI on which the user plays the Killer version of Sudoku and is a child of SudokuWindow
+ * This class represents the GUI on which the user plays the Killer version of Sudoku and is a child of ClassicWindow
  */
 public class KillerWindow extends ClassicWindow {
     /**
      * Calls constructor of parent class, with sud and chars as parameters.
-     * The areas of the grid (cells with the desired sum) are obtained and stored in the ArrayList<Area> areas.
-     * For each area, its cells are acquired, and colored randomly, as to indicate to the user that these cells' sum must amount to the sum of the label
-     * Said Label is located within the first SudCell of each area
      * @param sud Killer Sudoku object
      * @param chars char array with acceptable characters
      */
@@ -24,6 +21,11 @@ public class KillerWindow extends ClassicWindow {
         setTitle(lang.getString("kill"));
     }
 
+    /**
+     * Adds colors to the areas and displays the desired sum of each area within one of its cells
+     * For each area, its cells are acquired, and colored randomly
+     * This is done to indicate that these cells' sum must amount to the sum of the label
+     */
     @Override
     protected void styleGrid() {
         super.styleGrid();

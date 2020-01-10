@@ -47,7 +47,7 @@ public class KillerSudoku extends ClassicSudoku {
     }
 
     /**
-     * Conducts same checks as ClassicSudoku. It also checks that if the move fills the area, the area's sum must be correct
+     * Conducts same checks as ClassicSudoku. It also checks if the move fills the area, the area's sum must be correct
      * @param row Row of Cell
      * @param col Column of Cell
      * @param value Numeric value whose validity is to be determined

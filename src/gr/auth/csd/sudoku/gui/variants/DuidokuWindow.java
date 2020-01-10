@@ -11,11 +11,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * This class represents the GUI on which the user plays Duidoku against the pc. It is a child of SudokuWindow class
+ * This class represents the GUI on which the user plays Duidoku against the pc. It is a child of ClassicWindow class
  */
 public class DuidokuWindow extends ClassicWindow {
     /**
-     * Calls super contructor with duidoku charSet and false as parameters. Basically this creates a SudokuWindow with no key Listeners
+     * Calls super contructor with duidoku charSet
      * Then calls setListeners and sets the properties of DuidokuWindow
      * @param duidoku Duidoku object
      * @param charSet Acceptable characters

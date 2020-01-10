@@ -69,6 +69,9 @@ public class InputUsername extends JFrame {
         getRootPane().setDefaultButton(closeButton);
         setLocationRelativeTo(null);
     }
+    /**
+     * Sets the visibility of the InputUsername window to true
+     */
     public void showWindow() {
         textField.setText("");
         setVisible(true);
