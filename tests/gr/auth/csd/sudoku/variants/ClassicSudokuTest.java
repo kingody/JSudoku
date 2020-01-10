@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClassicSudokuTest {
     private ClassicSudoku sud;
+
     @BeforeEach
     void setUp(){
        sud = new ClassicSudoku(9,"classic1.txt");
