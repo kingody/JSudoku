@@ -17,14 +17,18 @@ class UserTest {
         User fail = User.loadUser("doesntExist");
         assertNull(fail);
 
-        User newuser = User.newUser("newTestUser");
-
-        User user = User.loadUser("testUser");
+        User user = User.newUser("testUser");
+        assertNotNull(user);
         assertEquals("testUser", user.getUsername());
+
+        user = User.loadUser("testUser");
+
+        User.setCurrentUser(user);
+        assertEquals(user, User.getCurrentUser());
 
         ArrayList<User> users = User.loadAll();
         assertNotNull(users);
-        assertEquals(2, users.size());
+        assertEquals(1, users.size());
 
 
         int oldWins = user.getWins(), oldLosses = user.getLosses();
@@ -41,7 +45,7 @@ class UserTest {
 
     @AfterAll
     static void deleteFile() {
-        File file = new File("Users/newTestUser.txt");
+        File file = new File("Users/testUser.txt");
         file.deleteOnExit();
     }
 }
