@@ -5,6 +5,8 @@ import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -140,10 +142,15 @@ public class SudokuWindow extends JFrame {
                 grid.add(cells[i][j]);
             }
         }
-        for(int i = (int)Math.sqrt(size); i<size;i+=(int)Math.sqrt(size)){
-            for(int j =0;j<size;j++){
-                cells[i][j].setBorder(BorderFactory.createMatteBorder(3,1,1,1,Color.BLACK));
-                cells[j][i].setBorder(BorderFactory.createMatteBorder(1,3,1,1,Color.BLACK));
+
+        Border topBorder = BorderFactory.createMatteBorder(3,0,0,0, Color.BLACK);
+        Border sideBorder = BorderFactory.createMatteBorder(0,3,0,0, Color.BLACK);
+        int boxSize = (int) Math.sqrt(size);
+
+        for(int i = boxSize; i < size; i += boxSize) {
+            for(int j = 0; j < size; j++) {
+                cells[i][j].setBorder(new CompoundBorder(cells[i][j].getBorder(), topBorder));
+                cells[j][i].setBorder(new CompoundBorder(cells[j][i].getBorder(), sideBorder));
             }
         }
     }

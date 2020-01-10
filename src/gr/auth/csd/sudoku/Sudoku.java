@@ -3,7 +3,7 @@ package gr.auth.csd.sudoku;
 /**
  * This class represents a basic Sudoku puzzle.
  */
-public class Sudoku {
+public abstract class Sudoku {
     //Sudoku file directory
     protected final String fileDir = "Sudokus/";
     protected final int gridSize;
