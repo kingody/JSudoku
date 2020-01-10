@@ -8,11 +8,12 @@ import java.awt.*;
  */
 
 public class SudCell extends JPanel {
-    private JLabel sum;
+    private static final Color warningColor = new Color(255, 28, 4);
+    private static final Font font = new Font("Arial", Font.BOLD, 15);
+
+//    private JLabel label;
     private JTextField inputText;
     private Color cellColor = Color.WHITE;
-    private static final Color wrongColor = new Color(255, 28, 4);
-    private static final Font font = new Font("Arial", Font.BOLD, 15);
 
     /**
      * In the constructor the layout and border of each SudCell are set as well as the properties(document,font etc.) of inputText which is then added to the cell
@@ -35,22 +36,22 @@ public class SudCell extends JPanel {
      * @param text The label's text
      */
     public void addLabel(String text) {
-        sum = new JLabel(text);
-        sum.setFont(font);
-        sum.setForeground(Color.BLACK);
-        sum.setMinimumSize(new Dimension(10,15));
-        sum.setPreferredSize(new Dimension(10,15));
-        sum.setMaximumSize(new Dimension(10,15));
-        add(sum,BorderLayout.NORTH);
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(Color.BLACK);
+        label.setMinimumSize(new Dimension(10,15));
+        label.setPreferredSize(new Dimension(10,15));
+        label.setMaximumSize(new Dimension(10,15));
+        add(label,BorderLayout.NORTH);
 
-        sum.setVisible(true);
+        label.setVisible(true);
     }
 
-    public JTextField getInputTextField(){
+    public JTextField getTextField(){
         return inputText;
     }
 
-    public void setInputText(String s){
+    public void setText(String s){
         inputText.setText(s);
     }
 
@@ -66,18 +67,15 @@ public class SudCell extends JPanel {
 
     /**
      * This method is used to set the color of the cell based on the value of flag
-     * If true, both SudCell's and inputText's color is set to wrongColor, else the SedCell's color is restored
+     * If true, both SudCell's and inputText's color is set to warningColor, else the SedCell's color is restored
      * @param flag changes the color if true, restores it if false
      */
     public void setWarning(boolean flag) {
         if (flag) {
-        setBackground(wrongColor);
-        inputText.setBackground(wrongColor);
+            setBackground(warningColor);
+            inputText.setBackground(warningColor);
         } else {
             setColor(cellColor);
         }
     }
-
-
-    public Color getCellColor(){ return cellColor; }
 }

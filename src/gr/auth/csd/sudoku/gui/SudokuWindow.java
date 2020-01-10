@@ -5,36 +5,28 @@ import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.gui.locale.Localization;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.*;
 
 /**
  * This class represents the GUI on which the user plays the classic version of Sudoku. Language lang represents the language being used
  */
-public class SudokuWindow extends JFrame {
-    protected Color fixedColor = Color.lightGray;
+public abstract class SudokuWindow extends JFrame {
+    private final Color fixedColor = Color.lightGray;
 
     protected Sudoku sudoku;
+    protected int size;
     protected char[] charSet;
-    protected int rowsel;
-    protected int colsel;
+    protected int selRow;
+    protected int selCol;
     protected JButton hint;
     protected SudCell[][] cells;
     protected JPanel grid;
 
-    protected Language lang = Localization.getLanguage();
+    protected MouseListener mouseListener;
+    protected KeyListener keyListener;
 
-    /**
-     * This constructor is used to call the other constructor with sudoku and charSet as parameters
-     * The boolean true indicates that there will be KeyListeners
-     * @param sudoku The Sudoku object
-     * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
-     */
-    public SudokuWindow(Sudoku sudoku, char[] charSet) {
-        this(sudoku, charSet, true);
-    }
+    protected Language lang = Localization.getLanguage();
 
     /**
      * The constructor initializes the GUI grid.
@@ -43,40 +35,41 @@ public class SudokuWindow extends JFrame {
      * The grid panel and the hint button are added to the background panel, with itself being added in turn to our SudokuWindow.
      * @param sudoku The Sudoku object
      * @param charSet Array with the characters used in game. Used to distinguish between Wordoku and Sudoku and languages
-     * @param setKeyListeners determines whether or not the keylisteners will be set for each cell
      */
-    public SudokuWindow(Sudoku sudoku, char[] charSet, boolean setKeyListeners) {
+    public SudokuWindow(Sudoku sudoku, char[] charSet) {
         this.sudoku = sudoku;
         this.charSet = charSet;
-        int size = sudoku.getSize();
+        size = sudoku.getSize();
 
         JPanel background = new JPanel();
         background.setBackground(Color.DARK_GRAY);
-        grid = new JPanel(new GridLayout(size, size));
         cells = new SudCell[size][size];
-        initializeGrid(setKeyListeners);
         hint = new JButton();
         hint.setText(lang.getString("hint"));
         hint.addActionListener(click -> {
             StringBuilder display = new StringBuilder();
 
-            for (char c: charSet) {
-                if(sudoku.isValidMove(rowsel,colsel,getIndex(c))){
+            for (char c : charSet) {
+                if(sudoku.isValidMove(selRow, selCol, getIndex(c))) {
                     display.append(c).append(" ");
                 }
             }
             new Hint(display.toString());
         });
 
-        grid.setPreferredSize(new Dimension(630,630));
+        grid = new JPanel(new GridLayout(size, size));
+        grid.setPreferredSize(new Dimension(70 * size,70 * size));
+        setListeners();
+        initializeGrid();
+        styleGrid();
+
         background.add(grid);
         background.add(hint);
-        this.add(background);
+        add(background);
 
-        setTitle(lang.getString("menuTitle"));
-        setSize(710, 710);
-        setLocationRelativeTo(null);
+        setSize(70 * size + 80, 70 * size + 80);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -105,78 +98,60 @@ public class SudokuWindow extends JFrame {
         return index > 0 && index <= sudoku.getSize();
     }
 
+    protected void setListeners() {
+        mouseListener = new DefaultMouseListener();
+        keyListener = new DefaultKeyListener();
+    }
+
     /**
      * Creates SudCell objects to fill the Cells array. Creates fixed cells that are used for the classic sudoku.
-     * The remaining cells are initialized to an empty string and have a MyMouseListener mouse listener associated with them.
-     * A MyKeyListener is also added to the cells if setKeyListener is true.
+     * The remaining cells are initialized to an empty string and have a mouse and key listener attached to them.
      * Finally, the cells are added to the grid.
-     * @param setKeyListeners determines if the cells will have the default key listeners
      */
-    public void initializeGrid(boolean setKeyListeners) {
-        int size = sudoku.getSize();
-
+    private void initializeGrid() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 cells[i][j] = new SudCell();
 
+                String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
+                cells[i][j].setText(num);
+
                 if (sudoku.getCell(i, j) != 0) {
                     //cells from file are initiliazed to corresponding value and not to be edited
-                    String num = String.valueOf(charSet[sudoku.getCell(i, j)]);
-                    cells[i][j].setInputText(num);
                     cells[i][j].setColor(fixedColor);
-                    cells[i][j].getInputTextField().setEditable(false);
+                    cells[i][j].getTextField().setEditable(false);
                 }
+                //empty cells
                 else {
-                    //empty cells
-                    cells[i][j].setInputText("");
                     //finding the selected cell from mouse click
-                    cells[i][j].getInputTextField().addMouseListener(new DefaultMouseListener());
-
-                    if (setKeyListeners) {
-                        //waiting for user input in mouse selected cell
-                        DefaultKeyListener a = new DefaultKeyListener();
-                        cells[i][j].getInputTextField().addKeyListener(a);
-                    }
-
+                    cells[i][j].getTextField().addMouseListener(mouseListener);
+                    //waiting for user input in mouse selected cell
+                    cells[i][j].getTextField().addKeyListener(keyListener);
                 }
+
                 grid.add(cells[i][j]);
             }
         }
-
-        Border topBorder = BorderFactory.createMatteBorder(2,0,0,0, Color.BLACK);
-        Border sideBorder = BorderFactory.createMatteBorder(0,2,0,0, Color.BLACK);
-        int boxSize = (int) Math.sqrt(size);
-
-        for(int i = boxSize; i < size; i += boxSize) {
-            for(int j = 0; j < size; j++) {
-                cells[i][j].setBorder(new CompoundBorder(cells[i][j].getBorder(), topBorder));
-                cells[j][i].setBorder(new CompoundBorder(cells[j][i].getBorder(), sideBorder));
-            }
-        }
     }
+
+    protected void styleGrid() {}
 
     /**
      * This class represents our implementation of the MouseListener interface.
      * In the mousePressed method we obtain the coordinates of the cell in the grid chosen
      * by the user via mouse, for further processing.
      */
-    public class DefaultMouseListener implements MouseListener{
-        int tempRow, tempCol;
-
-        @Override
-        public void mouseClicked(MouseEvent e) {}
-
+    protected class DefaultMouseListener implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
             JTextField selected = (JTextField) e.getSource();
-            int size = sudoku.getSize();
 
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
-                    if (selected.equals(cells[i][j].getInputTextField())) {
-                        rowsel = i;
-                        colsel = j;
-                        System.out.println("You selected :" + rowsel + " " + colsel);
+                    if (selected.equals(cells[i][j].getTextField())) {
+                        selRow = i;
+                        selCol = j;
+                        System.out.println("You selected :" + selRow + " " + selCol);
                         e.consume();
                         return;
                     }
@@ -184,13 +159,9 @@ public class SudokuWindow extends JFrame {
             }
         }
 
-        @Override
+        public void mouseClicked(MouseEvent e) {}
         public void mouseReleased(MouseEvent e) {}
-
-        @Override
         public void mouseEntered(MouseEvent e) {}
-
-        @Override
         public void mouseExited(MouseEvent e) {}
     }
 
@@ -198,11 +169,7 @@ public class SudokuWindow extends JFrame {
     /**
      * This class represents our implementation of the KeyListener interface
      */
-    public class DefaultKeyListener implements KeyListener{
-
-        @Override
-        public void keyTyped(KeyEvent e) {}
-
+    protected class DefaultKeyListener implements KeyListener{
         /**
          *  The cell is emptied when the user input is an accepted character.
          *  This also prevents the user from entering invalid characters to occupied cells.
@@ -212,7 +179,7 @@ public class SudokuWindow extends JFrame {
         public void keyPressed(KeyEvent e) {
             for (char c : charSet)
                 if (c == e.getKeyChar()) {
-                    cells[rowsel][colsel].setInputText("");
+                    cells[selRow][selCol].setText("");
                     return;
                 }
         }
@@ -228,32 +195,33 @@ public class SudokuWindow extends JFrame {
          */
         @Override
         public void keyReleased(KeyEvent e) {
-            String input = cells[rowsel][colsel].getInputTextField().getText();
+            String input = cells[selRow][selCol].getTextField().getText();
 
             if (input.isEmpty()) {
-                cells[rowsel][colsel].setWarning(false);
-                cells[rowsel][colsel].setInputText("");
-                sudoku.clearCell(rowsel,colsel);
+                cells[selRow][selCol].setWarning(false);
+                cells[selRow][selCol].setText("");
+                sudoku.clearCell(selRow, selCol);
                 return;
             }
 
             char value = input.charAt(0);
 
-            cells[rowsel][colsel].setWarning(false);
-            sudoku.clearCell(rowsel, colsel);
+            cells[selRow][selCol].setWarning(false);
+            sudoku.clearCell(selRow, selCol);
             if (isValidChar(value)) {
                 int numValue = getIndex(value);
-                boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
-                cells[rowsel][colsel].setWarning(!validMove);
+                boolean validMove = sudoku.setCell(selRow, selCol, numValue);
+                cells[selRow][selCol].setWarning(!validMove);
 
             }
             else {
-                cells[rowsel][colsel].setWarning(false);
-                cells[rowsel][colsel].setInputText("");
-                sudoku.clearCell(rowsel, colsel);
+                cells[selRow][selCol].setWarning(false);
+                cells[selRow][selCol].setText("");
+                sudoku.clearCell(selRow, selCol);
             }
 
         }
 
+        public void keyTyped(KeyEvent e) {}
     }
 }

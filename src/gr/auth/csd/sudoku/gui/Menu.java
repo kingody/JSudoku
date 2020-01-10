@@ -52,7 +52,7 @@ public class Menu extends JFrame {
                 }
             }
             ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
-            new SudokuWindow(sudoku, charSet);
+            new ClassicWindow(sudoku, charSet);
         });
 
         killer.addActionListener(click ->{

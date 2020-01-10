@@ -1,6 +1,5 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.gui.locale.Language;
 import gr.auth.csd.sudoku.variants.killer.Area;
 import gr.auth.csd.sudoku.variants.killer.Index;
 import gr.auth.csd.sudoku.variants.killer.KillerSudoku;
@@ -11,9 +10,7 @@ import java.util.ArrayList;
 /**
  * This class represents the GUI on which the user plays the Killer version of Sudoku and is a child of SudokuWindow
  */
-public class KillerWindow extends SudokuWindow {
-    private ArrayList<Area> areas;
-
+public class KillerWindow extends ClassicWindow {
     /**
      * Calls constructor of parent class, with sud and chars as parameters.
      * The areas of the grid (cells with the desired sum) are obtained and stored in the ArrayList<Area> areas.
@@ -24,9 +21,15 @@ public class KillerWindow extends SudokuWindow {
      */
     public KillerWindow(KillerSudoku sud, char[] chars) {
         super(sud,chars);
-        areas = sud.getAreas();
+        setTitle(lang.getString("kill"));
+    }
 
-        for (Area area : areas) {
+    @Override
+    protected void styleGrid() {
+        super.styleGrid();
+
+        KillerSudoku killer = (KillerSudoku) sudoku;
+        for (Area area : killer.getAreas()) {
             ArrayList<Index> connectedCells = area.getCells();
 
             float hue = (float) Math.random();
@@ -47,8 +50,6 @@ public class KillerWindow extends SudokuWindow {
                 cells[row][col].setColor(color);
             }
         }
-
-        setTitle(lang.getString("kill"));
     }
 
 }

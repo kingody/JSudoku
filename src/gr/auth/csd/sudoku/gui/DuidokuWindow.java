@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 /**
  * This class represents the GUI on which the user plays Duidoku against the pc. It is a child of SudokuWindow class
  */
-public class DuidokuWindow extends SudokuWindow {
+public class DuidokuWindow extends ClassicWindow {
     /**
      * Calls super contructor with duidoku charSet and false as parameters. Basically this creates a SudokuWindow with no key Listeners
      * Then calls setListeners and sets the properties of DuidokuWindow
@@ -20,14 +20,24 @@ public class DuidokuWindow extends SudokuWindow {
      * @param charSet Acceptable characters
      */
     public DuidokuWindow(Duidoku duidoku, char[] charSet) {
-        super(duidoku, charSet, false);
-        setListeners();
-
-        grid.setPreferredSize(new Dimension(280,280));
+        super(duidoku, charSet);
 
         setTitle(lang.getString("duidoku"));
-        setSize(350,370);
-        setLocationRelativeTo(null);
+    }
+
+    @Override
+    protected void setListeners() {
+        mouseListener = new DefaultMouseListener();
+        keyListener = new DuidokuKeyListener();
+    }
+
+    /**
+     * Removes listeners from a component
+     * @param comp JComponent whose listeners are to be removed
+     */
+    private void removeKeyListeners(JComponent comp) {
+        for (KeyListener listener : comp.getKeyListeners())
+            comp.removeKeyListener(listener);
     }
 
     /**
@@ -52,35 +62,10 @@ public class DuidokuWindow extends SudokuWindow {
     }
 
     /**
-     * Adds DuidokuKeyListener to each cell's inputText
-     */
-    public void setListeners() {
-        int size = sudoku.getSize();
-
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                cells[i][j].getInputTextField().addKeyListener(new DuidokuKeyListener());
-            }
-        }
-    }
-
-    /**
-     * Removes listeners from a component
-     * @param comp JComponent whose listeners are to be removed
-     */
-    public void removeListeners(JComponent comp) {
-        for (KeyListener listener : comp.getKeyListeners())
-            comp.removeKeyListener(listener);
-    }
-
-    /**
      * This class represents our implementation of KeyListener interface for Duidoku
      */
-    public class DuidokuKeyListener implements KeyListener{
-        Duidoku duidoku = (Duidoku) sudoku;
-
-        @Override
-        public void keyTyped(KeyEvent e) {}
+    private class DuidokuKeyListener implements KeyListener{
+        private Duidoku duidoku = (Duidoku) sudoku;
 
         /**
          *  The cell is emptied when the user input is an accepted character.
@@ -91,7 +76,7 @@ public class DuidokuWindow extends SudokuWindow {
         public void keyPressed(KeyEvent e) {
             for (char c : charSet)
                 if (c == e.getKeyChar()) {
-                    cells[rowsel][colsel].setInputText("");
+                    cells[selRow][selCol].setText("");
                     return;
                 }
         }
@@ -109,25 +94,25 @@ public class DuidokuWindow extends SudokuWindow {
         @Override
         public void keyReleased(KeyEvent e) {
 
-            String input = cells[rowsel][colsel].getInputTextField().getText();
+            String input = cells[selRow][selCol].getTextField().getText();
             if (input.isEmpty())
                 return;
 
             char value = input.charAt(0);
             if (!isValidChar(value)) {
-                cells[rowsel][colsel].setInputText("");
+                cells[selRow][selCol].setText("");
                 return;
             }
 
             int numValue = getIndex(value);
-            boolean validMove = sudoku.setCell(rowsel, colsel, numValue);
+            boolean validMove = sudoku.setCell(selRow, selCol, numValue);
 
             if (!validMove) {
-                cells[rowsel][colsel].setInputText("");
+                cells[selRow][selCol].setText("");
                 return;
             }
-            cells[rowsel][colsel].getInputTextField().setEditable(false);
-            removeListeners(cells[rowsel][colsel].getInputTextField());
+            cells[selRow][selCol].getTextField().setEditable(false);
+            removeKeyListeners(cells[selRow][selCol].getTextField());
 
             if (duidoku.isCompleted()) {
                 finishGame(true);
@@ -138,15 +123,15 @@ public class DuidokuWindow extends SudokuWindow {
 
             int row = compMove.getRow(), col = compMove.getColumn();
             int val = duidoku.getCell(row, col);
-            cells[row][col].setInputText(String.valueOf(charSet[val]));
-            cells[row][col].getInputTextField().setEditable(false);
-            removeListeners(cells[row][col].getInputTextField());
-            cells[row][col].getInputTextField().setForeground(Color.RED);
+            cells[row][col].setText(String.valueOf(charSet[val]));
+            cells[row][col].getTextField().setEditable(false);
+            removeKeyListeners(cells[row][col].getTextField());
+            cells[row][col].getTextField().setForeground(Color.RED);
 
-            if (duidoku.isCompleted()) {
+            if (duidoku.isCompleted())
                 finishGame(false);
-            }
         }
-    }
 
+        public void keyTyped(KeyEvent e) {}
+    }
 }
