@@ -9,6 +9,7 @@ import java.util.Scanner;
  * This class represents the Classic Sudoku. It is a child of Sudoku
  */
 public class ClassicSudoku extends Sudoku {
+    String currentFilename;
     /**
      * Creates an empty Classic Sudoku from a given size.
      * @param size The Sudoku grid size
@@ -24,6 +25,7 @@ public class ClassicSudoku extends Sudoku {
      */
     public ClassicSudoku(int size, String filename) {
         super(size);
+        currentFilename = filename;
         Scanner scanner = FileHandler.openFile(fileDir + "Classic/" + filename);
 
         for (int i = 0; i < size; i++) {
@@ -58,4 +60,6 @@ public class ClassicSudoku extends Sudoku {
         }
         return true;
     }
+
+    public String getFilename() { return  currentFilename; }
 }

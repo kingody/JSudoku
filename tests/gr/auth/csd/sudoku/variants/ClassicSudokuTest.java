@@ -31,4 +31,9 @@ class ClassicSudokuTest {
     void getSize(){
         assertEquals(9,sud.getSize());
     }
+
+    @Test
+    void checkFilename() {
+        assertEquals("classic1.txt", sud.getFilename());
+    }
 }

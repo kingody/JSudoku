@@ -45,21 +45,17 @@ public class DuidokuWindow extends ClassicWindow {
      * Utility method to show the user if they won.
      * @param isWin true if the user won, false otherwise
      */
-    public void finishGame(boolean isWin) {
+    public void endGame(boolean isWin) {
         User user =  User.getCurrentUser();
 
-        if (isWin) {
-            new FinishWindow(true,this);
-
-            if (user != null)
+        if (user != null) {
+            if (isWin)
                 user.incrementWins();
-        }
-        else {
-            new FinishWindow(false,this);
-
-            if (user != null)
+            else
                 user.incrementLosses();
         }
+
+        new FinishWindow(isWin,this);
     }
 
     /**
@@ -116,7 +112,7 @@ public class DuidokuWindow extends ClassicWindow {
             removeKeyListeners(cells[selRow][selCol].getTextField());
 
             if (duidoku.isCompleted()) {
-                finishGame(true);
+                endGame(true);
                 return;
             }
 
@@ -130,7 +126,7 @@ public class DuidokuWindow extends ClassicWindow {
             cells[row][col].getTextField().setForeground(Color.RED);
 
             if (duidoku.isCompleted())
-                finishGame(false);
+                endGame(false);
         }
 
         public void keyTyped(KeyEvent e) {}

@@ -11,6 +11,8 @@ import gr.auth.csd.sudoku.variants.Duidoku;
 import gr.auth.csd.sudoku.variants.KillerSudoku;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
@@ -46,26 +48,22 @@ public class Menu extends JFrame {
         Random random = new Random();
 
         settingsWindow = new Settings(this);
-        classic.addActionListener(click ->{
-            String classicNum = Integer.toString(1 + random.nextInt(10));
-            if(User.getCurrentUser() != null) {
-                while (User.getCurrentUser().hasSolved("classic" + classicNum + ".txt")) {
-                    classicNum = Integer.toString(1 + random.nextInt(10));
-                }
-            }
-            ClassicSudoku sudoku = new ClassicSudoku(9,"classic" + classicNum + ".txt");
+        classic.addActionListener(click -> {
+            String filename = getRandomSudoku("Classic");
+            if (filename == null)
+                filename = "classic1.txt";
+
+            ClassicSudoku sudoku = new ClassicSudoku(9, filename);
             new ClassicWindow(sudoku, charSet);
         });
 
-        killer.addActionListener(click ->{
-            String killerNum  = Integer.toString(1 + random.nextInt(10));
-            if(User.getCurrentUser() != null) {
-                while (User.getCurrentUser().hasSolved("classic" + killerNum + ".txt")) {
-                    killerNum = Integer.toString(1 + random.nextInt(10));
-                }
-            }
-            KillerSudoku kil = new KillerSudoku(9,"killer" + killerNum + ".txt");
-            new KillerWindow(kil, charSet);
+        killer.addActionListener(click -> {
+            String filename = getRandomSudoku("Killer");
+            if (filename == null)
+                filename = "killer1.txt";
+
+            KillerSudoku sudoku = new KillerSudoku(9, filename);
+            new KillerWindow(sudoku, charSet);
         });
 
         duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
@@ -128,6 +126,31 @@ public class Menu extends JFrame {
      */
     private void setCharSet() {
             charSet = isWordoku ? lang.getCharSet() : numberSet;
+    }
+
+    private ArrayList<String> getUnplayedSudokus(String directory) {
+        File[] files = new File(directory).listFiles();
+        ArrayList<String> filenames = new ArrayList<>();
+        User user = User.getCurrentUser();
+
+        if (files != null)
+            for (File file : files) {
+                String filename = file.getName();
+                if (user == null || !user.hasSolved(filename))
+                    filenames.add(filename);
+            }
+
+        return filenames;
+    }
+
+    private String getRandomSudoku(String directory) {
+        ArrayList<String> filenames = getUnplayedSudokus("Sudokus/" + directory);
+
+        if (filenames.size() == 0)
+            return null;
+
+        int rand = new Random().nextInt(filenames.size());
+        return filenames.get(rand);
     }
 
     public static void main(String[] args) {

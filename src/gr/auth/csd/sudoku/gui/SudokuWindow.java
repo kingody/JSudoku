@@ -1,6 +1,7 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.Sudoku;
+import gr.auth.csd.sudoku.utilities.User;
 import gr.auth.csd.sudoku.utilities.locale.Language;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 
@@ -142,6 +143,10 @@ public abstract class SudokuWindow extends JFrame {
      */
     protected void styleGrid() {}
 
+    protected void endGame() {
+        new FinishWindow(true, SudokuWindow.this);
+    }
+
     /**
      * This class represents our implementation of the MouseListener interface.
      * In the mousePressed method we obtain the coordinates of the cell in the grid chosen
@@ -218,6 +223,10 @@ public abstract class SudokuWindow extends JFrame {
                 int numValue = getIndex(value);
                 boolean validMove = sudoku.setCell(selRow, selCol, numValue);
                 cells[selRow][selCol].setWarning(!validMove);
+
+                if (validMove && sudoku.isCompleted()) {
+                    SudokuWindow.this.endGame();
+                }
 
             }
             else {

@@ -1,6 +1,8 @@
 package gr.auth.csd.sudoku.gui.variants;
 
+import gr.auth.csd.sudoku.gui.FinishWindow;
 import gr.auth.csd.sudoku.gui.SudokuWindow;
+import gr.auth.csd.sudoku.utilities.User;
 import gr.auth.csd.sudoku.variants.ClassicSudoku;
 
 import javax.swing.*;
@@ -37,5 +39,12 @@ public class ClassicWindow extends SudokuWindow {
                 cells[j][i].setBorder(new CompoundBorder(cells[j][i].getBorder(), sideBorder));
             }
         }
+    }
+
+    @Override
+    protected void endGame() {
+        super.endGame();
+        User user = User.getCurrentUser();
+        user.addToSolved(((ClassicSudoku) sudoku).getFilename());
     }
 }
