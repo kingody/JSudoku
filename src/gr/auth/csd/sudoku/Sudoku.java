@@ -5,7 +5,7 @@ package gr.auth.csd.sudoku;
  */
 public abstract class Sudoku {
     //Sudoku file directory
-    protected final String fileDir = "Sudokus/";
+    protected final static String fileDir = "Sudokus/";
     protected final int gridSize;
     protected int[][] grid;
 

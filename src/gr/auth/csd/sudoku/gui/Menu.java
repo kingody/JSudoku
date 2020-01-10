@@ -48,7 +48,7 @@ public class Menu extends JFrame {
         settingsWindow = new Settings(this);
         classic.addActionListener(click ->{
             String classicNum = Integer.toString(1 + random.nextInt(10));
-            if(User.getCurrentUser()!=null) {
+            if(User.getCurrentUser() != null) {
                 while (User.getCurrentUser().hasSolved("classic" + classicNum + ".txt")) {
                     classicNum = Integer.toString(1 + random.nextInt(10));
                 }
@@ -59,7 +59,7 @@ public class Menu extends JFrame {
 
         killer.addActionListener(click ->{
             String killerNum  = Integer.toString(1 + random.nextInt(10));
-            if(User.getCurrentUser()!=null) {
+            if(User.getCurrentUser() != null) {
                 while (User.getCurrentUser().hasSolved("classic" + killerNum + ".txt")) {
                     killerNum = Integer.toString(1 + random.nextInt(10));
                 }

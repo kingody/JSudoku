@@ -7,10 +7,12 @@ import java.awt.*;
 
 public class FinishWindow extends JDialog {
     private JLabel label;
-    private  JButton mainMenu;
+    private JButton mainMenu;
     private JPanel panel;
+
     public FinishWindow(boolean win, JFrame frame){
         super(frame);
+
         label = new JLabel();
         mainMenu = new JButton(Localization.getLanguage().getString("mainMenu"));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,15));
