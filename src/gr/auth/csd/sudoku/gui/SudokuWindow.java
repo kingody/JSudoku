@@ -14,7 +14,7 @@ import java.awt.event.*;
  * This class represents the GUI on which the user plays the classic version of Sudoku. Language lang represents the language being used
  */
 public class SudokuWindow extends JFrame {
-    protected Color fixedColor = Color.gray;
+    protected Color fixedColor = Color.lightGray;
 
     protected Sudoku sudoku;
     protected char[] charSet;
@@ -143,8 +143,8 @@ public class SudokuWindow extends JFrame {
             }
         }
 
-        Border topBorder = BorderFactory.createMatteBorder(3,0,0,0, Color.BLACK);
-        Border sideBorder = BorderFactory.createMatteBorder(0,3,0,0, Color.BLACK);
+        Border topBorder = BorderFactory.createMatteBorder(2,0,0,0, Color.BLACK);
+        Border sideBorder = BorderFactory.createMatteBorder(0,2,0,0, Color.BLACK);
         int boxSize = (int) Math.sqrt(size);
 
         for(int i = boxSize; i < size; i += boxSize) {
