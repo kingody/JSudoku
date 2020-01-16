@@ -1,11 +1,11 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.utilities.User;
-import gr.auth.csd.sudoku.utilities.locale.Language;
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
  * This class is used when the user wants to add a new user from the UserWindow
@@ -19,7 +19,7 @@ public class InputUsername extends JFrame {
     /**
      * The constructor initializes our panel and sets its layout. Then the properties of the panel's components are set.
      * Said components are then added to our panel and the properties of the InputUsername are set.
-     * Every language-sensitive property is set based on Language lang.
+     * Every language-sensitive property is set based on ResourceBundle lang.
      * Upon pressing the closeButton, the username from the textField is acquired. If it is not empty, the user is created.
      * Upon successful creation, the new user is added to the list in userWindow
      * @param userWindow UserWindow object
@@ -28,7 +28,7 @@ public class InputUsername extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        Language lang = Localization.getLanguage();
+        ResourceBundle lang = Localization.getLanguage();
 
         label = new JLabel(lang.getString("inputLabel"));
         userExists = new JLabel();

@@ -11,7 +11,7 @@ import java.util.Scanner;
  * This class represents a Sudoku variation called Killer Sudoku.
  */
 public class KillerSudoku extends ClassicSudoku {
-    private ArrayList<Area> areas;
+    private final ArrayList<Area> areas;
 
     /**
      * Creates a new Killer Sudoku from a file. The format of each area in the file is sum : x,y x1,y1 etc.

@@ -7,7 +7,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <scrollpane id="262d6">
+      <scrollpane id="262d6" binding="scrollPane">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
@@ -24,7 +24,7 @@
           </component>
         </children>
       </scrollpane>
-      <grid id="9dfe7" binding="buttonpanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="9dfe7" binding="buttonPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
@@ -36,14 +36,14 @@
             <constraints/>
             <properties>
               <focusPainted value="false"/>
-              <text value="View Stats"/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="statisticButton"/>
             </properties>
           </component>
           <component id="e5755" class="javax.swing.JButton" binding="selectButton">
             <constraints/>
             <properties>
               <focusPainted value="false"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="selectUser"/>
             </properties>
           </component>
         </children>
@@ -54,7 +54,8 @@
           <gridbag top="0" left="0" bottom="10" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <text value=""/>
+          <labelFor value="262d6"/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="existingUser"/>
         </properties>
       </component>
       <component id="3308e" class="javax.swing.JButton" binding="addUserButton" default-binding="true">
@@ -66,7 +67,7 @@
           <focusPainted value="false"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="Add User"/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="addUser"/>
         </properties>
       </component>
       <component id="25322" class="javax.swing.JButton" binding="noUserButton" default-binding="true">
@@ -77,7 +78,7 @@
         <properties>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
-          <text value="Play Without a User"/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="noUser"/>
         </properties>
       </component>
     </children>

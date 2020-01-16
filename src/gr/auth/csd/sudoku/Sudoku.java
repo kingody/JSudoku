@@ -7,7 +7,7 @@ public abstract class Sudoku {
     //Sudoku file directory
     protected final static String fileDir = "Sudokus/";
     protected final int gridSize;
-    protected int[][] grid;
+    protected final int[][] grid;
 
     /**
      * Creates an empty Sudoku from a given size.
@@ -56,7 +56,7 @@ public abstract class Sudoku {
     }
 
     /**
-     * Determines if a move obides by Sudoku's rules
+     * Determines if a move abides by Sudoku's rules
      * @param row Row of Cell
      * @param col Column of Cell
      * @param value Numeric value whose validity is to be determined

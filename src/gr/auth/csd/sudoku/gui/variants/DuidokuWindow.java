@@ -1,7 +1,8 @@
 package gr.auth.csd.sudoku.gui.variants;
 
-import gr.auth.csd.sudoku.utilities.User;
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.gui.FinishWindow;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.variants.Duidoku;
 import gr.auth.csd.sudoku.utilities.Index;
 
@@ -23,7 +24,7 @@ public class DuidokuWindow extends ClassicWindow {
     public DuidokuWindow(Duidoku duidoku, char[] charSet) {
         super(duidoku, charSet);
 
-        setTitle(lang.getString("duidoku"));
+        setTitle(Localization.getLanguage().getString("duidoku"));
     }
 
     @Override
@@ -62,7 +63,7 @@ public class DuidokuWindow extends ClassicWindow {
      * This class represents our implementation of KeyListener interface for Duidoku
      */
     private class DuidokuKeyListener implements KeyListener{
-        private Duidoku duidoku = (Duidoku) sudoku;
+        private final Duidoku duidoku = (Duidoku) sudoku;
 
         /**
          *  The cell is emptied when the user input is an accepted character.
@@ -80,11 +81,11 @@ public class DuidokuWindow extends ClassicWindow {
 
         /**
          * We obtain the input (String) from the cell in question, based on the coordinates obtained via MyMouseListener.
-         * If the input is not emptychar value is set to the first character of input String. If it is an invalid character the SudCell is emptied
+         * If the input is not empty value is set to the first character of input String. If it is an invalid character the SudCell is emptied
          * Else, we get the numeric value of it and check if it is a valid move. if not the SudCell is emptied
-         * Otherwise, the respective cell in Sudoku grid is set, the inputText of said cells is made ineditable, and its listeners are removed
+         * Otherwise, the respective cell in Sudoku grid is set, the inputText of said cells is made non editable, and its listeners are removed
          * Then, we check is the user won with this move. If not, the computers move is calculated and set on the GUI grid for the user to see
-         * The cells on which this took place is made ineditable and its listeners are removed. Lastly we check if the user lost with this move
+         * The cells on which this took place is made non editable and its listeners are removed. Lastly we check if the user lost with this move
          *
          * @param e Information about the event
          */

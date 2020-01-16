@@ -2,6 +2,7 @@ package gr.auth.csd.sudoku.gui.variants;
 
 import gr.auth.csd.sudoku.utilities.Area;
 import gr.auth.csd.sudoku.utilities.Index;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.variants.KillerSudoku;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public class KillerWindow extends ClassicWindow {
      */
     public KillerWindow(KillerSudoku sud, char[] chars) {
         super(sud,chars);
-        setTitle(lang.getString("kill"));
+        setTitle(Localization.getLanguage().getString("killer"));
     }
 
     /**

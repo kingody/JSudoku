@@ -1,11 +1,12 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.utilities.User;
-import gr.auth.csd.sudoku.utilities.locale.Language;
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 
 import javax.swing.*;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * This class represents our window for the management of stored users
@@ -13,15 +14,15 @@ import java.util.ArrayList;
 public class UserWindow extends JFrame {
     private JPanel panel;
     private JList<String> list;
-    private JPanel buttonpanel;
+    private JPanel buttonPanel;
     private JButton viewStatsButton;
     private JButton selectButton;
     private JLabel title;
     private JButton addUserButton;
     private JButton noUserButton;
+    private JScrollPane scrollPane;
     private String currentUser = "";
     private InputUsername inputUsername;
-    private Language lang;
 
     private DefaultListModel<String> model;
 
@@ -35,7 +36,7 @@ public class UserWindow extends JFrame {
      * @param menu instance of Menu
      */
     public UserWindow(Menu menu){
-        lang = Localization.getLanguage();
+        ResourceBundle lang = Localization.getLanguage();
 
         inputUsername = new InputUsername(this);
         title.setText(lang.getString("existingUser"));
@@ -51,9 +52,18 @@ public class UserWindow extends JFrame {
             JLabel label = new JLabel();
 
             if(!currentUser.equals("")) {
-                User a = User.loadUser(currentUser);
-                label.setText(lang.getString("user") + currentUser + lang.getString("has") +
-                        a.getWins() + lang.getString("wins") + a.getLosses() + lang.getString("loses"));
+                User user = User.loadUser(currentUser);
+
+                MessageFormat formatter = new MessageFormat("");
+                formatter.applyPattern(lang.getString("showStats"));
+
+                String text = formatter.format(new Object[] {
+                        user.getUsername(),
+                        user.getWins(),
+                        user.getLosses()
+                });
+
+                label.setText(text);
             }
             else{
                 label.setText(lang.getString("noUserWarn"));
@@ -91,7 +101,7 @@ public class UserWindow extends JFrame {
     }
 
     /**
-     * Used for the configuration of our JList, where the stored usernames are displayed.
+     * Used for the configuration of our JList, where the stored user names are displayed.
      * It also adds a SelectionListener to the list, from which the current user is obtained and set
      */
     private void createUIComponents() {

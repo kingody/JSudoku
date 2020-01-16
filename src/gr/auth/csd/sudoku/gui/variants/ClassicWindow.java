@@ -1,8 +1,8 @@
 package gr.auth.csd.sudoku.gui.variants;
 
-import gr.auth.csd.sudoku.gui.FinishWindow;
 import gr.auth.csd.sudoku.gui.SudokuWindow;
-import gr.auth.csd.sudoku.utilities.User;
+import gr.auth.csd.sudoku.User;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.variants.ClassicSudoku;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class ClassicWindow extends SudokuWindow {
      */
     public ClassicWindow(ClassicSudoku sudoku, char[] charSet) {
         super(sudoku, charSet);
-        setTitle(lang.getString("classic"));
+        setTitle(Localization.getLanguage().getString("classic"));
     }
 
     /**

@@ -11,8 +11,7 @@ public class SudokuCell extends JPanel {
     private static final Color warningColor = new Color(255, 28, 4);
     private static final Font font = new Font("Arial", Font.BOLD, 15);
 
-//    private JLabel label;
-    private JTextField inputText;
+    private final JTextField inputText;
     private Color cellColor = Color.WHITE;
 
     /**

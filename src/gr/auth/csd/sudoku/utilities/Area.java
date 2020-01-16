@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * This class represents a Killer Sudoku area
  */
 public class Area {
-    private int sum;
-    private ArrayList<Index> cells;
+    private final int sum;
+    private final ArrayList<Index> cells;
 
     /**
      * Creates the area

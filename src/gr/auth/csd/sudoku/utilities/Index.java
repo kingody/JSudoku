@@ -6,7 +6,7 @@ import java.util.Objects;
  * This class represents a set of 2d coordinates
  */
 public class Index {
-    private int row, column;
+    private final int row, column;
 
     /**
      * Helper class to store positions in the Sudoku grid

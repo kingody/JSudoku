@@ -1,4 +1,6 @@
-package gr.auth.csd.sudoku.utilities;
+package gr.auth.csd.sudoku;
+
+import gr.auth.csd.sudoku.utilities.FileHandler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -167,8 +169,10 @@ public class User {
     }
 
     public void addToSolved(String filename) {
-        solvedSudokus.add(filename);
-        saveToFile();
+        if (!hasSolved(filename)) {
+            solvedSudokus.add(filename);
+            saveToFile();
+        }
     }
 
     /**

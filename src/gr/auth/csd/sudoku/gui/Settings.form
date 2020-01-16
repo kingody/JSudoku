@@ -17,7 +17,7 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Settings"/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="settings"/>
         </properties>
       </component>
       <grid id="bd266" binding="settingsPanel" layout-manager="GridBagLayout">
@@ -38,7 +38,7 @@
               <focusPainted value="false"/>
               <horizontalAlignment value="10"/>
               <selected value="false"/>
-              <text value="Wordoku"/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="wordoku"/>
             </properties>
           </component>
           <component id="fd275" class="javax.swing.JLabel" binding="languageLabel">
@@ -48,7 +48,7 @@
             </constraints>
             <properties>
               <font name="Bahnschrift" size="15" style="0"/>
-              <text value="Select Language"/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="languageSelect"/>
             </properties>
           </component>
           <grid id="d7ec6" binding="languages" layout-manager="FlowLayout" hgap="10" vgap="20" flow-align="1">
@@ -64,14 +64,14 @@
                 <properties>
                   <focusPainted value="false"/>
                   <selected value="false"/>
-                  <text value="English"/>
+                  <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="english"/>
                 </properties>
               </component>
               <component id="bde93" class="javax.swing.JRadioButton" binding="greekButton">
                 <constraints/>
                 <properties>
                   <focusPainted value="false"/>
-                  <text value="Greek"/>
+                  <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="greek"/>
                 </properties>
               </component>
             </children>
@@ -86,7 +86,7 @@
         <properties>
           <enabled value="true"/>
           <focusPainted value="false"/>
-          <text value="OK"/>
+          <text value="OK" noi18n="true"/>
         </properties>
       </component>
     </children>

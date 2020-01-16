@@ -1,8 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.Sudoku;
-import gr.auth.csd.sudoku.utilities.User;
-import gr.auth.csd.sudoku.utilities.locale.Language;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 
 import javax.swing.*;
@@ -10,24 +8,22 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This class represents the basis for all game modes' Windows. Language lang represents the language being used
+ * This class represents the basis for all game modes' Windows.
  */
 public abstract class SudokuWindow extends JFrame {
     private final Color fixedColor = Color.lightGray;
 
-    protected Sudoku sudoku;
-    protected int size;
+    protected final Sudoku sudoku;
+    protected final int size;
     protected char[] charSet;
     protected int selRow;
     protected int selCol;
     protected JButton hint;
-    protected SudokuCell[][] cells;
-    protected JPanel grid;
+    protected final SudokuCell[][] cells;
+    protected final JPanel grid;
 
     protected MouseListener mouseListener;
     protected KeyListener keyListener;
-
-    protected Language lang = Localization.getLanguage();
 
     /**
      * The constructor initializes the GUI grid.
@@ -46,7 +42,7 @@ public abstract class SudokuWindow extends JFrame {
         background.setBackground(Color.DARK_GRAY);
         cells = new SudokuCell[size][size];
         hint = new JButton();
-        hint.setText(lang.getString("hint"));
+        hint.setText(Localization.getLanguage().getString("hint"));
         hint.addActionListener(click -> {
             StringBuilder display = new StringBuilder();
 
@@ -121,7 +117,7 @@ public abstract class SudokuWindow extends JFrame {
                 cells[i][j].setText(num);
 
                 if (sudoku.getCell(i, j) != 0) {
-                    //cells from file are initiliazed to corresponding value and not to be edited
+                    //cells from file are initialized to corresponding value and not to be edited
                     cells[i][j].setColor(fixedColor);
                     cells[i][j].getTextField().setEditable(false);
                 }
@@ -162,7 +158,6 @@ public abstract class SudokuWindow extends JFrame {
                     if (selected.equals(cells[i][j].getTextField())) {
                         selRow = i;
                         selCol = j;
-                        System.out.println("You selected :" + selRow + " " + selCol);
                         e.consume();
                         return;
                     }

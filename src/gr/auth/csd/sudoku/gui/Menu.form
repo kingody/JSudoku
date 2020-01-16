@@ -20,7 +20,7 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value=""/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="greeting"/>
           <verticalAlignment value="0"/>
         </properties>
       </component>
@@ -40,7 +40,7 @@
             <properties>
               <focusPainted value="false"/>
               <opaque value="true"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="classic"/>
             </properties>
           </component>
           <component id="932ff" class="javax.swing.JButton" binding="killer">
@@ -50,7 +50,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="killer"/>
             </properties>
           </component>
           <component id="f01f9" class="javax.swing.JButton" binding="duidoku">
@@ -60,7 +60,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="duidoku"/>
             </properties>
           </component>
           <component id="bad3d" class="javax.swing.JButton" binding="settings">
@@ -70,7 +70,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="settings"/>
             </properties>
           </component>
           <component id="1597" class="javax.swing.JButton" binding="userButton">
@@ -80,7 +80,7 @@
             </constraints>
             <properties>
               <focusPainted value="false"/>
-              <text value=""/>
+              <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="selectUser"/>
             </properties>
           </component>
         </children>
@@ -93,7 +93,7 @@
         <properties>
           <enabled value="true"/>
           <foreground color="-8223870"/>
-          <text value=""/>
+          <text resource-bundle="gr/auth/csd/sudoku/utilities/locale/languages" key="currentUser"/>
           <visible value="false"/>
         </properties>
         <clientProperties>

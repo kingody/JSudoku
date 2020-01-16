@@ -1,15 +1,15 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.utilities.locale.Language;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 
 import javax.swing.*;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * This class represents our settings window, from which the user can easily configure the application's settings
  */
-public class Settings extends JFrame{
+public class Settings extends JFrame {
     private JPanel panel;
     private JPanel settingsPanel;
     private JPanel languages;
@@ -19,7 +19,6 @@ public class Settings extends JFrame{
     private JButton closeButton;
     private JRadioButton englishButton;
     private JRadioButton greekButton;
-    private Language lang;
 
     /**
      * Adds an action listener to the close button.
@@ -29,12 +28,12 @@ public class Settings extends JFrame{
      * Lastly, the constructor determines which JRadioButton will be selected upon showing the window, and sets the properties of Settings
      * @param menu The current instance of the Menu
      */
-    public Settings(Menu menu){
-        setText();
+    public Settings(Menu menu) {
 
         closeButton.addActionListener(click -> {
             menu.setWordoku(wordokuCheckBox.isSelected());
-            menu.localize(englishButton.isSelected() ? new Locale("en", "US") : new Locale("el", "GR"));
+            Locale.setDefault(englishButton.isSelected() ? new Locale("en", "US") : new Locale("el", "GR"));
+            menu.setText();
             setVisible(false);
             setText();
         });
@@ -57,8 +56,8 @@ public class Settings extends JFrame{
      * Used to localize language-sensitive properties of components
      */
     public void setText() {
-        lang = Localization.getLanguage();
-
+//        lang = Localization.getLanguage();
+        ResourceBundle lang = Localization.getLanguage();
         setTitle(lang.getString("settings"));
 
         title.setText(lang.getString("settings"));

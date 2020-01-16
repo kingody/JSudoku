@@ -1,7 +1,6 @@
 package gr.auth.csd.sudoku.gui;
 
-import gr.auth.csd.sudoku.utilities.User;
-import gr.auth.csd.sudoku.utilities.locale.Language;
+import gr.auth.csd.sudoku.User;
 import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.gui.variants.ClassicWindow;
 import gr.auth.csd.sudoku.gui.variants.DuidokuWindow;
@@ -15,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 /**
  * This class represents our main menu, which contains our main method
@@ -29,23 +29,17 @@ public class Menu extends JFrame {
     private JPanel menu;
     private JButton userButton;
     private JLabel currentUser;
-    private Language lang;
 
     private boolean isWordoku = false;
-    private Settings settingsWindow;
+    private final Settings settingsWindow;
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-    private char[] charSet;
 
     /**
      * Adds all the components to the panel, initializes the puzzles randomly, adds the action listeners to the buttons and sets the properties of Menu
      */
     public Menu() {
         add(panel);
-
-        localize(Locale.getDefault());
-
-        Random random = new Random();
 
         settingsWindow = new Settings(this);
         classic.addActionListener(click -> {
@@ -54,7 +48,7 @@ public class Menu extends JFrame {
                 filename = "classic1.txt";
 
             ClassicSudoku sudoku = new ClassicSudoku(9, filename);
-            new ClassicWindow(sudoku, charSet);
+            new ClassicWindow(sudoku, getCharSet());
         });
 
         killer.addActionListener(click -> {
@@ -63,16 +57,17 @@ public class Menu extends JFrame {
                 filename = "killer1.txt";
 
             KillerSudoku sudoku = new KillerSudoku(9, filename);
-            new KillerWindow(sudoku, charSet);
+            new KillerWindow(sudoku, getCharSet());
         });
 
-        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), charSet));
+        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), getCharSet()));
         settings.addActionListener(click -> settingsWindow.showWindow());
         userButton.addActionListener(click-> new UserWindow(this));
 
         setSize(300, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     /**
@@ -81,7 +76,7 @@ public class Menu extends JFrame {
      */
     public void setUser(User user) {
         User.setCurrentUser(user);
-        currentUser.setText(lang.getString("currentUser") + user.getUsername());
+        currentUser.setText(Localization.getLanguage().getString("currentUser") + user.getUsername());
         currentUser.setVisible(true);
     }
 
@@ -93,24 +88,19 @@ public class Menu extends JFrame {
 
     public void setWordoku(boolean set) {
         isWordoku = set;
-        setCharSet();
-    }
-
-    public void localize(Locale locale) {
-        lang = Localization.localize(locale);
-        setText();
-        setCharSet();
     }
 
     /**
      * This function sets all the language-sensitive properties of our components
      */
-    private void setText() {
+    public void setText() {
+        ResourceBundle lang = Localization.getLanguage();
+
         setTitle(lang.getString("menuTitle"));
 
         title.setText(lang.getString("greeting"));
         classic.setText(lang.getString("classic"));
-        killer.setText(lang.getString("kill"));
+        killer.setText(lang.getString("killer"));
         duidoku.setText(lang.getString("duidoku"));
         settings.setText(lang.getString("settings"));
         userButton.setText(lang.getString("selectUser"));
@@ -124,8 +114,8 @@ public class Menu extends JFrame {
     /**
      * Sets the characters for the game based on the value of isWordoku boolean
      */
-    private void setCharSet() {
-            charSet = isWordoku ? lang.getCharSet() : numberSet;
+    private char[] getCharSet() {
+        return isWordoku ? Localization.getLanguage().getString("charSet").toCharArray() : numberSet;
     }
 
     private ArrayList<String> getUnplayedSudokus(String directory) {
@@ -154,7 +144,6 @@ public class Menu extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new Menu();
-        frame.setVisible(true);
+        new Menu();
     }
 }

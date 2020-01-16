@@ -25,12 +25,9 @@ public class FinishWindow extends JDialog {
         label = new JLabel();
         mainMenu = new JButton(Localization.getLanguage().getString("mainMenu"));
         panel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,15));
-        if(win){
-            label.setText(Localization.getLanguage().getString("wonMessage"));
-        }
-        else{
-            label.setText(Localization.getLanguage().getString("lostMessage"));
-        }
+
+        label.setText(Localization.getLanguage().getString((win ? "win" : "lose") + "Message"));
+
         mainMenu.addActionListener(click -> {
             frame.dispose();
             dispose();
