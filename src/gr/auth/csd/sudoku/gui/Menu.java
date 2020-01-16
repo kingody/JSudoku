@@ -1,33 +1,34 @@
 package gr.auth.csd.sudoku.gui;
 
 import gr.auth.csd.sudoku.User;
-import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.gui.variants.ClassicWindow;
 import gr.auth.csd.sudoku.gui.variants.DuidokuWindow;
 import gr.auth.csd.sudoku.gui.variants.KillerWindow;
+import gr.auth.csd.sudoku.utilities.locale.Localization;
 import gr.auth.csd.sudoku.variants.ClassicSudoku;
 import gr.auth.csd.sudoku.variants.Duidoku;
 import gr.auth.csd.sudoku.variants.KillerSudoku;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-/**
- * This class represents our main menu, which contains our main method
- */
 public class Menu extends JFrame {
-    private JPanel panel;
+    private JPanel background;
     private JLabel title;
+    private JButton close;
+    private JPanel buttons;
     private JButton classic;
     private JButton killer;
-    private JButton settings;
     private JButton duidoku;
-    private JPanel menu;
-    private JButton userButton;
+    private JButton settings;
+    private JButton users;
+    private JButton minimize;
+    private JPanel bar;
     private JLabel currentUser;
 
     private boolean isWordoku = false;
@@ -35,13 +36,10 @@ public class Menu extends JFrame {
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-    /**
-     * Adds all the components to the panel, initializes the puzzles randomly, adds the action listeners to the buttons and sets the properties of Menu
-     */
     public Menu() {
-        add(panel);
-
+        initializeTopBar();
         settingsWindow = new Settings(this);
+
         classic.addActionListener(click -> {
             String filename = getRandomSudoku("Classic");
             if (filename == null)
@@ -62,12 +60,24 @@ public class Menu extends JFrame {
 
         duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), getCharSet()));
         settings.addActionListener(click -> settingsWindow.showWindow());
-        userButton.addActionListener(click-> new UserWindow(this));
+        users.addActionListener(click-> new UserWindow(this));
 
-        setSize(300, 350);
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1,1,1,1, new Color(60, 60, 60)));
+        add(background);
+        setUndecorated(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        pack();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private void initializeTopBar() {
+        MouseHandler mouse = new MouseHandler();
+        bar.addMouseListener(mouse);
+        bar.addMouseMotionListener(mouse);
+
+        close.addActionListener(click -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
+        minimize.addActionListener(click -> setState(Frame.ICONIFIED));
     }
 
     /**
@@ -98,12 +108,12 @@ public class Menu extends JFrame {
 
         setTitle(lang.getString("menuTitle"));
 
-        title.setText(lang.getString("greeting"));
+        title.setText(lang.getString("menuTitle"));
         classic.setText(lang.getString("classic"));
         killer.setText(lang.getString("killer"));
         duidoku.setText(lang.getString("duidoku"));
         settings.setText(lang.getString("settings"));
-        userButton.setText(lang.getString("selectUser"));
+        users.setText(lang.getString("selectUser"));
         currentUser.setText(lang.getString("currentUser"));
 
         User user = User.getCurrentUser();
@@ -145,5 +155,26 @@ public class Menu extends JFrame {
 
     public static void main(String[] args) {
         new Menu();
+    }
+
+
+    private class MouseHandler implements MouseListener, MouseMotionListener {
+        private int x, y;
+        @Override
+        public void mousePressed(MouseEvent e) {
+            x = e.getX();
+            y = e.getY();
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            Menu.this.setLocation(e.getXOnScreen() - x, e.getYOnScreen() - y);
+        }
+
+        public void mouseClicked(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {}
+        public void mouseMoved(MouseEvent e) {}
     }
 }

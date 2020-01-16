@@ -35,7 +35,7 @@ public class UserWindow extends JFrame {
      * The noUser button removes any previously selected user
      * @param menu instance of Menu
      */
-    public UserWindow(Menu menu){
+    public UserWindow(Menu menu) {
         ResourceBundle lang = Localization.getLanguage();
 
         inputUsername = new InputUsername(this);
