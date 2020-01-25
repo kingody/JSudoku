@@ -10,8 +10,11 @@ import gr.auth.csd.sudoku.variants.Duidoku;
 import gr.auth.csd.sudoku.variants.KillerSudoku;
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,47 +23,69 @@ import java.util.ResourceBundle;
 public class Menu extends JFrame {
     private JPanel background;
     private JLabel title;
-    private JButton close;
     private JPanel buttons;
-    private JButton classic;
-    private JButton killer;
-    private JButton duidoku;
-    private JButton settings;
-    private JButton users;
-    private JButton minimize;
-    private JPanel bar;
+    private JLabel classic;
+    private JLabel settings;
+    private JLabel users;
+    private TopBar bar;
     private JLabel currentUser;
+    private JLabel killer;
+    private JLabel duidoku;
+    private JPanel panel;
+    private JPanel main;
 
     private boolean isWordoku = false;
-    private final Settings settingsWindow;
+    private final NewSettings settingsWindow;
 
     private final char[] numberSet = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
     public Menu() {
-        initializeTopBar();
-        settingsWindow = new Settings(this);
+        settingsWindow = new NewSettings(this);
 
-        classic.addActionListener(click -> {
-            String filename = getRandomSudoku("Classic");
-            if (filename == null)
-                filename = "classic1.txt";
+        classic.addMouseListener(new ButtonListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String filename = getRandomSudoku("Classic");
+                if (filename == null)
+                    filename = "classic1.txt";
 
-            ClassicSudoku sudoku = new ClassicSudoku(9, filename);
-            new ClassicWindow(sudoku, getCharSet());
+                ClassicSudoku sudoku = new ClassicSudoku(9, filename);
+                new ClassicWindow(sudoku, getCharSet());
+            }
         });
 
-        killer.addActionListener(click -> {
-            String filename = getRandomSudoku("Killer");
-            if (filename == null)
-                filename = "killer1.txt";
+        killer.addMouseListener(new ButtonListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String filename = getRandomSudoku("Killer");
+                if (filename == null)
+                    filename = "killer1.txt";
 
-            KillerSudoku sudoku = new KillerSudoku(9, filename);
-            new KillerWindow(sudoku, getCharSet());
+                KillerSudoku sudoku = new KillerSudoku(9, filename);
+                new KillerWindow(sudoku, getCharSet());
+            }
         });
 
-        duidoku.addActionListener(click-> new DuidokuWindow(new Duidoku(4), getCharSet()));
-        settings.addActionListener(click -> settingsWindow.showWindow());
-        users.addActionListener(click-> new UserWindow(this));
+        duidoku.addMouseListener(new ButtonListener() {
+             @Override
+             public void mouseClicked(MouseEvent e) {
+                 new DuidokuWindow(new Duidoku(4), getCharSet());
+             }
+         });
+
+        settings.addMouseListener(new ButtonListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                settingsWindow.showWindow();
+            }
+        });
+
+        users.addMouseListener(new ButtonListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new UserWindow(Menu.this);
+            }
+        });
 
         getRootPane().setBorder(BorderFactory.createMatteBorder(1,1,1,1, new Color(60, 60, 60)));
         add(background);
@@ -71,15 +96,6 @@ public class Menu extends JFrame {
         setVisible(true);
     }
 
-    private void initializeTopBar() {
-        MouseHandler mouse = new MouseHandler();
-        bar.addMouseListener(mouse);
-        bar.addMouseMotionListener(mouse);
-
-        close.addActionListener(click -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
-        minimize.addActionListener(click -> setState(Frame.ICONIFIED));
-    }
-
     /**
      * Sets Menu's user to user and the text of label currentUser
      * @param user User object
@@ -87,12 +103,11 @@ public class Menu extends JFrame {
     public void setUser(User user) {
         User.setCurrentUser(user);
         currentUser.setText(Localization.getLanguage().getString("currentUser") + user.getUsername());
-        currentUser.setVisible(true);
     }
 
     public void removeUser() {
         User.setCurrentUser(null);
-        currentUser.setVisible(false);
+        currentUser.setText(" ");
     }
 
 
@@ -106,15 +121,12 @@ public class Menu extends JFrame {
     public void setText() {
         ResourceBundle lang = Localization.getLanguage();
 
-        setTitle(lang.getString("menuTitle"));
-
         title.setText(lang.getString("menuTitle"));
         classic.setText(lang.getString("classic"));
         killer.setText(lang.getString("killer"));
         duidoku.setText(lang.getString("duidoku"));
         settings.setText(lang.getString("settings"));
         users.setText(lang.getString("selectUser"));
-        currentUser.setText(lang.getString("currentUser"));
 
         User user = User.getCurrentUser();
         if (user != null)
@@ -157,24 +169,47 @@ public class Menu extends JFrame {
         new Menu();
     }
 
+    private void createUIComponents() {
+        classic = new RoundedLabel();
+        killer = new RoundedLabel();
+        duidoku = new RoundedLabel();
+        settings = new RoundedLabel();
+        users = new RoundedLabel();
+    }
 
-    private class MouseHandler implements MouseListener, MouseMotionListener {
-        private int x, y;
+    private static class ButtonListener implements MouseListener {
         @Override
         public void mousePressed(MouseEvent e) {
-            x = e.getX();
-            y = e.getY();
+            ((JLabel) e.getSource()).setBackground(new Color(80, 80, 80));
         }
-
         @Override
-        public void mouseDragged(MouseEvent e) {
-            Menu.this.setLocation(e.getXOnScreen() - x, e.getYOnScreen() - y);
+        public void mouseReleased(MouseEvent e) {
+            ((JLabel) e.getSource()).setBackground(new Color(60, 60, 60));
+        }
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            ((JLabel) e.getSource()).setBackground(new Color(70, 70, 70));
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ((JLabel) e.getSource()).setBackground(new Color(60, 60, 60));
         }
 
         public void mouseClicked(MouseEvent e) {}
-        public void mouseReleased(MouseEvent e) {}
-        public void mouseEntered(MouseEvent e) {}
-        public void mouseExited(MouseEvent e) {}
-        public void mouseMoved(MouseEvent e) {}
+    }
+
+    private class RoundedLabel extends JLabel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            Dimension arcs = new Dimension(5,5);
+            int width = getWidth();
+            int height = getHeight();
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            graphics.setColor(getBackground());
+            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+            super.paintComponent(g);
+        }
     }
 }

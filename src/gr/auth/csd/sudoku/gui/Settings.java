@@ -56,7 +56,6 @@ public class Settings extends JFrame {
      * Used to localize language-sensitive properties of components
      */
     public void setText() {
-//        lang = Localization.getLanguage();
         ResourceBundle lang = Localization.getLanguage();
         setTitle(lang.getString("settings"));
 
